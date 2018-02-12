@@ -47,7 +47,7 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(name="role", type="string", length=255)
      */
-    private $role = 'ROLE_STUDENT';
+    private $role = "ROLE_STUDENT";
 
     /**
      * @ORM\Column(name="is_active", type="boolean")
@@ -135,11 +135,12 @@ class User implements UserInterface, \Serializable
     /**
      * Get role
      *
-     * @return string
      */
     public function getRoles()
     {
-        return $this->role;
+        return[
+        'ROLE_STUDENT'
+        ];
     }
 
 

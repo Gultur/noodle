@@ -29,6 +29,10 @@ $(document).ready(function () {
         })
     }
 
+    /*
+        check the status of the quiz with the json
+        display in function of the status
+     */
     $.getJSON("json/runningQuiz.json", function (data) {
         switch(data.status) {
 
@@ -61,19 +65,28 @@ $(document).ready(function () {
         }
     })
 
-    // Fonction permettant de modifier le status du quiz
+    /*
+        change the status of the quiz
+     */
     function changeStatus(value) {
         $.post( 'viewquiz', {
             "status": value
         })
     }
 
+    /*
+        empty some fields
+     */
     function emptyFields(arrayFields) {
         $.each(arrayFields, function(index, value) {
             $("#" + value).empty()
         })
     }
 
+    /*
+        display the question with the type
+        checkbox/radio
+     */
     function displayQuestion(data, elem){
 
         elem.innerHTML =
@@ -128,7 +141,13 @@ $(document).ready(function () {
         }
     }
 
-    // Gestion des boutons (démarrer, clore, question suivante, afficher la réponse)
+    /*
+        this functions handle the action after click on the buttons
+     */
+
+    /*
+        handle start action button
+     */
 
     $("#startQuiz").click(function () {
 
@@ -142,8 +161,9 @@ $(document).ready(function () {
 
 
 
-
-
+    /*
+        handle next action button
+     */
     $("#nextQuestion").click(function () {
 
         changeStatus("delayQuestion")
@@ -156,6 +176,9 @@ $(document).ready(function () {
         togglePropsButtons(buttons, [])
     })
 
+    /*
+        handle stop action button
+     */
     $("#stopQuestion").click(function () {
         changeStatus("endedQuestionHide")
         $(this).prop("disabled", true)
@@ -163,15 +186,27 @@ $(document).ready(function () {
         emptyFields(["quiz"])
     })
 
+    /*
+        handle show result action button
+     */
+
     $("#showResults").click(function () {
 
     })
+
+    /*
+        handle addtime action button
+     */
 
     $("#addTime").click(function () {
         $.post( 'viewquiz', {
             "addTime": "success"
         })
     })
+
+    /*
+        handle showResponse action button
+     */
 
     $("#showResponse").click(function () {
         
@@ -190,7 +225,9 @@ $(document).ready(function () {
         })
     })
 
-
+    /*
+        handle closequiz action button
+     */
 
     $("#closeQuiz").click(function () {
 
@@ -204,16 +241,20 @@ $(document).ready(function () {
         togglePropsButtons(["nextQuestion", "stopQuestion", "showResults", "addTime", "showResponse", "closeQuiz"], ["startQuiz"])
     })
 
+    /*
+        handle loadquestions action button
+        todo : this will be the action of start session
+     */
     $("#loadQuestions").click(function () {
         $.post( 'viewquiz', {
             "loadQuestions": "success"
         })
     })
     
-    // Fonction principale permettant d'actualiser le quiz toutes les secondes
-    // de récupérer le fichier json de la question en cours
-    // de gérer le temps, l'affichage de la réponse, le status du quiz
-    // et d'afficher la question en cours côté enseignant
+    /*
+        Main function , look into the Json all seconde
+     */
+
     function handleQuestion() {
 
         $.getJSON("json/runningQuiz.json", function (data) {
@@ -242,10 +283,12 @@ $(document).ready(function () {
                     elem.setAttribute("id", "questionForm")
 
 
+                    //todo : implemented session and projectionchoice
+                    if("session" == "projeted") {
 
-                    displayQuestion(data, elem)
+                        displayQuestion(data, elem)
 
-
+                    }
                     $("#quiz").html(elem)
 
                     $("#time").html("Délai d'attente : " + data.delay)

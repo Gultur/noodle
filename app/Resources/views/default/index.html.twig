@@ -1,0 +1,21 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Accueil' %}
+{% block content %}
+
+    <div>
+        <h1>Bienvenue sur Noodle !</h1>
+        <p class="presentation">
+            Vous êtes sur un site de quiz interactif en ligne. Venez créer des quiz pour vos
+            élèves ou encore venez répondre à des quiz préparés par vos professeurs.
+        </p>
+    </div>
+
+    {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
+        <h2><a href="{{ path('addquestion') }}">Créer une question</a></h2>
+        <h2><a href="{{ path('createquiz') }}">Créer un quiz</a></h2>
+    {% endif %}
+
+
+
+{% endblock %}

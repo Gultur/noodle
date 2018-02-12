@@ -1,0 +1,49 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Création de question' %}
+
+
+{% block content %}
+
+
+
+    <div class="well">
+        {# form_start(variable, [parametres]) correspond à la balise <form>#}
+        {# form_start(form) rajoute l'attribut enctype,necessaire pour l'upload de fichier, dans la balise <form>#}
+        {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
+
+        {# Les erreurs générales du formulaire. #}
+        {{ form_errors(form) }}
+
+        {{ form_row(form.name) }}
+        {{ form_row(form.type) }}
+        {{ form_row(form.question) }}
+        {{ form_row(form.time) }}
+
+        <div id="answersDiv">
+        {{ form_row(form.answers) }}
+        </div>
+
+        <button id="add_answer" class="btn btn-default">Ajouter une réponse</button>
+
+
+
+        {# Génération automatique des champs pas encore écrits.
+            Dans cet exemple, ce serait le champ CSRF (géré automatiquement par Symfony !)
+            et tous les champs cachés (type « hidden »). #}
+
+        {{ form_rest(form) }}
+
+
+        {# Fermeture de la balise <form> du formulaire HTML #}
+
+        {{ form_end(form) }}
+    </div>
+
+
+    {% block javascripts %}
+
+        <script type="text/javascript" src="{{ asset('js/addQuestion.js') }}"></script>
+
+    {% endblock %}
+{% endblock %}

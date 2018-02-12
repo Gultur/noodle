@@ -32,12 +32,11 @@
         </div>
     </main>
 
-<script src="{{ asset('js/quizJs.js') }}"></script>
-{% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN")%}
-    <script src="{{ asset('js/teacher.js') }}"></script>
-{% endif %}
-{% if is_granted("ROLE_STUDENT")%}
-    <script src="{{ asset('js/student.js') }}"></script>
-{% endif %}
+    {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN")%}
+        <script src="{{ asset('js/teacher.js') }}"></script>
+    {% endif %}
+    {% if is_granted("ROLE_STUDENT")%}
+        <script src="{{ asset('js/student.js') }}"></script>
+    {% endif %}
 
 {% endblock %}

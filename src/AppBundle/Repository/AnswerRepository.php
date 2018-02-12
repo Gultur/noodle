@@ -10,11 +10,4 @@ namespace AppBundle\Repository;
  */
 class AnswerRepository extends \Doctrine\ORM\EntityRepository
 {
-    public function getLikeQueryBuilder($pattern)
-    {
-        return $this->createQueryBuilder('ans')
-            ->where('ans.value LIKE :pattern')
-            ->setParameter('pattern',$pattern);
-
-    }
 }

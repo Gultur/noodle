@@ -28,6 +28,20 @@ class AnswerUser
      */
     private $value;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Question")
+     * @ORM\JoinColumn(name="id_question", referencedColumnName="id", nullable=false)
+     *
+     */
+    private $question;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="id_user", referencedColumnName="id", nullable=false)
+     *
+     */
+    private $user;
+
 
     /**
      * Get id
@@ -61,6 +75,38 @@ class AnswerUser
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuestion()
+    {
+        return $this->question;
+    }
+
+    /**
+     * @param mixed $question
+     */
+    public function setQuestion($question)
+    {
+        $this->question = $question;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getUser()
+    {
+        return $this->user;
+    }
+
+    /**
+     * @param mixed $user
+     */
+    public function setUser($user)
+    {
+        $this->user = $user;
     }
 }
 

@@ -16,28 +16,29 @@ $(document).ready(function () {
         switch (data.typeQuestion) {
             case "text":
 
-                elem.innerHTML = elem.innerHTML + "<input type='text'>"
+                elem.innerHTML += "<input type='text'>"
 
                 break;
             case "trueOrFalse":
-                elem.innerHTML = elem.innerHTML + "<div>"
-                    + "<input id='radioTrue' type='radio' value='true' name='trueOrFalse'>"
+                elem.innerHTML +=  "<div>"
+                    + "<input id='radioTrue' type='radio' value='Vrai' name='trueOrFalse'>"
                     + "<label for='radioTrue'>Vrai</label>"
                     + "</div>"
                     + "<div>"
-                    + "<input id='radioFalse' type='radio' value='false' name='trueOrFalse'>"
+                    + "<input id='radioFalse' type='radio' value='Faux' name='trueOrFalse'>"
                     + "<label for='radioFalse'>Faux</label>"
                     + "</div>";
 
                 break;
             case "multipleChoicesRadio":
 
-                for(let i = 0; i < data.response.length; i++) {
+                for(let i = 0; i < data.responses.length; i++) {
 
+                    const idResponse = "radioResponse" + i
 
-                    elem.innerHTML = elem.innerHTML + "<div>"
-                        + "<input id='radioResponse'"+i +" type='radio' value='true' name='multipleChoicesRadio' >"
-                        + "<label for='radioResponse'"+i+"'>"+ data.response[i] + "</label>"
+                    elem.innerHTML += "<div>"
+                        + "<input id=" + idResponse + " type='radio' value=\"" + data.responses[i] + "\" name='multipleChoicesRadio' >"
+                        + "<label for=" + idResponse + "> "+ data.responses[i] + "</label>"
                         + "</div>"
                 }
 
@@ -45,12 +46,13 @@ $(document).ready(function () {
 
             case "multipleChoicesCheckBox":
 
-                for(let i = 0; i < data.response.length; i++) {
+                for(let i = 0; i < data.responses.length; i++) {
 
+                    const idResponse = "checkBoxResponse" + i
 
-                    elem.innerHTML = elem.innerHTML + "<div>"
-                        + "<input id='checkBoxResponse'"+i +" type='checkbox' value='true' name='multipleChoicesCheckBox' value='" + data.response[i] +"' disabled>"
-                        + "<label for='checkBoxResponse'"+i+"'>"+ data.response[i] + "</label>"
+                    elem.innerHTML += "<div>"
+                        + "<input id=" +idResponse  + " type='checkbox' value=\"" + data.responses[i] + "\" name='multipleChoicesCheckBox' value='" + data.responses[i] +"' >"
+                        + "<label for="+ idResponse + ">"+ data.responses[i] + "</label>"
                         + "</div>"
                 }
 
@@ -86,7 +88,7 @@ $(document).ready(function () {
 
                         displayQuestion(data, elem);
 
-                        elem.innerHTML = elem.innerHTML + "<input type='submit' id='sendResponse'>";
+                        elem.innerHTML += "<input type='submit' id='sendResponse'>";
 
                         $("#quiz").html(elem);
 
@@ -96,13 +98,32 @@ $(document).ready(function () {
                                 e.preventDefault();
                                 $("#sendResponse").off();
 
-                                var formdata = {"idQuestion": data.idQuestion, "idStudent": 1, "response": $("#answer").val()};
+                                var answersUser = []
 
+                                switch (data.typeQuestion) {
+                                    case "text":
+                                        answersUser.push($("#questionForm input[type='text']").val())
+                                        break
 
-                                var studentResponse = $("#answer").val();
+                                    case "trueOrFalse":
+                                    case "multipleChoicesRadio":
 
-                                $("#quiz").html("<p>En attente de la question suivante" + ", vous avez répondu : " + studentResponse + "</p>");
+                                        $("#questionForm input[type='radio']:checked").each(function() {
+                                            answersUser.push($(this).val())
+                                        })
+                                        break
 
+                                    case "multipleChoicesCheckBox":
+                                        $("#questionForm input[type='checkbox']:checked").each(function() {
+                                            answersUser.push($(this).val())
+                                        })
+                                        break
+
+                                }
+
+                                const formdata = {"idQuestion": data.idQuestion, "idStudent": 1, "responses": answersUser}
+
+                                $("#quiz").html("<p>En attente de la question suivante" + ", vous avez répondu : " + answersUser.toString() + "</p>")
 
                                 $.post('responsequestion', formdata)
                             })
@@ -117,19 +138,19 @@ $(document).ready(function () {
                         $("#nextQuestion").prop('disabled', true)
                     }
 
-                    $("#time").html("<p>Temps restant : " + data.time + " secondes</p>");
+                    $("#time").html("<p>Temps restant : " + data.time + " secondes</p>")
                     
-                    break;
+                    break
                 case "endedQuestionShow":
                     if(typeof reponseEtudiant == 'undefined'){
                         emptyFields(["quiz"])
 
                     }
-                    var response = document.createElement("p");
-                    response.innerHTML = "<span>Réponse : </span>" + data.response;
-                    $("#response").html(response);
-                    $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
-                    break;
+                    var response = document.createElement("p")
+                    response.innerHTML = data.responses + " "
+                    $("#response").html(response)
+                    $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>")
+                    break
                 case "endedQuestionHide":
                     if(typeof reponseEtudiant == 'undefined'){
                         emptyFields(["quiz"])

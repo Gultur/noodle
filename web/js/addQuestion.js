@@ -43,7 +43,7 @@
 
                     var divTrue = document.createElement("div")
                     var radioTrue = document.createElement("input")
-                    $(radioTrue).attr({type : "radio", id : "trueRadio", value : "true", name : "trueOrFalse", checked : true})
+                    $(radioTrue).attr({type : "radio", id : "trueRadio", value : "Vrai", name : "trueOrFalse", checked : true})
                     var labelTrue = document.createElement("label")
                     $(labelTrue).attr("for","trueRadio");
                     labelTrue.append("Vrai")
@@ -51,7 +51,7 @@
 
                     var divFalse = document.createElement("div")
                     var radioFalse = document.createElement("input")
-                    $(radioFalse).attr({type : "radio", id : "falseRadio", value : "false", name : "trueOrFalse"})
+                    $(radioFalse).attr({type : "radio", id : "falseRadio", value : "Faux", name : "trueOrFalse"})
                     var labelFalse = document.createElement("label")
                     $(labelFalse).attr("for","falseRadio");
                     labelFalse.append("Faux")

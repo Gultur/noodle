@@ -30,7 +30,7 @@ $(document).ready(function () {
     }
 
     /*
-        check the status of the quiz with the json
+        on initialise check the status of the quiz with the json
         display in function of the status
      */
     $.getJSON("json/runningQuiz.json", function (data) {
@@ -95,28 +95,30 @@ $(document).ready(function () {
 
         switch (data.typeQuestion) {
             case "text":
-                elem.innerHTML = elem.innerHTML +  "<input type='text' disabled>"
+                elem.innerHTML += "<input type='text' disabled>"
 
                 break
             case "trueOrFalse":
-                elem.innerHTML = elem.innerHTML + "<div>"
-                    + "<input id='radioTrue' type='radio' value='true' name='trueOrFalse' disabled>"
+                elem.innerHTML += "<div>"
+                    + "<input id='radioTrue' type='radio' value='Vrai' name='trueOrFalse' disabled>"
                     + "<label for='radioTrue'>Vrai</label>"
                     + "</div>"
                     + "<div>"
-                    + "<input id='radioFalse' type='radio' value='false' name='trueOrFalse' disabled>"
+                    + "<input id='radioFalse' type='radio' value='Faux' name='trueOrFalse' disabled>"
                     + "<label for='radioFalse'>Faux</label>"
                     + "</div>"
 
                 break
             case "multipleChoicesRadio":
 
-                for(let i = 0; i < data.response.length; i++) {
+                for(let i = 0; i < data.responses.length; i++) {
 
 
-                    elem.innerHTML = elem.innerHTML + "<div>"
-                        + "<input id='radioResponse'"+i +" type='radio' value='true' name='multipleChoicesRadio' disabled>"
-                        + "<label for='radioResponse'"+i+"'>"+ data.response[i] + "</label>"
+                    const idResponse = "radioResponse" + i
+
+                    elem.innerHTML += "<div>"
+                        + "<input id=" + idResponse + " type='radio' value=\"" + data.responses[i] + "\" name='multipleChoicesRadio' disabled >"
+                        + "<label for=" + idResponse + "> "+ data.responses[i] + "</label>"
                         + "</div>"
                 }
 
@@ -124,12 +126,13 @@ $(document).ready(function () {
 
             case "multipleChoicesCheckBox":
 
-                for(let i = 0; i < data.response.length; i++) {
+                for(let i = 0; i < data.responses.length; i++) {
 
+                    const idResponse = "checkBoxResponse" + i
 
-                    elem.innerHTML = elem.innerHTML + "<div>"
-                        + "<input id='checkBoxResponse'"+i +" type='checkbox' value='true' name='multipleChoicesCheckBox' value='" + data.response[i] +"' disabled>"
-                        + "<label for='checkBoxResponse'"+i+"'>"+ data.response[i] + "</label>"
+                    elem.innerHTML += "<div>"
+                        + "<input id=" +idResponse  + " type='checkbox' value=\"" + data.responses[i] + "\" name='multipleChoicesCheckBox' value='" + data.responses[i] +"' disabled >"
+                        + "<label for="+ idResponse + ">"+ data.responses[i] + "</label>"
                         + "</div>"
                 }
 
@@ -252,7 +255,8 @@ $(document).ready(function () {
     })
     
     /*
-        Main function , look into the Json all seconde
+        Main function , handle the timers, change the status
+
      */
 
     function handleQuestion() {
@@ -291,7 +295,7 @@ $(document).ready(function () {
                     }
                     $("#quiz").html(elem)
 
-                    $("#time").html("Délai d'attente : " + data.delay)
+                    $("#time").html("La question s'affichera dans " + data.delay + " seconde(s)")
                     break
 
                 case "runningQuestion":
@@ -323,17 +327,25 @@ $(document).ready(function () {
                     }
                     
                     break
+
                 case "endedQuestionShow":
                     var response = document.createElement("p")
-                    response.innerHTML = "<span>Réponse : </span>" + data.response
+
+                    for (let i=0 ; i<data.responses.length; i++) {
+                        response.innerHTML +=  data.responses[i] + " "
+                    }
+
+
                     $("#response").html(response)
                     $("#time").html("Temps écoulé")
                     break
+
                 case "endedQuestionHide":
                     $("#time").html("Temps écoulé")
                     emptyFields(["response"])
 
                     break
+
                 case "closedQuiz":
                     emptyFields(["time", "response", "quiz"])
                     break

@@ -133,15 +133,27 @@ class User implements UserInterface, \Serializable
     }
 
     /**
+     * @return mixed
+     */
+    public function getRole()
+    {
+        return [
+            $this->role
+        ];
+    }
+
+    /**
      * Get role
      *
      */
     public function getRoles()
     {
-        return[
-        'ROLE_STUDENT'
+        return [
+            $this->role
         ];
     }
+
+
 
 
 

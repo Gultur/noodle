@@ -2,6 +2,7 @@
 
 namespace AppBundle\Form;
 
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -23,11 +24,12 @@ class UserType extends AbstractType
             ->add('plainPassword', RepeatedType::class, array (
                 'type' => PasswordType::class,
                 'first_options' => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Validez mot de passe'),
-            ));
-    }/**
- * {@inheritdoc}
- */
+                'second_options' => array('label' => 'Validez mot de passe')));
+    }
+
+    /**
+    * {@inheritdoc}
+    */
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(

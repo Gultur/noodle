@@ -13,6 +13,7 @@ namespace AppBundle\Controller;
 use AppBundle\Form\UserType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Component\BrowserKit\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\User;
 
@@ -51,6 +52,40 @@ class RegistrationController extends Controller
             'default/register.html.twig',
             array('form' => $form->createView())
         );
+    }
+
+    /**
+     * @Route("/listUser", name="listUser")
+     */
+    public function listUserAction() {
+        $repository = $this->getDoctrine()->getRepository('AppBundle:User');
+
+        $user = $repository->findAll();
+
+        return $this->render('default/userUpdate.html.twig', array('users'=>$user));
+    }
+
+    /**
+     * @Route("/editUser/{username}", name="editUser")
+     */
+    public function edit(Request $request , User $user) {
+
+        $form = $this->createForm(UserType::class, $user);
+
+        $form->handleRequest($request);
+
+        if($form->handleRequest($request) && $form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+
+            //$em->persist($user);
+            $em->flush();
+
+            return new Response('Modifié !');
+        }
+
+        $formView = $form->createView();
+
+        return $this->render('default/userUpdate.html.twig', array('form'=>$formView, 'users'=>$user));
     }
 
 }

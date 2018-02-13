@@ -3,18 +3,22 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Validator\Constraints\UserPassword;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * user
  *
  * @ORM\Table(name="user")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  */
-class User
+class User implements UserInterface, \Serializable
 {
     /**
-     * @var int
-     *
      * @ORM\Column(name="id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
@@ -22,32 +26,39 @@ class User
     private $id;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="pseudo", type="string", length=255)
+     * @Assert\NotBlank()
+     * @ORM\Column(unique=true, type="string", length=255)
      */
-    private $pseudo;
+    private $username;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="mail", type="string", length=255)
+     * @Assert\NotBlank()
+     * @Assert\Email()
+     * @ORM\Column(unique=true, type="string", length=255)
      */
-    private $mail;
+    private $email;
 
     /**
-     * @var string
-     *
-     * @ORM\Column(name="password", type="string", length=255)
+     * @ORM\Column(type="string", length=255)
      */
     private $password;
 
     /**
-     * @var string
      *
      * @ORM\Column(name="role", type="string", length=255)
      */
-    private $role;
+    private $role = "ROLE_STUDENT";
+
+    /**
+     * @ORM\Column(name="is_active", type="boolean")
+     */
+    private $isActive;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+    private $plainPassword;
 
 
     /**
@@ -60,76 +71,51 @@ class User
         return $this->id;
     }
 
-    /**
-     * Set pseudo
-     *
-     * @param string $pseudo
-     *
-     * @return user
-     */
-    public function setPseudo($pseudo)
-    {
-        $this->pseudo = $pseudo;
 
-        return $this;
+    public function setUsername($username)
+    {
+        $this->username = $username;
     }
 
-    /**
-     * Get pseudo
-     *
-     * @return string
-     */
-    public function getPseudo()
+
+    public function getUsername()
     {
-        return $this->pseudo;
+        return $this->username;
     }
 
-    /**
-     * Set mail
-     *
-     * @param string $mail
-     *
-     * @return user
-     */
-    public function setMail($mail)
-    {
-        $this->mail = $mail;
 
-        return $this;
+    public function setEmail($email)
+    {
+        $this->email = $email;
     }
 
-    /**
-     * Get mail
-     *
-     * @return string
-     */
-    public function getMail()
+
+    public function getEmail()
     {
-        return $this->mail;
+        return $this->email;
     }
 
-    /**
-     * Set password
-     *
-     * @param string $password
-     *
-     * @return user
-     */
+
     public function setPassword($password)
     {
         $this->password = $password;
-
-        return $this;
     }
 
-    /**
-     * Get password
-     *
-     * @return string
-     */
     public function getPassword()
     {
         return $this->password;
+    }
+
+
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
     }
 
     /**
@@ -147,13 +133,62 @@ class User
     }
 
     /**
-     * Get role
-     *
-     * @return string
+     * @return mixed
      */
     public function getRole()
     {
-        return $this->role;
+        return [
+            $this->role
+        ];
+    }
+
+    /**
+     * Get role
+     *
+     */
+    public function getRoles()
+    {
+        return [
+            $this->role
+        ];
+    }
+
+
+
+
+
+
+
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
+    }
+
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+        return null;
+    }
+
+    public function __construct()
+    {
+        $this->isActive = true;
+    }
+
+    public function serialize() {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+        ));
+    }
+
+    public function unserialize($serialized) {
+        list (
+            $this->id,
+            $this->pseudo,
+            $this->password,
+            ) = unserialize($serialized);
     }
 }
 

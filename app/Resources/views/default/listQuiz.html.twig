@@ -7,7 +7,13 @@
 
     {% for quiz in listQuiz %}
         <div class="quiz">
-            <p><a href="{{ path('editquiz', {"id": quiz.id}) }}">{{ quiz.name }}</a></p>
+            <a href="{{ path('editquiz', {"id": quiz.id}) }}">{{ quiz.name }}</a>
+            {% if quiz.questions is empty %}
+                <p>Il n'y a pas de question dans ce Quiz</p>
+                <a href="{{ path('editquiz', {"id": quiz.id}) }}">Ajouter une ou des questions</a>
+            {% else %}
+                <a href="{{ path('loadquiz', {"id": quiz.id}) }}">Lancer le quiz</a>
+            {% endif %}
         </div>
     {% endfor %}
 

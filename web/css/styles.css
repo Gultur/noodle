@@ -359,3 +359,7 @@ span {
     max-width: 100%;
     margin: 0;
 }
+
+#redirectLink {
+    display: none;
+}

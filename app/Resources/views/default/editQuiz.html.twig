@@ -10,6 +10,7 @@
 
         {% for question in quiz.questions %}
             <p>{{ question.question }}</p>
+            <a href="{{ path("deletequestionfromquiz", {"idquestion": question.id, "idquiz": quiz.id}) }}">Supprimer</a>
         {% endfor %}
     </div>
 
@@ -35,6 +36,8 @@
                 "idQuiz" : {{ quiz.id }},
                 "idQuestions": idQuestions
             })
+
+            document.location.reload(true);
 
         })
     </script>

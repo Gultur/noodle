@@ -34,6 +34,7 @@ $(document).ready(function () {
         display in function of the status
      */
     $.getJSON("json/runningQuiz.json", function (data) {
+
         switch(data.status) {
 
             case "delayQuestion":
@@ -234,24 +235,16 @@ $(document).ready(function () {
 
     $("#closeQuiz").click(function () {
 
+        clearInterval(quizInterval);
+
         changeStatus("closedQuiz")
 
-        $("#showResponse").html("Envoyer la réponse")
+        //$("#showResponse").html("Envoyer la réponse")
 
         emptyFields(["time", "response", "quiz"])
 
         toggleButtons(["nextQuestion", "stopQuestion", "showResults", "addTime", "showResponse", "closeQuiz"], ["startQuiz"])
         togglePropsButtons(["nextQuestion", "stopQuestion", "showResults", "addTime", "showResponse", "closeQuiz"], ["startQuiz"])
-    })
-
-    /*
-        handle loadquestions action button
-        todo : this will be the action of start session
-     */
-    $("#loadQuestions").click(function () {
-        $.post( 'viewquiz', {
-            "loadQuestions": "success"
-        })
     })
     
     /*
@@ -349,9 +342,15 @@ $(document).ready(function () {
                 case "closedQuiz":
                     emptyFields(["time", "response", "quiz"])
                     break
+                case _:
+                    alert("Le quiz n'a pas de status")
+                    break
             }
         })
     }
 
-    setInterval(handleQuestion, 1000);
+    /*
+        we call the main method with an interval
+     */
+    const quizInterval = setInterval(handleQuestion, 1000);
 })

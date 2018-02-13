@@ -7,21 +7,21 @@
 
         {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
 
-            <button id="loadQuestions">Charger les questions</button>
-
-
             <button id="startQuiz">Démarrer le quiz</button>
             <button id="nextQuestion">Question suivante</button>
             <button id="stopQuestion">Arrêter la question</button>
             <button id="showResults">Voir les résultats</button>
             <button id="showResponse">Envoyer la réponse</button>
             <button id="addTime">Ajouter 10 secondes</button>
-            <button id="closeQuiz">Clore le quiz</button>
+            <a id="closeQuiz" href="{{ path('homepage') }}">Clore le quiz</a>
         {% endif %}
 
         <div id="quiz">
 
         </div>
+
+        <a id="redirectLink" href="{{ path('homepage') }}">Retour</a>
+
 
         <div id="response">
 

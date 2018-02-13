@@ -32,8 +32,6 @@
                     {% if (is_granted("ROLE_TEACHER") == false and is_granted("ROLE_ADMIN") == false and is_granted("ROLE_STUDENT") == false) %}
                         <li><a href="{{ path('login') }}">Connexion</a></li>
                     {% else %}
-                        <li><a href="{{ path('viewquiz') }}">Quiz</a></li>
-
                         <li><a href="{{ path('logout') }}">Déconnexion</a></li>
                     {% endif %}
                 </ul>

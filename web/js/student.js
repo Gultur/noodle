@@ -161,10 +161,14 @@ $(document).ready(function () {
                     break;
                 case "closedQuiz":
                     emptyFields(["time", "response", "quiz"]);
+                    clearInterval(quizInterval);
+                    $("#quiz").html("<p>Le Quiz est terminé</p>")
+                   $("#redirectLink").show()
+
                     break
             }
         })
     }
 
-    setInterval(handleQuestion, 1000)
+    const quizInterval = setInterval(handleQuestion, 1000);
 });

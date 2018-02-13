@@ -54,6 +54,31 @@ class QuizController extends Controller
     }
 
     /**
+     * @Route("/loadquiz/{id}", name="loadquiz")
+     */
+    public function loadQuizAction(Request $request, $id)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $quiz = $em->getRepository('AppBundle:Quiz')->find($id);
+
+        $questions = $quiz->getQuestions();
+
+        $json["idsQuestions"] = [];
+
+        for ($i = 0; $i < count($questions); $i++) {
+            $json["idsQuestions"][$i] = $questions[$i]->getId();
+        }
+
+        $json["status"] = "closedQuiz";
+        $json["delay"] = 5;
+
+        $new_json = json_encode($json);
+        file_put_contents("json/runningQuiz.json", $new_json);
+
+        return $this->redirectToRoute('viewquiz', array(), 301);
+    }
+
+    /**
      * @Route("/viewquiz", name="viewquiz")
      */
     public function quizAction(Request $request){
@@ -61,21 +86,6 @@ class QuizController extends Controller
 
         $file_json = file_get_contents("json/runningQuiz.json");
         $json = json_decode($file_json, true);
-
-        if($request->request->get('loadQuestions') == "success") {
-
-            $json["idsQuestions"] = [];
-
-
-            $questions = $em->getRepository(Question::class)->findAll();
-
-            for($i=0 ; $i<count($questions); $i++) {
-                $json["idsQuestions"][$i] = $questions[$i]->getId();
-            }
-
-            $new_json = json_encode($json);
-            file_put_contents("json/runningQuiz.json", $new_json);
-        }
 
         if($request->request->get('addTime') == "success") {
             $json['time'] = $json['time'] + 10;
@@ -183,7 +193,6 @@ class QuizController extends Controller
                     $json["question"] = "";
                     $json["responses"] = "";
                     $json["time"] = 0;
-                    $json["delay"] = 5;
 
                     $json["idsQuestions"] = [];
 
@@ -277,7 +286,20 @@ class QuizController extends Controller
         $em = $this->getDoctrine()->getManager();
         $quiz = $em->getRepository('AppBundle:Quiz')->find($id);
 
-        $questions = $em->getRepository('AppBundle:Question')->findAll();
+        $questionsInQuiz = $em->getRepository('AppBundle:Question')->getIdQuestionsFromQuiz($quiz->getId());
+
+        $arrayOfArrayQuestionsNotInQuiz = $em->getRepository('AppBundle:Question')->getUnusedQuestions($questionsInQuiz);
+
+
+        $arrayQuestionsNotInQuiz = array_map(function($value) { return $value['id']; }, $arrayOfArrayQuestionsNotInQuiz);
+
+        if(sizeof($questionsInQuiz) == 0) {
+            $arrayQuestionsNotInQuiz = $em->getRepository('AppBundle:Question')->findAll();
+        }
+
+        $questionsNotInQuiz =$em->getRepository('AppBundle:Question')->findBy(array('id' => $arrayQuestionsNotInQuiz));
+
+
 
         if ($request->request->get('idQuestions')) {
             $idQuestions = $request->request->get('idQuestions');
@@ -292,7 +314,7 @@ class QuizController extends Controller
             $em->flush();
         }
 
-        return $this->render("default/editQuiz.html.twig", array("quiz" => $quiz, "questions" => $questions));
+        return $this->render("default/editQuiz.html.twig", array("quiz" => $quiz, "questions" => $questionsNotInQuiz));
 
     }
 
@@ -326,31 +348,26 @@ class QuizController extends Controller
         }
     }
 
+    /**
+     * @Route("/deletequestionfromquiz/{idquestion}/{idquiz}", name="deletequestionfromquiz")
+     */
+    public function removeQuestionAction(Request $request, $idquestion, $idquiz){
+        $em = $this->getDoctrine()->getManager();
+        //$idQuiz= $request->query->get("idquiz");
+        $quiz = $em->getRepository('AppBundle:Quiz')->find($idquiz);
+        $question = $em->getRepository('AppBundle:Question')->find($idquestion);
+
+        $quiz->removeQuestion($question);
+
+        $em->flush();
+
+        return $this->redirectToRoute('editquiz', array('id' => $idquiz));
+    }
 
     /**
      * @Route("/test", name="test")
      */
-    public function testAction(){
-
-        $idQuiz = 1;
-
-        $em = $this->getDoctrine()->getManager();
-        $results = $em->getRepository('AppBundle:Question')->getIdQuestionsFromQuiz($idQuiz);
-        var_dump($results);
-        echo "<br/>";
-
-
-        var_dump($result2 = $em->getRepository('AppBundle:Question')->getUnusedQuestions($results));
-
-        echo "<br />";
-
-        $resultNeeded = array_map(function($value) { return $value['id']; }, $result2);
-        var_dump($resultNeeded);
-        echo "<br />";
-        $result3 =$em->getRepository('AppBundle:Question')->findBy(array('id' => $resultNeeded));
-       // var_dump($em->getRepository('AppBundle:Question')->testArrayQuestion($idQuiz));
-        return $this->render("default/displayQuestions.html.twig", array('questions' => $result3));
-
+    public function testAction(Request $request){
 
     }
 

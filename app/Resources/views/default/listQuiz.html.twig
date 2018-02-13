@@ -1,0 +1,14 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Liste des Quiz' %}
+
+
+{% block content %}
+
+    {% for quiz in listQuiz %}
+        <div class="quiz">
+            <p><a href="{{ path('editquiz', {"id": quiz.id}) }}">{{ quiz.name }}</a></p>
+        </div>
+    {% endfor %}
+
+{% endblock %}

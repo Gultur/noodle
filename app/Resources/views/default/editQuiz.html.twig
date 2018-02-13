@@ -1,0 +1,42 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Édition du Quiz' %}
+
+
+{% block content %}
+
+    <div class="editQuiz">
+        <p>{{ quiz.name }}</p>
+
+        {% for question in quiz.questions %}
+            <p>{{ question.question }}</p>
+        {% endfor %}
+    </div>
+
+    {% for question in questions %}
+        <form id="checkboxForm">
+            <label for={{ question.id }}>{{ question.name }}</label>
+            <input id={{ question.id }} type="checkbox" value={{ question.id }} />
+        </form>
+    {% endfor %}
+
+    <button id="addQuestions">Ajouter</button>
+
+    <script>
+        $("#addQuestions").click(function () {
+
+            idQuestions = []
+
+            $("#checkboxForm [type=checkbox]:checked").each(function () {
+                idQuestions.push($(this).val())
+            })
+
+            $.post( {{ quiz.id }}, {
+                "idQuiz" : {{ quiz.id }},
+                "idQuestions": idQuestions
+            })
+
+        })
+    </script>
+
+{% endblock %}

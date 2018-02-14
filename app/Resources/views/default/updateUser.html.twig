@@ -1,0 +1,26 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Création de Quiz' %}
+{% block content %}
+
+
+    <main>
+        <h1>Modification du rôle d'un utilisateur</h1>
+        <p>Pour modifier le rôle de l'utilisateur, choissisez simplement le rôle correspondant
+            </br> puis appuyez sur le bouton Valider.</p>
+
+        {{ form_start(form) }}
+
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.role) }}
+
+            <button type="submit" class="btn btn-default">Valider</button>
+
+        {{ form_end(form) }}
+
+    </main>
+
+
+
+{% endblock %}

@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\UserType;
+use AppBundle\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Response;
@@ -62,30 +63,40 @@ class RegistrationController extends Controller
 
         $user = $repository->findAll();
 
-        return $this->render('default/userUpdate.html.twig', array('users'=>$user));
+        return $this->render('default/listUser.html.twig', array('users'=>$user));
     }
 
     /**
-     * @Route("/editUser/{username}", name="editUser")
+     * @Route("/editUser/{id}", name="editUser")
      */
-    public function edit(Request $request , User $user) {
+    public function editAction(Request $request , User $user) {
 
-        $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserUpdateType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->handleRequest($request) && $form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
+        //$originalPassword = $user->getPassword();
 
+        if($form->isSubmitted() && $form->isValid()) {
+
+            $user = $form->getData();
+
+            $em = $this->getDoctrine()->getManager();
             //$em->persist($user);
             $em->flush();
 
-            return new Response('Modifié !');
+            $this->addFlash('success', 'User updated!');
+
+            return $this->redirectToRoute('homepage');
         }
 
         $formView = $form->createView();
 
-        return $this->render('default/userUpdate.html.twig', array('form'=>$formView, 'users'=>$user));
+        return $this->render('default/updateUser.html.twig',
+            array(
+                'form'=>$formView,
+                'users'=>$user,
+                ));
     }
 
 }

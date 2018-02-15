@@ -2,18 +2,18 @@
 
 ### A project for school 
 
-Where are a three members team of student, we are **learning** web-development in Laval(France)
+Where are a three members team of students, we are **learning** web-development in Laval(France)
 
-The aim is to create a interactive quiz :
+The aim is to create an interactive quiz :
 * Teachers can make questions, linked them to a quiz
 * Teachers load the quiz and then the students can answer in real time
 * We need to handle few types of question like : 
     * true or false
-    * multiple answer 
+    * multiple answers 
     * simple answer
 
-#### Used Technologys :
+#### Used Technologies :
 * Symfony 3.4, php 5.6 on server
-* Javascript / AJAX
+* jQuery / AJAX
 * Versionning with Git (yeah, without it you couldn't read it) 
 

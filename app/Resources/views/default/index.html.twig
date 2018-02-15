@@ -17,8 +17,12 @@
         <h2><a href="{{ path('displayquestions') }}">Afficher les questions</a></h2>
         <h2><a href="{{ path('listquiz') }}">Liste des Quiz</a></h2>
     {% elseif is_granted("ROLE_STUDENT") %}
-        <h2><a href="{{ path('viewquiz') }}">Acceder au quiz</a></h2>
-
+        <h1>Accéder au Quiz</h1>
+        <form action="{{ path('sessionadduser') }}" method="post">
+            <label for="sessionKey">Entrez la clé de la session du Quiz</label>
+            <input id="sessionKey" name="sessionKey" type="text">
+            <input type="submit" value="Valider">
+        </form>
     {% endif %}
 
 

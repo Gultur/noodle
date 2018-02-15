@@ -5,40 +5,69 @@
 
 {% block content %}
 
-    <div class="editQuiz">
-        <p>{{ quiz.name }}</p>
+    <main>
 
-        {% for question in quiz.questions %}
-            <p>{{ question.question }}</p>
-            <a href="{{ path("deletequestionfromquiz", {"idquestion": question.id, "idquiz": quiz.id}) }}">Supprimer</a>
-        {% endfor %}
-    </div>
+        <p>Nom du Quiz : {{ quiz.name }}</p>
 
-    {% for question in questions %}
-        <form id="checkboxForm">
-            <label for={{ question.id }}>{{ question.name }}</label>
-            <input id={{ question.id }} type="checkbox" value={{ question.id }} />
-        </form>
-    {% endfor %}
+        <div id="leftDiv" class="col-md-6">
+            {% for question in quiz.questions %}
+                <div id={{ question.id }}>
+                    <p>{{ question.question }}</p>
+                    <button>Changer de zone</button>
+                </div>
+            {% endfor %}
+        </div>
 
-    <button id="addQuestions">Ajouter</button>
+
+        <div id="rightDiv" class="col-md-6">
+            {% for question in questions %}
+                <div id={{ question.id }}>
+                    <p>{{ question.question }}</p>
+                    <button>Changer de zone</button>
+                </div>
+            {% endfor %}
+        </div>
+    </main>
+
 
     <script>
-        $("#addQuestions").click(function () {
+        $(document).ready(function () {
+            const questionsInQuiz = $('#leftDiv');
+            const questionsNotInQuiz = $('#rightDiv');
 
-            idQuestions = []
+            $('#leftDiv button').each(function () {
+                $(this).html('Retirer du quiz');
+            });
+            $('#rightDiv button').each(function () {
+                $(this).html('Ajouter au quiz');
+            });
 
-            $("#checkboxForm [type=checkbox]:checked").each(function () {
-                idQuestions.push($(this).val())
+            $('main button').click(function (event) {
+                event.stopPropagation();
+                let elementToMove = $(event.target).parent();
+                let elementParent = $(elementToMove).parent();
+
+
+                if ($(elementParent).attr('id') == 'leftDiv') {
+                    console.log($(elementParent).attr('id'));
+                    $(elementToMove).appendTo(questionsNotInQuiz);
+                    $(event.target).html('Ajouter au quiz')
+                    $.post( {{ quiz.id }}, {
+                        "idRemoveQuestion": $(elementToMove).attr('id')
+                    })
+                }
+                else {
+                    console.log($(elementParent).attr('id'));
+                    $(elementToMove).appendTo(questionsInQuiz);
+                    $(event.target).html('Retirer du quiz')
+                    $.post( {{ quiz.id }}, {
+                        "idAddQuestion": $(elementToMove).attr('id')
+                    })
+                }
+
+
+                console.log(elementToMove);
             })
-
-            $.post( {{ quiz.id }}, {
-                "idQuiz" : {{ quiz.id }},
-                "idQuestions": idQuestions
-            })
-
-            document.location.reload(true);
-
         })
     </script>
 

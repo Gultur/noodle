@@ -37,6 +37,11 @@ class Quiz
      */
     private $questions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="Session", mappedBy="quiz")
+     *
+     */
+    private $sessions;
 
     public function __construct()
     {

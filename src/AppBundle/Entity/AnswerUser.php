@@ -42,6 +42,12 @@ class AnswerUser
      */
     private $user;
 
+    /**
+     * @ORM\ManyToOne(targetEntity="Session")
+     * @ORM\JoinColumn(name="id_session", referencedColumnName="id", nullable=false)
+     */
+    private $session;
+
 
     /**
      * Get id
@@ -108,5 +114,23 @@ class AnswerUser
     {
         $this->user = $user;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getSession()
+    {
+        return $this->session;
+    }
+
+    /**
+     * @param mixed $session
+     */
+    public function setSession($session)
+    {
+        $this->session = $session;
+    }
+
+
 }
 

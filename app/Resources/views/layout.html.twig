@@ -6,6 +6,7 @@
     {% block stylesheets %}
         <link rel="stylesheet" href="{{ asset('css/bootstrap.css') }}">
         <link rel="stylesheet" href="{{ asset('css/styles.css') }}">
+        <link rel="icon" type="image/png" href="{{ asset('images/noodles.png') }}">
 
         <script src="{{ asset('js/jquery.min.js') }}"></script>
         <script src="{{ asset('js/bootstrap.js') }}"></script>
@@ -29,13 +30,19 @@
                 <ul class="nav-list">
                     <!-- Setting the links to #! will ensure that no action takes place on click. -->
                     <li><a href="{{ path('homepage') }}">Accueil</a></li>
+
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <li><a href="{{ path('administration') }}">Administration</a></li>
+                    {% endif %}
                     {% if (is_granted("ROLE_TEACHER") == false and is_granted("ROLE_ADMIN") == false and is_granted("ROLE_STUDENT") == false) %}
+
                         <li><a href="{{ path('login') }}">Connexion</a></li>
                         <li><a href="{{ path('user_registration') }}">S'enregistrer</a></li>
                     {% else %}
                         <li><a href="{{ path('viewquiz') }}">Quiz</a></li>
 
                         <li><a href="{{ path('logout') }}">Déconnexion</a></li>
+
                     {% endif %}
                 </ul>
             </nav>

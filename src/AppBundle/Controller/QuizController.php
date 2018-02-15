@@ -31,7 +31,7 @@ class QuizController extends Controller
         $quiz = new Quiz();
 
         $form = $this->createForm(QuizType::class,$quiz);
-        $form->add("Ajouter",SubmitType::class);
+        //$form->add("Ajouter",SubmitType::class);
 
 
         $form->handleRequest($request);

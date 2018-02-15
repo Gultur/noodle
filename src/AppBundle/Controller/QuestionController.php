@@ -30,9 +30,9 @@ class QuestionController extends Controller
         $question = new Question();
 
         $form = $this->createForm(QuestionType::class, $question);
-        $form->add("add",SubmitType::class, array(
-            "label" => "Ajouter"
-        ));
+        //$form->add("add",SubmitType::class, array(
+        //    "label" => "Ajouter"
+        //));
 
         $form->handleRequest($request);
 

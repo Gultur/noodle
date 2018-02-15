@@ -2,7 +2,7 @@
 
 {% set page_title = 'Accueil' %}
 {% block content %}
-
+<main>
     <div>
         <h1>Bienvenue sur Noodle !</h1>
         <p class="presentation">
@@ -11,14 +11,20 @@
         </p>
     </div>
 
-    {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
-        <h2><a href="{{ path('addquestion') }}">Créer une question</a></h2>
-        <h2><a href="{{ path('createquiz') }}">Créer un quiz</a></h2>
-    {% endif %}
-    {% if is_granted("ROLE_ADMIN") %}
-        <h2><a href="{{ path('listUser') }}">Modifier Role</a></h2>
-    {% endif %}
 
+    <div class="btn-site">
+    {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
+            <a href="{{ path('addquestion') }}" type="button" class="btn btn-primary btn-lg">Créer une question</a>
+            <a href="{{ path('createquiz') }}" type="button" class="btn btn-primary btn-lg">Créer un quiz</a>
+    {% endif %}
+    </div>
+
+    <div class="btn-site">
+    {% if is_granted("ROLE_TEACHER") %}
+        <a href="{{ path('homepage') }}" type="button" class="btn btn-primary btn-lg">Liste Quiz</a>
+    {% endif %}
+    </div>
+</main>
 
 
 {% endblock %}

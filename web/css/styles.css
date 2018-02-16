@@ -166,6 +166,10 @@ p {
     text-align: center;
 }
 
+#redirectLink{
+    display:none;
+}
+
 /* PAGE AJOUTER QUESTION */
 
 .ajoutQuestion {

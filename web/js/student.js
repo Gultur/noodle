@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 // le cas closed quiz declenche le par defaut des switchs !!!
 
 $(document).ready(function () {
@@ -98,117 +97,117 @@ $(document).ready(function () {
 
                 } else {
 
-                     switch (dataSession.status) {
+                    switch (dataSession.status) {
 
-                         case "delayQuestion":
+                        case "delayQuestion":
 
-                             emptyFields(["response", "quiz"]);
-                             answersUser = [];
+                            emptyFields(["response", "quiz"]);
+                            answersUser = [];
 
-                             $("#time").html("La question s'affichera dans " + dataSession.delay + " seconde(s)");
-                             break;
+                            $("#time").html("La question s'affichera dans " + dataSession.delay + " seconde(s)");
+                            break;
 
-                         case "runningQuestion":
+                        case "runningQuestion":
 
-                             //alert(dataSession.responded[0])
+                            //alert(dataSession.responded[0])
 
-                             if(dataSession.responded.indexOf(5) > -1){
-                                 $("#quiz").html("<p>En attente de la question suivante" + ", vous avez répondu : " + answersUser.toString() + "</p>");
-                             } else {
-                                 if (idCurrentQuestion != dataSession.idQuestion) {
+                            if(dataSession.responded.indexOf(5) > -1){
+                                $("#quiz").html("<p>En attente de la question suivante" + ", vous avez répondu : " + answersUser.toString() + "</p>");
+                            } else {
+                                if (idCurrentQuestion != dataSession.idQuestion) {
 
-                                     var elem = document.createElement("form");
-                                     $(elem).attr("id", "questionForm");
+                                    var elem = document.createElement("form");
+                                    $(elem).attr("id", "questionForm");
 
-                                     displayQuestion(data, elem);
+                                    displayQuestion(data, elem);
 
-                                     elem.innerHTML += "<input type='submit' id='sendResponse'>";
+                                    elem.innerHTML += "<input type='submit' id='sendResponse'>";
 
-                                     $("#quiz").html(elem);
+                                    $("#quiz").html(elem);
 
-                                     if ($("#sendReponse") != null) {
+                                    if ($("#sendReponse") != null) {
 
-                                         $("#sendResponse").on("click", function (e) {
-                                             e.preventDefault();
-                                             $("#sendResponse").off();
+                                        $("#sendResponse").on("click", function (e) {
+                                            e.preventDefault();
+                                            $("#sendResponse").off();
 
-                                             switch (dataSession.typeQuestion) {
-                                                 case "text":
-                                                     answersUser.push($("#questionForm input[type='text']").val());
-                                                     break;
+                                            switch (dataSession.typeQuestion) {
+                                                case "text":
+                                                    answersUser.push($("#questionForm input[type='text']").val());
+                                                    break;
 
-                                                 case "trueOrFalse":
-                                                 case "multipleChoicesRadio":
+                                                case "trueOrFalse":
+                                                case "multipleChoicesRadio":
 
-                                                     $("#questionForm input[type='radio']:checked").each(function () {
-                                                         answersUser.push($(this).val());
-                                                     });
-                                                     break;
+                                                    $("#questionForm input[type='radio']:checked").each(function () {
+                                                        answersUser.push($(this).val());
+                                                    });
+                                                    break;
 
-                                                 case "multipleChoicesCheckBox":
-                                                     $("#questionForm input[type='checkbox']:checked").each(function () {
-                                                         answersUser.push($(this).val());
-                                                     });
-                                                     break;
+                                                case "multipleChoicesCheckBox":
+                                                    $("#questionForm input[type='checkbox']:checked").each(function () {
+                                                        answersUser.push($(this).val());
+                                                    });
+                                                    break;
 
-                                             }
+                                            }
 
-                                             $("#quiz").html("<p>En attente de la question suivante" + ", vous avez répondu : " + answersUser.toString() + "</p>");
+                                            $("#quiz").html("<p>En attente de la question suivante" + ", vous avez répondu : " + answersUser.toString() + "</p>");
 
-                                             const formdata = {
-                                                 "idQuestion": dataSession.idQuestion,
-                                                 "responses": answersUser,
-                                             };
-
-
-                                             $.post(idSession, formdata);
-                                         })
-                                     }
-
-                                     idCurrentQuestion = dataSession.idQuestion;
-
-                                 }
-                             }
+                                            const formdata = {
+                                                "idQuestion": dataSession.idQuestion,
+                                                "responses": answersUser,
+                                            };
 
 
+                                            $.post(idSession, formdata);
+                                        })
+                                    }
+
+                                    idCurrentQuestion = dataSession.idQuestion;
+
+                                }
+                            }
 
 
-                             if (dataSession.idQuestion == "10") {
-                                 $("#nextQuestion").prop('disabled', true);
-                             }
 
-                             $("#time").html("<p>Temps restant : " + dataSession.time + " secondes</p>");
 
-                             break;
-                         case "endedQuestionShow":
-                             if (typeof reponseEtudiant == 'undefined') {
-                                 emptyFields(["quiz"]);
+                            if (dataSession.idQuestion == "10") {
+                                $("#nextQuestion").prop('disabled', true);
+                            }
 
-                             }
-                             var response = document.createElement("p");
-                             response.innerHTML = dataSession.responses + " ";
-                             $("#response").html(response);
-                             $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
-                             break;
-                         case "endedQuestionHide":
-                             if (typeof reponseEtudiant == 'undefined') {
-                                 emptyFields(["quiz"]);
+                            $("#time").html("<p>Temps restant : " + dataSession.time + " secondes</p>");
 
-                             }
-                             emptyFields(["response"]);
-                             $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
-                             break;
-                         case "closedQuiz":
-                         /*    emptyFields(["time", "response", "quiz"]);
-                             clearInterval(quizInterval);
-                             $("#quiz").html("<p>Le Quiz est terminé</p>");
-                            $("#redirectLink").show();
-*/
-                             break;
-                         default :
-                             messageNoSession();
-                             break;
-                     }
+                            break;
+                        case "endedQuestionShow":
+                            if (typeof reponseEtudiant == 'undefined') {
+                                emptyFields(["quiz"]);
+
+                            }
+                            var response = document.createElement("p");
+                            response.innerHTML = dataSession.responses + " ";
+                            $("#response").html(response);
+                            $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
+                            break;
+                        case "endedQuestionHide":
+                            if (typeof reponseEtudiant == 'undefined') {
+                                emptyFields(["quiz"]);
+
+                            }
+                            emptyFields(["response"]);
+                            $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
+                            break;
+                        case "closedQuiz":
+                            /*    emptyFields(["time", "response", "quiz"]);
+                                clearInterval(quizInterval);
+                                $("#quiz").html("<p>Le Quiz est terminé</p>");
+                               $("#redirectLink").show();
+   */
+                            break;
+                        default :
+                            messageNoSession();
+                            break;
+                    }
                 }
             } else {messageNoSession();}
         })
@@ -216,4 +215,3 @@ $(document).ready(function () {
 
     const quizInterval = setInterval(handleQuestion, 1000);
 });
-

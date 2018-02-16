@@ -1,4 +1,3 @@
-
 // le cas closed quiz declenche le par defaut des switchs !!!
 
 $(document).ready(function () {
@@ -6,13 +5,11 @@ $(document).ready(function () {
     /*
         array with all the buttons id
      */
-
     const buttons = ["startQuiz", "nextQuestion", "stopQuestion", "showResults", "addTime", "showResponse", "closeQuiz"];
-    
+
     var idSession = -1;
     var dataSession = 1;
     const indexSession = $("#quiz").attr('data-session');
-
 
     /*
         handle the visibility of the buttons
@@ -199,7 +196,7 @@ $(document).ready(function () {
 
         changeStatus("delayQuestion");
 
-        
+
         $("#showResponse").html("Envoyer la réponse");
         emptyFields(["response"]);
 
@@ -240,9 +237,8 @@ $(document).ready(function () {
      */
 
     $("#showResponse").click(function () {
-        
+
         $.getJSON("json/runningQuiz.json", function (data) {
-<<<<<<< HEAD
             dataSession = data[indexSession];
 
             if(dataSession.status == "endedQuestionShow") {
@@ -269,7 +265,7 @@ $(document).ready(function () {
 
         changeStatus("closedQuiz");
 
-   });
+    });
 
     // handle the end of a quiz or an non existant quiz
     function messageNoSession() {
@@ -282,7 +278,7 @@ $(document).ready(function () {
         $("#redirectLink").show();
 
     }
-    
+
     /*
         Main function , handle the timers, change the status
 

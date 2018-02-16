@@ -65,30 +65,32 @@ class RegistrationController extends Controller
 
         $user = $repository->findAll();
 
-        return $this->render('security/userUpdate.html.twig', array('users'=>$user));
+        return $this->render('security/listUser.html.twig', array('users'=>$user));
     }
 
     /**
-     * @Route("/editUser/{username}", name="editUser")
+     * @Route("/editUser/{id}", name="editUser")
      */
-    public function edit(Request $request , User $user)
-    {
-
-        $form = $this->createForm(UserType::class, $user);
-
+    public function editAction(Request $request , User $user) {
+        $form = $this->createForm(UserUpdateType::class, $user);
         $form->handleRequest($request);
-
-        if ($form->handleRequest($request) && $form->isValid()) {
+        //$originalPassword = $user->getPassword();
+        if($form->isSubmitted() && $form->isValid()) {
+            $user = $form->getData();
             $em = $this->getDoctrine()->getManager();
-
             //$em->persist($user);
             $em->flush();
-
-            //return new Response('Modifié !');
-            return $this->render('security/listUser.html.twig', array('users' => $user));
+            $this->addFlash('success', 'User updated!');
+            return $this->redirectToRoute('homepage');
         }
-
+        $formView = $form->createView();
+        return $this->render('security/updateUser.html.twig',
+            array(
+                'form'=>$formView,
+                'users'=>$user,
+            ));
     }
+
 
 
 }

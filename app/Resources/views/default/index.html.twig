@@ -32,6 +32,13 @@
                 <input type="submit" value="Valider">
             </form>
 
+            {% if errorSession is defined %}
+                <div class="alert alert-danger alert-dismissable">
+                    {{ errorSession }}
+                    <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                </div>
+            {% endif %}
+
         {% endif %}
 
 

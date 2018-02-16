@@ -52,12 +52,13 @@ class QuizController extends Controller
             $em->persist($quiz);
             $em->flush();
 
-            return new RedirectResponse($this->generateUrl("homepage"));
+            return $this->redirectToRoute('editquiz', array('id' => $quiz->getId()));
         }
 
         $formView = $form->createView();
 
         return $this->render('default/createQuiz.html.twig', array('form'=>$formView));
+
     }
 
     /**

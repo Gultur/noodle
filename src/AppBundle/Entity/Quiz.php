@@ -3,6 +3,7 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
@@ -29,6 +30,7 @@ class Quiz
      */
     private $name;
 
+
     /**
      * @ORM\ManyToMany(targetEntity="Question")
      * @ORM\JoinTable(name="quiz_questions", joinColumns={@ORM\JoinColumn(name="quiz_id", referencedColumnName="id")},
@@ -47,6 +49,7 @@ class Quiz
     {
         $this->questions = new ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -82,6 +85,7 @@ class Quiz
         return $this->name;
     }
 
+
     /**
      * @return mixed
      */
@@ -109,5 +113,6 @@ class Quiz
         $this->questions->removeElement($question);
 
     }
+
 }
 

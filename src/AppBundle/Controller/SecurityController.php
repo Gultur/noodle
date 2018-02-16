@@ -36,6 +36,14 @@ class SecurityController extends Controller
     }
 
     /**
+     * @Route("/administration", name="administration")
+     */
+    public function adminAction(Request $request) {
+        return $this->render('security/administration.html.twig');
+
+    }
+
+    /**
      * @Route("/logout", name="logout")
      * @param Request
      */

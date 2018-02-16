@@ -1,0 +1,27 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Modification utilisateur' %}
+{% block content %}
+
+
+    <main>
+        <h1>Modification du rôle d'un utilisateur</h1>
+        <p>Pour modifier le rôle de l'utilisateur, choissisez simplement le rôle correspondant
+            </br> puis appuyez sur le bouton Valider.</p>
+
+        {{ form_start(form) }}
+
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.role) }}
+
+        <div class="btn-site">
+            <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+        </div>
+        {{ form_end(form) }}
+
+    </main>
+
+
+
+{% endblock %}

@@ -25,20 +25,9 @@ use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 
+
 class QuizController extends Controller
 {
-
-
-    /**
-     *
-     * @ParamConverter(name="session", Class="AppBundle:Session", isOptional="true")
-     *
-     *
-     */
-    public function responseAction(Request $request, Session $session){
-
-
-    }
 
 
     /**
@@ -51,7 +40,8 @@ class QuizController extends Controller
         $quiz = new Quiz();
 
         $form = $this->createForm(QuizType::class,$quiz);
-        $form->add("Ajouter",SubmitType::class);
+
+        //$form->add("Ajouter",SubmitType::class);
 
 
         $form->handleRequest($request);
@@ -432,57 +422,6 @@ class QuizController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('editquiz', array('id' => $idquiz));
-    }
-
-    /**
-     * @Route("/test", name="test")
-     */
-    public function testAction(Request $request){
-
-        /*$id = 1;
-
-        $em = $this->getDoctrine()->getManager();
-        $questionRepo = $em->getRepository('AppBundle:Question');
-        $quiz = $em->getRepository('AppBundle:Quiz')->find($id);
-
-
-        $questionsIdInQuiz = $questionRepo->getIdQuestionsFromQuiz($quiz->getId());
-
-
-        $arrayOfArrayQuestionsNotInQuiz = $questionRepo->getUnusedQuestions($questionsIdInQuiz);
-
-
-        $arrayQuestionsNotInQuiz = array_map(function($value) { return $value['id']; }, $arrayOfArrayQuestionsNotInQuiz);
-
-        if(sizeof($questionsIdInQuiz) == 0) {
-            $arrayQuestionsNotInQuiz = $questionRepo->findAll();
-        }
-
-        $questionsNotInQuiz = $questionRepo->findBy(array('id' => $arrayQuestionsNotInQuiz));
-        $questionInQuiz = $questionRepo->findBy(array('id' => $questionsIdInQuiz));
-
-
-
-        if ($request->request->get('idQuestions')) {
-            $idQuestions = $request->request->get('idQuestions');
-
-            foreach ($idQuestions as $idQuestion) {
-                $question = $questionRepo->find($idQuestion);
-
-                $quiz->addQuestion($question);
-
-            }
-
-            $em->flush();
-
-        }*/
-
-        return $this->render("default/test.html.twig");
-
-
-
-
-
     }
 
 }

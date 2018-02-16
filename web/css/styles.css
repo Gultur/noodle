@@ -1,7 +1,17 @@
 @import url('https://fonts.googleapis.com/css?family=Lato');
 
+
+main {
+    margin: auto;
+    margin-top: 50px;
+    width: 80%;
+    background-color: white;
+    padding-bottom: 20px;
+}
+
 body {
     background-color: #f4edd7;
+    background-image: radial-gradient(circle at center, white, #f4edd7);
 }
 
 header {
@@ -10,7 +20,32 @@ header {
 
 h1 {
     font-size: xx-large;
+    font-family: Lato, serif;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 10px;
 }
+
+p {
+    text-align: center;
+    font-size: large;
+    padding: 20px;
+}
+
+.btn-site {
+    padding: 3% 15% 0% 15%;
+    display: flex;
+    justify-content: space-around;
+}
+
+.btn-site > a {
+    width: 200px;
+}
+
+.listUser > p{
+    padding: 10px;
+}
+
 
 /* PAGE AFFICHAGE QUIZ */
 
@@ -117,8 +152,6 @@ h1 {
 .btn , .btn-primary {
     background-color: #fa7b00;
     border-color: #d78900;
-    margin-left: 45%;
-    margin-right: 45%;
 }
 
 [class*="col-"], footer {
@@ -183,6 +216,7 @@ nav ul li a {
 nav ul li a:hover {
     background: #f2f2f2;
     color: #fb5958;
+    text-decoration: none;
 }
 nav ul li a:not(:only-child):after {
     padding-left: 4px;
@@ -289,11 +323,11 @@ nav ul li ul li a {
     background: #fa7b00;
 }
 
+
 /*
 .nav-container – the inner wrapper for the navbar. Defines how far the actual content should stretch.
 */
 .nav-container {
-    max-width: 1000px;
     margin: 0 auto;
 }
 
@@ -313,14 +347,6 @@ nav ul li ul li a {
 
 
 /* ccs pour la gestion du quiz */
-
-
-main {
-    margin: auto;
-    margin-top: 50px;
-    width: 80%;
-    background-color: white;
-}
 
 #response {
     margin: 10px 0;
@@ -360,6 +386,3 @@ span {
     margin: 0;
 }
 
-#redirectLink {
-    display: none;
-}

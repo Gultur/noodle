@@ -11,6 +11,7 @@ namespace AppBundle\Controller;
 
 
 use AppBundle\Form\UserType;
+use AppBundle\Form\UserUpdateType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Component\BrowserKit\Response;
@@ -49,7 +50,9 @@ class RegistrationController extends Controller
         }
 
         return $this->render(
+
             'security/register.html.twig',
+
             array('form' => $form->createView())
         );
     }
@@ -68,24 +71,24 @@ class RegistrationController extends Controller
     /**
      * @Route("/editUser/{username}", name="editUser")
      */
-    public function edit(Request $request , User $user) {
+    public function edit(Request $request , User $user)
+    {
 
         $form = $this->createForm(UserType::class, $user);
 
         $form->handleRequest($request);
 
-        if($form->handleRequest($request) && $form->isValid()) {
+        if ($form->handleRequest($request) && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
 
             //$em->persist($user);
             $em->flush();
 
-            return new Response('Modifié !');
+            //return new Response('Modifié !');
+            return $this->render('security/listUser.html.twig', array('users' => $user));
         }
 
-        $formView = $form->createView();
-
-        return $this->render('security/userUpdate.html.twig', array('form'=>$formView, 'users'=>$user));
     }
+
 
 }

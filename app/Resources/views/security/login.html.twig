@@ -4,9 +4,13 @@
 
 
 {% block content %}
+
     {% if error %}
         <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
     {% endif %}
+
+
+<main>
 
     <form action="{{ path('login') }}" method="post">
 
@@ -18,9 +22,14 @@
             <label for="password">Mot de passe</label>
             <input type="password" class="form-control" id="password" name="_password" placeholder="Mot de passe">
         </div>
-        <button type="submit" class="btn btn-primary">Connexion</button>
+
+        <div class="btn-site">
+            <button type="submit" class="btn btn-primary btn-lg">Connexion</button>
+        </div>
 
 
     </form>
+
+</main>
 
 {% endblock %}

@@ -13,6 +13,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserType extends AbstractType
 {
+
     /**
      * {@inheritdoc}
      */
@@ -24,8 +25,11 @@ class UserType extends AbstractType
             ->add('plainPassword', RepeatedType::class, array (
                 'type' => PasswordType::class,
                 'first_options' => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Validez mot de passe')));
+                'second_options' => array('label' => 'Validez mot de passe'),
+                'required' => false,
+                ));
     }
+
 
     /**
     * {@inheritdoc}

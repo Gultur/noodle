@@ -28,6 +28,7 @@ class AnswerUser
      */
     private $value;
 
+
     /**
      * @ORM\ManyToOne(targetEntity="Question")
      * @ORM\JoinColumn(name="id_question", referencedColumnName="id", nullable=false)
@@ -47,7 +48,6 @@ class AnswerUser
      * @ORM\JoinColumn(name="id_session", referencedColumnName="id", nullable=false)
      */
     private $session;
-
 
     /**
      * Get id
@@ -130,7 +130,6 @@ class AnswerUser
     {
         $this->session = $session;
     }
-
 
 }
 

@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // le cas closed quiz declenche le par defaut des switchs !!!
 
 $(document).ready(function () {
@@ -215,3 +216,4 @@ $(document).ready(function () {
 
     const quizInterval = setInterval(handleQuestion, 1000);
 });
+

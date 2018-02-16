@@ -10,6 +10,7 @@ namespace AppBundle\Repository;
  */
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
+
     public function getUnusedQuestions($idQuestionsInQuiz) {
 
 
@@ -34,7 +35,7 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
         $results = $query->getResult();
         return $results;
     }
-
+/*
     function testGetQuestionsInQuiz($idQuiz)
     {
 
@@ -63,7 +64,6 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
             ->setParameter(':idQuestionsInQuiz', $results);
 
         return $qb->getQuery()->getResult();
-    }
-
+    }*/
 
 }

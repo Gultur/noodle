@@ -39,7 +39,7 @@ class Session
     private $sKey;
 
     /**
-     * @var int
+     * @var User
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="author", referencedColumnName="id")
      */
@@ -145,7 +145,7 @@ class Session
     /**
      * Set author
      *
-     * @param integer $author
+     * @param User $author
      *
      * @return Session
      */
@@ -159,7 +159,7 @@ class Session
     /**
      * Get author
      *
-     * @return int
+     * @return User
      */
     public function getAuthor()
     {

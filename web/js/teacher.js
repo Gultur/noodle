@@ -1,3 +1,5 @@
+// le cas closed quiz declenche le par defaut des switchs !!!
+
 $(document).ready(function () {
 
     /*
@@ -114,6 +116,8 @@ $(document).ready(function () {
             "<p> <span>Question : </span> " + dataSession.name +  "</p>"
             + "<p> <span>Intitulé : </span> " + dataSession.question +  "</p>";
 
+
+
         switch (dataSession.typeQuestion) {
             case "text":
                 elem.innerHTML += "<input type='text' disabled>";
@@ -159,7 +163,7 @@ $(document).ready(function () {
 
 
                 break;
-            case _:
+            default:
                 alert("Erreur ! La question n'a pas de type");
                 break;
         }
@@ -265,12 +269,14 @@ $(document).ready(function () {
 
     // handle the end of a quiz or an non existant quiz
     function messageNoSession() {
-        emptyFields(["time", "response", "quiz"]);
         clearInterval(quizInterval);
-        $("#quiz").html("<p>Le Quiz est terminé</p>");
-        $("#redirectLink").show();
+        emptyFields(["time", "response", "quiz"]);
         toggleButtons(buttons,[]);
         togglePropsButtons(buttons,[]);
+
+        $("#quiz").html("<p>Le Quiz est terminé</p>");
+        $("#redirectLink").show();
+
     }
     
     /*
@@ -300,6 +306,8 @@ $(document).ready(function () {
                     $("#responded").html(dataSession.responded.length + '/' + totalStudents);
                     $("#notResponded").html(dataSession.notResponded.length + '/' + totalStudents);
 
+                    var elem;
+
                     switch (dataSession.status) {
 
                         case "delayQuestion":
@@ -319,9 +327,8 @@ $(document).ready(function () {
                                     "decrementDelay": "success"
                                 });
                             }
-
-                            var elem = document.createElement("form");
-                            elem.setAttribute("id", "questionForm");
+                            elem = document.createElement("form");
+                            $(elem).attr("id","questionForm");
 
 
                             //todo : implemented session and projectionchoice
@@ -337,8 +344,9 @@ $(document).ready(function () {
 
                         case "runningQuestion":
 
-                            var elem = document.createElement("form");
-                            elem.setAttribute("id", "questionForm");
+
+                            elem = document.createElement("form");
+                            $(elem).attr("id", "questionForm");
 
                             displayQuestion(data, elem);
 
@@ -386,9 +394,10 @@ $(document).ready(function () {
                         /*case "closedQuiz":
                             emptyFields(["time", "response", "quiz"]);
                             break;*/
-                        case _:
-                            messageNoSession();
+                        case "closedQuiz":
                             break;
+                        default:
+                            messageNoSession();
                     }
                 }
             } else {messageNoSession();}

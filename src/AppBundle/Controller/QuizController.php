@@ -317,7 +317,7 @@ class QuizController extends Controller
             }
         }
 
-        return $this->render("default/quiz.html.twig",array('indexSession' => $indexSession));
+        return $this->render("default/quiz.html.twig",array('indexSession' => $indexSession, 'sessionKey' => $session->getSKey() ));
     }
 
     /**

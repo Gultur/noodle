@@ -7,26 +7,33 @@
 
     <main>
 
-        <p>Nom du Quiz : {{ quiz.name }}</p>
+        <h1>Nom du Quiz : {{ quiz.name }}</h1>
 
-        <div id="leftDiv" class="col-md-6">
-            {% for question in quiz.questions %}
-                <div id={{ question.id }}>
-                    <p>{{ question.question }}</p>
-                    <button>Changer de zone</button>
-                </div>
-            {% endfor %}
-        </div>
+        <p><a href="{{ path('listquiz') }}">Revenir à la liste des Quiz</a></p>
+
+        <section>
+
+            <div id="leftDiv" class="col-md-6">
+                {% for question in quiz.questions %}
+                    <div class="questionBox" id={{ question.id }}>
+                        <p>{{ question.question }}</p>
+                        <button>Changer de zone</button>
+                    </div>
+                {% endfor %}
+            </div>
 
 
-        <div id="rightDiv" class="col-md-6">
-            {% for question in questions %}
-                <div id={{ question.id }}>
-                    <p>{{ question.question }}</p>
-                    <button>Changer de zone</button>
-                </div>
-            {% endfor %}
-        </div>
+            <div id="rightDiv" class="col-md-6">
+                {% for question in questions %}
+                    <div class="questionBox" id={{ question.id }}>
+                        <p>{{ question.question }}</p>
+                        <button>Changer de zone</button>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+
+
     </main>
 
 

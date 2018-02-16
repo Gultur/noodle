@@ -5,16 +5,21 @@
 
 {% block content %}
 
-    {% for quiz in listQuiz %}
-        <div class="quiz">
-            <a href="{{ path('editquiz', {"id": quiz.id}) }}">{{ quiz.name }}</a>
-            {% if quiz.questions is empty %}
-                <p>Il n'y a pas de question dans ce Quiz</p>
-                <a href="{{ path('editquiz', {"id": quiz.id}) }}">Ajouter une ou des questions</a>
-            {% else %}
-                <a href="{{ path('createsession', {"id": quiz.id}) }}">Lancer le quiz</a>
-            {% endif %}
-        </div>
-    {% endfor %}
+    <main>
+        <h1>Liste des Quiz</h1>
+
+        {% for quiz in listQuiz %}
+            <div class="quiz">
+                <h3>{{ quiz.name }}</h3>
+                <p><a href="{{ path('editquiz', {"id": quiz.id}) }}">Modifier la liste des questions du quiz</a></p>
+                {% if quiz.questions is empty %}
+                    <p>Il n'y a pas de question dans ce Quiz, ajoutez des questions pour pouvoir l'utiliser </p>
+                {% else %}
+                    <p><a href="{{ path('createsession', {"id": quiz.id}) }}">Lancer le quiz</a></p>
+                {% endif %}
+            </div>
+        {% endfor %}
+
+    </main>
 
 {% endblock %}

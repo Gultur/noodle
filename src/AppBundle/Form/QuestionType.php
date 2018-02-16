@@ -25,7 +25,7 @@ class QuestionType extends AbstractType
     {
         $builder
             ->add('name', TextType::class, array(
-                'label' => 'Énoncé'
+                'label' => 'Nom de la question'
             ))
             ->add('type', ChoiceType::class, array('choices' =>
                     array(
@@ -41,7 +41,7 @@ class QuestionType extends AbstractType
                 )
             )
             ->add('question', TextType::class, array(
-                'label' => 'Question'
+                'label' => 'Enoncé'
             ))
             ->add('time', IntegerType::class, array(
                 'label' => 'Durée (en seconde)'

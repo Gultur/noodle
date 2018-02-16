@@ -39,10 +39,9 @@ class SessionController extends Controller
 
         if($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            //$user = $em->getRepository('AppBunlde:User')->find($iduser);
 
             $session->setAuthor($user);
-            $session->addUser($user);
+            //$session->addUser($user);
             $session->setQuiz($quiz);
 
             $em->persist($session);

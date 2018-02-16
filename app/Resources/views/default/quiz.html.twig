@@ -8,6 +8,8 @@
 
         {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
 
+            <p>La clé de session est : <span>{{ sessionKey }}</span></p>
+
             <p>Nombre d'étudiants ayant répondu : <span id="responded"></span></p>
             <p>Nombre d'étudiants n'ayant pas répondu : <span id="notResponded"></span></p>
 

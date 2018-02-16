@@ -1,3 +1,5 @@
+// le cas closed quiz declenche le par defaut des switchs !!!
+
 $(document).ready(function () {
     var idCurrentQuestion = -1;
 
@@ -94,11 +96,13 @@ $(document).ready(function () {
                     messageNoSession();
 
                 } else {
+
                      switch (dataSession.status) {
 
                          case "delayQuestion":
 
                              emptyFields(["response", "quiz"]);
+                             answersUser = [];
 
                              $("#time").html("La question s'affichera dans " + dataSession.delay + " seconde(s)");
                              break;
@@ -113,7 +117,7 @@ $(document).ready(function () {
                                  if (idCurrentQuestion != dataSession.idQuestion) {
 
                                      var elem = document.createElement("form");
-                                     elem.setAttribute("id", "questionForm");
+                                     $(elem).attr("id", "questionForm");
 
                                      displayQuestion(data, elem);
 
@@ -193,14 +197,14 @@ $(document).ready(function () {
                              emptyFields(["response"]);
                              $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
                              break;
-                         /*case "closedQuiz":
-                             emptyFields(["time", "response", "quiz"]);
+                         case "closedQuiz":
+                         /*    emptyFields(["time", "response", "quiz"]);
                              clearInterval(quizInterval);
                              $("#quiz").html("<p>Le Quiz est terminé</p>");
                             $("#redirectLink").show();
-
-                             break;*/
-                         case _:
+*/
+                             break;
+                         default :
                              messageNoSession();
                              break;
                      }

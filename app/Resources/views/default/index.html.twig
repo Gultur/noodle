@@ -13,25 +13,26 @@
         </p>
     </div>
 
-    <div class="btn-site">
         {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
+        <div class="btn-site">
             <a href="{{ path('addquestion') }}" type="button" class="btn btn-primary btn-lg">Créer une question</a>
             <a href="{{ path('displayquestions') }}" type="button" class="btn btn-primary btn-lg">Afficher les questions</a>
+        </div>
+        <div class="btn-site">
             <a href="{{ path('createquiz') }}" type="button" class="btn btn-primary btn-lg">Créer un quiz</a>
             <a href="{{ path('listquiz') }}" type="button" class="btn btn-primary btn-lg">Liste des Quiz</a>
-
+        </div>
 
         {% elseif is_granted("ROLE_STUDENT") %}
 
-        {% endif %}
+            <p>Accéder au Quiz</p>
+            <form action="{{ path('sessionadduser') }}" method="post">
+                <label for="sessionKey">Entrez la clé de la session du Quiz</label>
+                <input id="sessionKey" name="sessionKey" type="text">
+                <input type="submit" value="Valider">
+            </form>
 
-        <p>Accéder au Quiz</p>
-        <form action="{{ path('sessionadduser') }}" method="post">
-            <label for="sessionKey">Entrez la clé de la session du Quiz</label>
-            <input id="sessionKey" name="sessionKey" type="text">
-            <input type="submit" value="Valider">
-        </form>
-    </div>
+        {% endif %}
 
 
 

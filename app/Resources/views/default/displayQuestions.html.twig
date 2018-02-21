@@ -3,7 +3,7 @@
 {% set page_title = 'Affichage des questions' %}
 {% block content %}
 
-    <main>
+    <main class="container">
         {% if (is_granted("ROLE_TEACHER") == true or is_granted("ROLE_ADMIN") == true ) %}
 
             <h1>Liste des questions</h1>
@@ -13,21 +13,21 @@
             {% for question in questions %}
                 <div class="question">
                     <p>{{ question.name }}</p>
-                    <p>{{ question.type }}</p>
+                    <p>{{ question.type }} / {{ question.time }} seconde(s)</p>
                     <p>{{ question.question }}</p>
-                    <p>{{ question.time }}</p>
-
-
+                    <div class="answer">
                     {% for answer in question.answers %}
-                        <div class="answer">
-                            <p>{{ answer.value }}</p>
+
+                            <p>{{ answer.value }} :
                             {% if answer.correct == 1 %}
-                            <p>Bonne réponse</p>
+                                bonne réponse
                             {% elseif answer.correct == 0 %}
-                            <p>Mauvaise réponse</p>
+                                mauvaise réponse
                             {% endif %}
-                        </div>
+                            </p>
+
                     {% endfor %}
+                    </div>
 
                     <a class="btn btn-primary btn-lg" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
                     <hr>

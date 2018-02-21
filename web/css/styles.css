@@ -2,9 +2,9 @@
 
 
 main {
-    margin: auto;
+    /*margin: auto;
     margin-top: 50px;
-    width: 80%;
+    width: 80%;*/
     background-color: white;
     padding-bottom: 20px;
 }
@@ -21,7 +21,6 @@ header {
 h1 {
     font-size: xx-large;
     font-family: Lato, serif;
-    text-transform: uppercase;
     text-align: center;
     padding: 10px;
 }
@@ -33,7 +32,7 @@ h2, h3 {
 p {
     text-align: center;
     font-size: large;
-    padding: 20px;
+    /*padding: 20px;*/
 }
 
 .btn-site {
@@ -42,8 +41,19 @@ p {
     justify-content: space-around;
 }
 
+@media(max-width:900px) {
+    .btn-site {
+        flex-direction: column;
+        align-items: center;
+        padding-top: 0;
+        padding-bottom: 0;
+    }
+
+}
+
 .btn-site > a {
     width: 200px;
+    margin-top:15px;
 }
 
 .listUser > p{
@@ -362,7 +372,7 @@ nav ul li ul li a {
 }
 
 main #clore, main #nextquestion, main #displayresponse, main #close, main #addtime {
-    //display: none;
+    display: none;
 }
 
 main #quiz form {
@@ -377,12 +387,14 @@ span {
 .question {
     display: block;
     width: 80%;
-    background-color: white;
+    background-color: #f3f3f3;
     margin: 10px;
 }
 
+
+
 .answer {
-    background-color: #5bc0de;
+    background-color: #f8f8f8;
 }
 
 

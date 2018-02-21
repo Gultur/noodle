@@ -101,7 +101,11 @@ class QuizController extends Controller
      *
      * handle all the event during the quiz
      */
-    public function quizAction(Request $request, Session $session, UserInterface $user){
+    public function quizAction(Request $request, Session $session = null, UserInterface $user){
+
+        if (empty($session)) {
+            return $this->redirectToRoute('homepage');
+        }
 
         if(!in_array($user, $session->getUsers()->toArray()) && $session->getAuthor() != $user) {
             return $this->redirectToRoute('homepage');
@@ -292,6 +296,8 @@ class QuizController extends Controller
 
                         unset($json[$indexSession]);
 
+                        $session->setState("Closed");
+
                         $new_json = json_encode($json);
                         file_put_contents("viewquiz/json/runningQuiz.json", $new_json);
                         break;
@@ -300,7 +306,7 @@ class QuizController extends Controller
             }
         }
 
-        return $this->render("default/quiz.html.twig",array('indexSession' => $indexSession, 'sessionKey' => $session->getSKey() ));
+        return $this->render("default/quiz.html.twig",array('indexSession' => $indexSession, 'sessionKey' => $session->getSKey(), 'idSession' => $session->getId() ));
     }
 
     /**

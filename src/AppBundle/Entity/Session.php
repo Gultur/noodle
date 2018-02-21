@@ -60,6 +60,12 @@ class Session
     private $projected;
 
     /**
+     * @var string
+     * @ORM\Column(name="state", type="string")
+     */
+    private $state;
+
+    /**
      * @var \DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
@@ -213,6 +219,24 @@ class Session
     {
         return $this->projected;
     }
+
+    /**
+     * @return string
+     */
+    public function getState()
+    {
+        return $this->state;
+    }
+
+    /**
+     * @param string $state
+     */
+    public function setState($state)
+    {
+        $this->state = $state;
+    }
+
+
 
     /**
      * Set createdAt

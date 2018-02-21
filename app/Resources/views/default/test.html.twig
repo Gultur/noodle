@@ -1,0 +1,30 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Resultats' %}
+
+
+{% block content %}
+
+    <main class="container">
+        <h1>Réponses à la question {{ question.name }}</h1>
+
+        <p>{{ question.question }}</p>
+
+            {% for answer in answers %}
+
+                {{ answer.value }}
+
+            {% endfor %}
+
+        <h3>La réponse correcte était :</h3>
+
+            {% for correct in corrects %}
+                {{ correct.value }}
+            {% endfor %}
+
+
+
+
+    </main>
+
+{% endblock %}

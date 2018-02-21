@@ -17,12 +17,12 @@ class AnswerUserRepository extends \Doctrine\ORM\EntityRepository
     public function getAnswersForASpecificStudent(User $student, Question $question, Session $session){
 
         $qb = $this->createQueryBuilder('ans');
-        $qb -> select('ans.value')
+        $qb -> select('ans')
             ->where('ans.user = :student')
             ->setParameter('student',$student)
-            ->where('ans.question = :question')
+            ->andWhere('ans.question = :question')
             ->setParameter('question', $question)
-            ->where('ans.session = :session')
+            ->andWhere('ans.session = :session')
             ->setParameter('session', $session)
             ->orderBy('ans.value', 'DESC');
 

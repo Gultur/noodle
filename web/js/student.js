@@ -76,7 +76,7 @@ $(document).ready(function () {
         emptyFields(["time", "response", "quiz"]);
         clearInterval(quizInterval);
         $("#quiz").html("<p>Le Quiz est terminé</p>");
-        $("#redirectLink").show();
+        $(".redirectLink").show();
     }
 
     // this function make an ajax request in order to have the current question information

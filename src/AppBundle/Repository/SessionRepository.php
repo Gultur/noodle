@@ -15,4 +15,5 @@ class SessionRepository extends \Doctrine\ORM\EntityRepository
 
         return $result;
     }
+
 }

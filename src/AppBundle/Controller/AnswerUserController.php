@@ -96,4 +96,32 @@ class AnswerUserController extends Controller
             return $this->render("default/quiz.html.twig", array('id' => $idSession));
         }
     }
+
+    /**
+     * @param Request $request
+     * @return \Symfony\Component\HttpFoundation\Response
+     * @Route("/results", name="studentresults")
+     */
+
+    public function testResult(Request $request){
+
+
+        $id = $request->query->get('id');
+
+        $em = $this->getDoctrine()->getManager();
+
+        $session = $em->getRepository('AppBundle:Session')->find($id);
+        $user = $em->getRepository('AppBundle:User')->find(5);
+        $question = $em->getRepository('AppBundle:Question')->find(26);
+
+        $answers = $em ->getRepository('AppBundle:AnswerUser')
+            ->getAnswersForASpecificStudent ($user, $question, $session);
+
+        $correctsAnswers = $em -> getRepository('AppBundle:Answer')
+            ->getCorrectsAnswers($question);
+
+
+        return $this->render('default/test.html.twig', array('answers' => $answers, 'question' => $question, 'corrects' => $correctsAnswers));
+    }
+
 }

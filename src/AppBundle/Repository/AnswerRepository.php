@@ -10,13 +10,15 @@ namespace AppBundle\Repository;
  */
 class AnswerRepository extends \Doctrine\ORM\EntityRepository
 {
-/*
-    public function getLikeQueryBuilder($pattern)
-    {
-        return $this->createQueryBuilder('ans')
-            ->where('ans.value LIKE :pattern')
-            ->setParameter('pattern',$pattern);
+    public function getCorrectsAnswers($question){
+        $qb = $this->createQueryBuilder('ans');
+        $qb -> select('ans')
+            ->andWhere('ans.question = :question')
+            ->setParameter('question', $question)
+            ->andWhere('ans.correct = :correct')
+            ->setParameter('correct', 1);
 
-    }*/
+        return $qb->getQuery()->getResult();
+    }
 
 }

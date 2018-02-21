@@ -53,6 +53,7 @@ class SessionController extends Controller
 
             $session->setAuthor($user);
             $session->setQuiz($quiz);
+            $session->setState("Running");
 
             $em->persist($session);
             $em->flush();

@@ -39,9 +39,19 @@ class SessionController extends Controller
 
         if($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            $sessionsKeys = $em->getRepository('AppBundle:Session')->getAllKeys();
+
+            $enteredKey = $form->getData()->getSKey();
+
+
+            foreach ($sessionsKeys as $sessionKey) {
+                if(in_array($enteredKey, $sessionKey)) {
+
+                    return $this->render("default/createSession.html.twig", array("form" => $form->createView(), 'errorKey' => 'La clé existe déjà, veuillez entrer une clé différente'));
+                }
+            }
 
             $session->setAuthor($user);
-            //$session->addUser($user);
             $session->setQuiz($quiz);
 
             $em->persist($session);

@@ -29,7 +29,7 @@
                         </div>
                     {% endfor %}
 
-                    <a class="btn btn-primary btn-lg href="{{ path("deletequestion", {"id": question.id}) }}">Supprimer</a>
+                    <a class="btn btn-primary btn-lg" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
                     <hr>
                 </div>
 

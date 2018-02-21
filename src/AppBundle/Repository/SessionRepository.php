@@ -10,4 +10,9 @@ namespace AppBundle\Repository;
  */
 class SessionRepository extends \Doctrine\ORM\EntityRepository
 {
+    public function getAllKeys() {
+        $result = $this->createQueryBuilder('s')->select('s.sKey')->getQuery()->getArrayResult();
+
+        return $result;
+    }
 }

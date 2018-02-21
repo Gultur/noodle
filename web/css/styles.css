@@ -394,3 +394,19 @@ span {
     margin: 0;
 }
 
+/* editquiz */
+#leftDiv, #rightDiv{
+    border:none;
+    padding: 5px;
+    background-color: white;
+}
+
+#leftDiv .questionBox{
+    background-color: #e5e5e5 ;
+
+}
+
+#rightDiv .questionBox{
+    background-color: #e8e8e8 ;
+    font-size: 12px;
+}

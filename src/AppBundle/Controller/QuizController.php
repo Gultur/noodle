@@ -34,6 +34,7 @@ class QuizController extends Controller
      * @Route("/createquiz", name="createquiz")
      *
      * @return \Symfony\Component\HttpFoundation\Response
+     *
      */
     public function createQuizAction(Request $request) {
 
@@ -63,6 +64,8 @@ class QuizController extends Controller
 
     /**
      * @Route("/loadquiz/{id}", name="loadquiz")
+     *
+     * initialize the quiz before start
      */
     public function loadQuizAction(Request $request, Session $session)
     {
@@ -72,9 +75,7 @@ class QuizController extends Controller
         $jsonSessions = json_decode($file_json, true);
 
         $quiz = $session->getQuiz();
-
         $questions = $quiz->getQuestions();
-
         $json["idsQuestions"] = [];
 
         for ($i = 0; $i < count($questions); $i++) {
@@ -98,8 +99,13 @@ class QuizController extends Controller
     /**
      * @Route("/viewquiz/{id}", name="viewquiz")
      *
+     * handle all the event during the quiz
      */
     public function quizAction(Request $request, Session $session, UserInterface $user){
+
+        if(!in_array($user, $session->getUsers()->toArray()) && $session->getAuthor() != $user) {
+            return $this->redirectToRoute('homepage');
+        }
 
         $file_json = file_get_contents("viewquiz/json/runningQuiz.json");
         $json = json_decode($file_json, true);
@@ -119,14 +125,11 @@ class QuizController extends Controller
         }
 
         if($request->request->get('responses')){
-            //$idSession = $this->getDoctrine()->getManager()->getRepository("AppBundle:Session")->find($session)->getId();
-
-            //on verifie qu'il y a bien eu quelque chose d'envoyé
 
             if($request->request->get('idQuestion')){
 
-                // on créé un json correspondant pour l'écrire dans un fichier
-                // en attentant les requetes en bases de données
+                // the json is only here for test
+                // todo : delete the json section
 
                 $reponsejson = json_encode(array(
                     "idSessions"=>$session->getId(),
@@ -134,14 +137,10 @@ class QuizController extends Controller
                     "idStudent"=>$user->getId(),
                     "responses"=>$request->request->get('responses')));
 
-                // création, ecriture du fichier
                 $file = fopen("viewquiz/json/answerStudents.json","w");
                 fwrite($file, $reponsejson);
                 fclose($file);
 
-                // creation de l'objet answerStudent
-                // l'id de la session est arbitrairement mis à 1
-                // les sessions n'étant pas encore implémentées
 
                 $em = $this->getDoctrine()->getManager();
 
@@ -182,14 +181,7 @@ class QuizController extends Controller
         }
         else {
 
-
-            //$em = $this->getDoctrine()->getManager();
-
-            //$session = $em->getRepository('AppBundle:Session')->find($id);
-
-
             $em = $this->getDoctrine()->getManager();
-            //$session = $em->getRepository('AppBundle:Session')->find($id);
 
             $file_json = file_get_contents("viewquiz/json/runningQuiz.json");
             $json = json_decode($file_json, true);
@@ -383,6 +375,8 @@ class QuizController extends Controller
      * @param Request $request
      * @return \Symfony\Component\HttpFoundation\Response
      * @Route("/addquestionstoquiz", name="addquestionstoquiz")
+     *
+     * not need anymore, include in editQuizAction
      */
    /* public function addQuestionsAction (Request $request) {
         if ($request->request->get('idQuiz')) {
@@ -423,6 +417,24 @@ class QuizController extends Controller
         $em->flush();
 
         return $this->redirectToRoute('editquiz', array('id' => $idquiz));
+    }
+
+    /**
+     * @Route("/deletequiz/{id}", name="deletequiz")
+     *
+     */
+
+    public function deleteQuizAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $quiz = $em->getRepository('AppBundle:Quiz')->find($id);
+        $em->remove($quiz);
+        $em->flush();
+
+        $listQuiz = $em->getRepository('AppBundle:Quiz')->findAll();
+
+
+        return $this->redirectToRoute('listquiz', array('listQuiz' => $listQuiz));
+
     }
 
 }

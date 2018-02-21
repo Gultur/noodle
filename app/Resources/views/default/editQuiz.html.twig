@@ -14,10 +14,11 @@
         <section>
 
             <div id="leftDiv" class="col-md-6">
+                <h2>Questions présentes dans le quiz</h2>
                 {% for question in quiz.questions %}
                     <div class="questionBox" id={{ question.id }}>
                         <p>{{ question.question }}</p>
-                        <button>Changer de zone</button>
+                        <button class="btn btn-primary btn-lg">Changer de zone</button>
                         <hr>
                     </div>
                 {% endfor %}
@@ -26,10 +27,11 @@
 
 
             <div id="rightDiv" class="col-md-6">
+                <h2>Questions disponibles</h2>
                 {% for question in questions %}
                     <div class="questionBox" id={{ question.id }}>
                         <p>{{ question.question }}</p>
-                        <button>Changer de zone</button>
+                        <button class="btn btn-primary btn-lg">Changer de zone</button>
                         <hr>
                     </div>
                 {% endfor %}

@@ -12,6 +12,13 @@
         {{ form_start(form) }}
         {{ form_widget(form) }}
         {{ form_end(form) }}
+
+        {% if errorKey is defined %}
+            <div class="alert alert-danger alert-dismissable">
+                {{ errorKey }}
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+            </div>
+        {% endif %}
     </main>
 
 {% endblock %}

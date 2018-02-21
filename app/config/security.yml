@@ -57,3 +57,17 @@ security:
 
     access_control:
         - { path: ^/addquestion, roles: ROLE_TEACHER }
+        - { path: ^/listquiz, roles: ROLE_TEACHER }
+        - { path: ^/editquiz, roles: ROLE_TEACHER }
+        - { path: ^/displayquestions, roles: ROLE_TEACHER }
+        - { path: ^/createquiz, roles: ROLE_TEACHER }
+        - { path: ^/createsession, roles: ROLE_TEACHER }
+        - { path: ^/deletequestion, roles: ROLE_TEACHER }
+        - { path: ^/deletequestionfromquiz, roles: ROLE_TEACHER }
+        - { path: ^/loadquiz, roles: ROLE_TEACHER }
+        - { path: ^/deletequiz, roles: ROLE_TEACHER }
+        - { path: ^/listUser, roles: ROLE_ADMIN }
+        - { path: ^/editUser, roles: ROLE_ADMIN }
+        - { path: ^/administration, roles: ROLE_ADMIN }
+
+    access_denied_url: /

@@ -12,6 +12,7 @@
             <div class="quiz">
                 <h3>{{ quiz.name }}</h3>
                 <p><a href="{{ path('editquiz', {"id": quiz.id}) }}">Modifier la liste des questions du quiz</a></p>
+                <p><a href="{{ path('deletequiz', {"id": quiz.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer le quiz</a></p>
                 {% if quiz.questions is empty %}
                     <p>Il n'y a pas de question dans ce Quiz, ajoutez des questions pour pouvoir l'utiliser </p>
                 {% else %}

@@ -1,0 +1,36 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Resultats' %}
+
+
+{% block content %}
+
+    <main>
+        <a href="{{ path('homepage') }}" type="button" class="btn btn-default leave">Quitter</a>
+
+        <p id="correctAnswers">{{ studentCorrectAnswers }} bonne(s) réponse(s) sur {{ nbQuestions }} question(s)</p>
+
+        <div id="studentresults">
+            {% for result in results %}
+                <div class="questionContainer">
+                    <p class="questionResults">{{ result.question.question }}</p>
+                    <p>Vos réponses :
+                        {% for answer in result.studentAnswers %}
+                            {{ answer.value }}
+                        {% endfor %}
+                    </p>
+
+
+                    <p class="correctAnswers">Les bonnes réponses :
+                        {% for correctanswer in result.correctAnswers %}
+                            {{ correctanswer.value }}
+                        {% endfor %}
+                    </p>
+                </div>
+            {% endfor %}
+        </div>
+
+
+    <main/>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Quiz' %}
+{% block content %}
+    <main class="container">
+
+        {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
+
+            <p>La clé de session est : <span>{{ sessionKey }}</span></p>
+
+            <p>Nombre d'étudiants ayant répondu : <span id="responded"></span></p>
+            <p>Nombre d'étudiants n'ayant pas répondu : <span id="notResponded"></span></p>
+
+            <button id="startQuiz" class="btn btn-default">Démarrer le quiz</button>
+            <button id="nextQuestion" class="btn btn-default">Question suivante</button>
+            <button id="stopQuestion" class="btn btn-default">Arrêter la question</button>
+            <button id="showResults" class="btn btn-default">Voir les résultats</button>
+            <button id="showResponse" class="btn btn-default">Envoyer la réponse</button>
+            <button id="addTime" class="btn btn-default">Ajouter 10 secondes</button>
+            <a id="closeQuiz" href="{{ path('homepage') }}" type="button" class="btn btn-default">Clore le quiz</a>
+        {% endif %}
+
+        <div id="quiz" data-session="{{ indexSession }}">
+
+        </div>
+
+        <a href="{{ path('studentresults', {'id': idSession}) }}" type="button" class="btn btn-default leave redirectLink">Visualiser mes résultats</a>
+        <a href="{{ path('homepage') }}" type="button" class="btn btn-default leave redirectLink">Quitter</a>
+
+
+        <div id="response">
+
+        </div>
+
+        <div id="time">
+
+        </div>
+    </main>
+
+    {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN")%}
+        <script src="{{ asset('js/teacher.js') }}"></script>
+    {% endif %}
+    {% if is_granted("ROLE_STUDENT")%}
+        <script src="{{ asset('js/student.js') }}"></script>
+    {% endif %}
+
+
+{% endblock %}

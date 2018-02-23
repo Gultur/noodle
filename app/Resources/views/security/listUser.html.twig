@@ -1,0 +1,19 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Liste utilisateur' %}
+{% block content %}
+
+
+    <main>
+        <h1>Listes des utilisateurs :</h1>
+        <p>Pour modifier le rôle d'un utilisateur, cliquez sur la ligne correspondante</p>
+        <div class="listUser">
+        {% for user in users %}
+            <p><a href="{{ path('editUser', {'id':user.id}) }}">{{ user.id }} : {{ user.username }} - {{ user.email }}</a></p>
+        {% endfor %}
+        </div>
+    </main>
+
+
+
+{% endblock %}

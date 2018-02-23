@@ -1,0 +1,22 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Création de Quiz' %}
+
+
+{% block content %}
+
+
+    <main class="container">
+
+        <h1>Création d'un Quiz</h1>
+
+
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        <div class="btn-site">
+            <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+        </div>
+        {{ form_end(form) }}
+    </main>
+
+{% endblock %}

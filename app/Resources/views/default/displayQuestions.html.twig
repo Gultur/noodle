@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Affichage des questions' %}
+{% block content %}
+
+    <main class="container">
+        {% if (is_granted("ROLE_TEACHER") == true or is_granted("ROLE_ADMIN") == true ) %}
+
+            <h1>Liste des questions</h1>
+
+
+
+            {% for question in questions %}
+                <div class="question">
+                    <p>{{ question.name }}</p>
+                    <p>{{ question.type }} / {{ question.time }} seconde(s)</p>
+                    <p>{{ question.question }}</p>
+                    <div class="answer">
+                    {% for answer in question.answers %}
+
+                            <p>{{ answer.value }} :
+                            {% if answer.correct == 1 %}
+                                bonne réponse
+                            {% elseif answer.correct == 0 %}
+                                mauvaise réponse
+                            {% endif %}
+                            </p>
+
+                    {% endfor %}
+                    </div>
+
+                    <a class="btn btn-primary btn-lg" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
+                    <hr>
+                </div>
+
+            {% endfor %}
+
+        {% endif %}
+
+    </main>
+
+{% endblock %}
+

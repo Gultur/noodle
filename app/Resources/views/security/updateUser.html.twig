@@ -1,0 +1,25 @@
+{% extends 'layout.html.twig' %}
+
+{% set page_title = 'Édition utilisateur' %}
+{% block content %}
+
+
+    <main>
+        <h1>Éditer un utilisateur</h1>
+
+        {{ form_start(form) }}
+
+            {{ form_row(form.username) }}
+            {{ form_row(form.email) }}
+            {{ form_row(form.role) }}
+
+        <div class="btn-site">
+            <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+        </div>
+        {{ form_end(form) }}
+
+    </main>
+
+
+
+{% endblock %}

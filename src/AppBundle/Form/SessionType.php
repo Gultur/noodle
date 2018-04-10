@@ -22,10 +22,10 @@ class SessionType extends AbstractType
                  'label' => 'Nom de la session'
             ))
             ->add('sKey', TextType::class,array(
-                'label' => 'Clé de session'
+                'label' => 'Clé de session (code fourni aux étudiants pour accéder au quiz)'
             ))
             ->add('delayQuestion', IntegerType::class, array(
-                'label' => 'Délai en seconde avant chaque question'
+                'label' => 'Délai en seconde avant chaque question (un minimum de 3 secondes sera appliqué)'
             ))
             ->add('projected');
     }/**

@@ -11,9 +11,20 @@
 
 
             {% for question in questions %}
-                <div class="question">
-                    <p>{{ question.name }}</p>
-                    <p>{{ question.type }} / {{ question.time }} seconde(s)</p>
+                <div class="question text-center">
+                    <p>Intitulé : {{ question.name }}</p>
+                    <p>Question de type :
+                        {% if question.type == 'text' %}
+                            texte
+                        {% elseif question.type == 'trueOrFalse' %}
+                            vrai ou faux
+                        {% elseif question.type == 'multipleChoicesRadio' %}
+                            choix multiple, une seule réponse correcte
+                        {% elseif question.type == 'multipleChoicesCheckBox' %}
+                            choix multiple, au moins une bonne réponse
+                        {% endif %}
+                    </p>
+                    <p>Durée : {{ question.time }} seconde(s)</p>
                     <p>{{ question.question }}</p>
                     <div class="answer">
                     {% for answer in question.answers %}
@@ -29,7 +40,9 @@
                     {% endfor %}
                     </div>
 
-                    <a class="btn btn-primary btn-lg" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
+                    {% if is_granted("ROLE_ADMIN") %}
+                        <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
+                    {% endif %}
                     <hr>
                 </div>
 

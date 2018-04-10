@@ -44,7 +44,7 @@ class QuestionType extends AbstractType
                 'label' => 'Enoncé'
             ))
             ->add('time', IntegerType::class, array(
-                'label' => 'Durée (en seconde)'
+                'label' => 'Durée (un minimum de 5 secondes sera appliqué)'
             ))
 
             ->add('answers', CollectionType::class, array(
@@ -62,7 +62,6 @@ class QuestionType extends AbstractType
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(array(
-            //'data_class' => 'AppBundle\Entity\Question'
             'data_class' => Question::class
         ));
     }

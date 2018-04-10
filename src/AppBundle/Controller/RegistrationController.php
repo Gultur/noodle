@@ -22,26 +22,21 @@ use AppBundle\Entity\User;
 class RegistrationController extends Controller
 {
     /**
+     * Register a new user
      * @Route("/register", name="register")
-     *
-     * @param Request $request
      */
     public function registerAction(Request $request) {
-
-        // 1) Build the form
         $user = new User();
-        $form = $this->createForm(UserType::class, $user);
 
-        // 2) handle the submit (will only happen on post)
+        $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
+
         if ($form->isSubmitted() && $form->isValid()) {
 
-            // 3) Encode the password
             $password = $this->get('security.password_encoder')
                 ->encodePassword($user, $user->getPlainPassword());
             $user->setPassword($password);
 
-            // 4) save the User
             $em = $this->getDoctrine()->getManager();
             $em->persist($user);
             $em->flush();
@@ -49,48 +44,37 @@ class RegistrationController extends Controller
             return $this->redirectToRoute('homepage');
         }
 
-        return $this->render(
-
-            'security/register.html.twig',
-
-            array('form' => $form->createView())
-        );
+        return $this->render('security/register.html.twig', array('form' => $form->createView()));
     }
 
     /**
-     * @Route("/listUser", name="listUser")
+     * Display every users from the database
+     * @Route("/listusers", name="listusers")
      */
     public function listUserAction() {
         $repository = $this->getDoctrine()->getRepository('AppBundle:User');
 
-        $user = $repository->findAll();
+        $users = $repository->findAll();
 
-        return $this->render('security/listUser.html.twig', array('users'=>$user));
+        return $this->render('security/listUser.html.twig', array('users'=>$users));
     }
 
     /**
-     * @Route("/editUser/{id}", name="editUser")
+     * Edit informations for a user
+     * @Route("/edituser/{id}", name="edituser")
      */
     public function editAction(Request $request , User $user) {
         $form = $this->createForm(UserUpdateType::class, $user);
         $form->handleRequest($request);
-        //$originalPassword = $user->getPassword();
+
         if($form->isSubmitted() && $form->isValid()) {
-            $user = $form->getData();
+            //$user = $form->getData();
             $em = $this->getDoctrine()->getManager();
-            //$em->persist($user);
             $em->flush();
             $this->addFlash('success', 'User updated!');
-            return $this->redirectToRoute('homepage');
+            return $this->redirectToRoute('listusers');
         }
         $formView = $form->createView();
-        return $this->render('security/updateUser.html.twig',
-            array(
-                'form'=>$formView,
-                'users'=>$user,
-            ));
+        return $this->render('security/updateUser.html.twig', array('form'=>$formView));
     }
-
-
-
 }

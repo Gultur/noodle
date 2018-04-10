@@ -7,7 +7,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * quiz
  *
  * @ORM\Table(name="quiz")
  * @ORM\Entity(repositoryClass="AppBundle\Repository\QuizRepository")
@@ -52,7 +51,6 @@ class Quiz
 
 
     /**
-     * Get id
      *
      * @return int
      */
@@ -62,7 +60,6 @@ class Quiz
     }
 
     /**
-     * Set name
      *
      * @param string $name
      *
@@ -76,7 +73,7 @@ class Quiz
     }
 
     /**
-     * Get name
+
      *
      * @return string
      */

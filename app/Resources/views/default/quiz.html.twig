@@ -8,24 +8,25 @@
 
             <p>La clé de session est : <span>{{ sessionKey }}</span></p>
 
-            <p>Nombre d'étudiants ayant répondu : <span id="responded"></span></p>
-            <p>Nombre d'étudiants n'ayant pas répondu : <span id="notResponded"></span></p>
+            <p id="totalStudents"></p>
+            <p id="responded"></p>
+            <p id="notResponded"></p>
 
-            <button id="startQuiz" class="btn btn-default">Démarrer le quiz</button>
-            <button id="nextQuestion" class="btn btn-default">Question suivante</button>
-            <button id="stopQuestion" class="btn btn-default">Arrêter la question</button>
-            <button id="showResults" class="btn btn-default">Voir les résultats</button>
-            <button id="showResponse" class="btn btn-default">Envoyer la réponse</button>
-            <button id="addTime" class="btn btn-default">Ajouter 10 secondes</button>
-            <a id="closeQuiz" href="{{ path('homepage') }}" type="button" class="btn btn-default">Clore le quiz</a>
+            <button id="startQuiz" class="btn btn-primary">Démarrer le quiz</button>
+            <button id="nextQuestion" class="btn btn-primary">Question suivante</button>
+            <button id="stopQuestion" class="btn btn-primary">Arrêter la question</button>
+            <button id="showResults" class="btn btn-primary">Voir les résultats</button>
+            <button id="showResponse" class="btn btn-primary">Envoyer la réponse</button>
+            <button id="addTime" class="btn btn-primary">Ajouter 10 secondes</button>
+            <a id="closeQuiz" href="{{ path('homepage') }}" type="button" class="btn btn-primary">Clore le quiz</a>
         {% endif %}
 
         <div id="quiz" data-session="{{ indexSession }}">
 
         </div>
 
-        <a href="{{ path('studentresults', {'id': idSession}) }}" type="button" class="btn btn-default leave redirectLink">Visualiser mes résultats</a>
-        <a href="{{ path('homepage') }}" type="button" class="btn btn-default leave redirectLink">Quitter</a>
+        <a href="{{ path('studentresults', {'id': idSession}) }}" type="button" class="btn btn-primary leave redirectLink">Visualiser mes résultats</a>
+        <a href="{{ path('homepage') }}" type="button" class="btn btn-primary leave redirectLink">Quitter</a>
 
 
         <div id="response">

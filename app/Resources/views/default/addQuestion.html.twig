@@ -12,11 +12,8 @@
 
 
     <div class="well">
-        {# form_start(variable, [parametres]) correspond à la balise <form>#}
-        {# form_start(form) rajoute l'attribut enctype,necessaire pour l'upload de fichier, dans la balise <form>#}
         {{ form_start(form, {'attr': {'class': 'form-horizontal'}}) }}
 
-        {# Les erreurs générales du formulaire. #}
         {{ form_errors(form) }}
 
         {{ form_row(form.name) }}
@@ -30,7 +27,7 @@
 
 
         <div class="btn-site">
-            <button id="add_answer" class="btn btn-primary btn-lg">Ajouter une réponse</button>
+            <button id="add_answer" class="btn btn-primary">Ajouter une réponse</button>
         </div>
 
 
@@ -38,7 +35,7 @@
 
 
         <div class="btn-site">
-            <button type="submit" class="btn btn-primary btn-lg">Ajouter</button>
+            <button type="submit" class="btn btn-primary btn-lg">Créer</button>
         </div>
 
 

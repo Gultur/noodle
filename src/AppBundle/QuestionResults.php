@@ -5,16 +5,28 @@
  * Date: 21/02/2018
  * Time: 21:44
  */
+/*
+ * External class to store a question, the student answers and the correct answers
+ */
 
 namespace AppBundle;
 
 
 class QuestionResults
 {
+    /*
+     * @var Question
+     */
     private $question;
 
+    /*
+     * @var array String
+     */
     private $studentAnswers;
 
+    /*
+     * @var array
+     */
     private $correctAnswers;
 
     public function __construct($question, $studentAnswers, $correctAnswers)

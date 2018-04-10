@@ -9,10 +9,15 @@ main {
     width: 80%;
     margin: auto;
     background-color: white;
+    padding-bottom: 30px;
 }
 
 header {
     width: 100%;
+}
+
+h1{
+    text-align: center;
 }
 
 .leave {
@@ -74,10 +79,6 @@ header {
 }
 
 .enonceQuestion {
-    display: inline;
-}
-
-.question {
     display: inline;
 }
 
@@ -374,7 +375,6 @@ span {
 /* /addquestion */
 .question {
     display: block;
-    width: 80%;
     background-color: #f3f3f3;
     margin: 10px;
 }
@@ -402,33 +402,17 @@ span {
 }
 
 #leftDiv .questionBox{
-    background-color: #e5e5e5 ;
+    background-color: lightblue;
 
 }
 
 #rightDiv .questionBox{
     background-color: #e8e8e8 ;
-    font-size: 12px;
 }
 
 /* studentresults */
-
-.questionContainer  {
-    width: 90%;
-    margin: 10px auto;
-    border: 1px solid black;
-    border-radius: 5px;
-}
 
 .correctAnswers {
     color: green;
 }
 
-.questionResults {
-    font-size: 1.5em;
-}
-
-#correctAnswers {
-    margin-left: 5px;
-    font-size: 1.5em;
-}

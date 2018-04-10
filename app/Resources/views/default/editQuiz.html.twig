@@ -1,15 +1,16 @@
 {% extends 'layout.html.twig' %}
 
-{% set page_title = 'Édition du Quiz' %}
+{% set page_title = 'Édition du quiz' %}
 
 
 {% block content %}
 
     <main class="container">
+        <a href="{{ path('listquiz') }}" type="button" class="btn btn-primary leave">Revenir à la liste des Quiz</a>
+        <a href="{{ path('displayquestions') }}" type="button" class="btn btn-primary leave">Liste des questions</a>
+        <a href="{{ path('createsession', {"id" : quiz.id})  }}" type="button" class="btn btn-primary leave">Lancer le quiz</a>
 
-        <h1>Nom du Quiz : {{ quiz.name }}</h1>
-
-        <p><a href="{{ path('listquiz') }}">Revenir à la liste des Quiz</a></p>
+        <h1 class="text-center" data-quiz="{{ quiz.id }}">{{ quiz.name }}</h1>
 
         <section>
 
@@ -18,7 +19,7 @@
                 {% for question in quiz.questions %}
                     <div class="questionBox" id={{ question.id }}>
                         <p>{{ question.question }}</p>
-                        <button class="btn btn-primary btn-lg">Changer de zone</button>
+                        <button class="btn btn-primary">Changer de zone</button>
                         <hr>
                     </div>
                 {% endfor %}
@@ -31,7 +32,7 @@
                 {% for question in questions %}
                     <div class="questionBox" id={{ question.id }}>
                         <p>{{ question.question }}</p>
-                        <button class="btn btn-primary btn-lg">Changer de zone</button>
+                        <button class="btn btn-primary">Changer de zone</button>
                         <hr>
                     </div>
                 {% endfor %}
@@ -43,45 +44,7 @@
     </main>
 
 
-    <script>
-        $(document).ready(function () {
-            const questionsInQuiz = $('#leftDiv');
-            const questionsNotInQuiz = $('#rightDiv');
+    <script src="{{ asset('js/editQuiz.js') }}"></script>
 
-            $('#leftDiv button').each(function () {
-                $(this).html('Retirer du quiz');
-            });
-            $('#rightDiv button').each(function () {
-                $(this).html('Ajouter au quiz');
-            });
-
-            $('main button').click(function (event) {
-                event.stopPropagation();
-                let elementToMove = $(event.target).parent();
-                let elementParent = $(elementToMove).parent();
-
-
-                if ($(elementParent).attr('id') == 'leftDiv') {
-                    console.log($(elementParent).attr('id'));
-                    $(elementToMove).appendTo(questionsNotInQuiz);
-                    $(event.target).html('Ajouter au quiz')
-                    $.post( {{ quiz.id }}, {
-                        "idRemoveQuestion": $(elementToMove).attr('id')
-                    })
-                }
-                else {
-                    console.log($(elementParent).attr('id'));
-                    $(elementToMove).appendTo(questionsInQuiz);
-                    $(event.target).html('Retirer du quiz')
-                    $.post( {{ quiz.id }}, {
-                        "idAddQuestion": $(elementToMove).attr('id')
-                    })
-                }
-
-
-                console.log(elementToMove);
-            })
-        })
-    </script>
 
 {% endblock %}

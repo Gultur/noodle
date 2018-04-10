@@ -6,22 +6,22 @@
 {% block content %}
 
     <main>
-        <a href="{{ path('homepage') }}" type="button" class="btn btn-default leave">Quitter</a>
+        <p class="text-center">{{ studentCorrectAnswers }} bonne(s) réponse(s) sur {{ nbQuestions }} question(s)</p>
 
-        <p id="correctAnswers">{{ studentCorrectAnswers }} bonne(s) réponse(s) sur {{ nbQuestions }} question(s)</p>
-
-        <div id="studentresults">
+        <div class="text-center">
             {% for result in results %}
-                <div class="questionContainer">
-                    <p class="questionResults">{{ result.question.question }}</p>
-                    <p>Vos réponses :
+                <hr>
+
+                <div>
+                    <p>{{ result.question.question }}</p>
+                    <p>Votre ou vos réponse(s) :
                         {% for answer in result.studentAnswers %}
                             {{ answer.value }}
                         {% endfor %}
                     </p>
 
 
-                    <p class="correctAnswers">Les bonnes réponses :
+                    <p class="correctAnswers">La ou les bonne(s) réponse(s) :
                         {% for correctanswer in result.correctAnswers %}
                             {{ correctanswer.value }}
                         {% endfor %}

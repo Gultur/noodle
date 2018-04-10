@@ -20,25 +20,23 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class QuestionController extends Controller
 {
     /**
+     * Add a question in the database
      * @Route("/addquestion", name="addquestion")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addAction(Request $request) {
-
 
         $question = new Question();
 
         $form = $this->createForm(QuestionType::class, $question);
-
-        //$form->add("add",SubmitType::class, array(
-        //    "label" => "Ajouter"
-        //));
-
         $form->handleRequest($request);
 
         if($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+
+            if(($form->getData()->getTime()) < 5){
+                $question->setTime(5);
+            }
+
             $em->persist($question);
 
             $em->flush();
@@ -51,11 +49,10 @@ class QuestionController extends Controller
 
 
     /**
+     * Display every questions from the database
      * @Route("/displayquestions", name="displayquestions")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
-    public function displayAction(Request $request) {
+    public function displayQuestionsAction(Request $request) {
         $repository = $this->getDoctrine()->getRepository('AppBundle:Question');
         $questions = $repository->findAll();
 
@@ -65,8 +62,7 @@ class QuestionController extends Controller
 
 
     /**
-     * @param $id
-     * @return RedirectResponse
+     * Delete a question in the database
      * @Route("/deletequestion/{id}", name="deletequestion")
      */
     public function deleteAction($id){

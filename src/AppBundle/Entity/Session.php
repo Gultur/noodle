@@ -66,7 +66,7 @@ class Session
     private $state;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      *
      * @ORM\Column(name="createdAt", type="datetime")
      */

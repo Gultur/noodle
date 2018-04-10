@@ -11,10 +11,10 @@ namespace AppBundle\Repository;
 class QuestionRepository extends \Doctrine\ORM\EntityRepository
 {
 
+    /*
+     * return the questions which are not in the edited quiz
+     */
     public function getUnusedQuestions($idQuestionsInQuiz) {
-
-
-
         $qb = $this->getEntityManager()->createQueryBuilder();
         $qb->select('qs.id')
             ->from('AppBundle:Question','qs')
@@ -25,45 +25,16 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    /*
+     * return the questions which are in the edited quiz
+     */
     function getIdQuestionsFromQuiz($idQuiz){
         $query = $this->getEntityManager()->createQuery(
             'SELECT q.id FROM AppBundle:Quiz qz JOIN qz.questions q WHERE qz.id = :id'
         )->setParameter('id', $idQuiz);
 
-
-
         $results = $query->getResult();
         return $results;
     }
-/*
-    function testGetQuestionsInQuiz($idQuiz)
-    {
-
-
-        $query = $this->getEntityManager()->createQuery(
-            'SELECT q FROM AppBundle:Quiz qz JOIN qz.questions q WHERE qz.id = :id'
-        )->setParameter('id', $idQuiz);
-        $results = $query->getResult();
-
-        return $results;
-    }
-
-
-    function testGetQuestionNotInQuiz($idQuiz){
-
-
-        $query = $this->getEntityManager()->createQuery(
-            'SELECT q.id FROM AppBundle:Quiz qz JOIN qz.questions q WHERE qz.id = :id'
-        )->setParameter('id', $idQuiz);
-        $results = $query->getResult();
-
-        $qb = $this->getEntityManager()->createQueryBuilder();
-        $qb->select('qs')
-            ->from('AppBundle:Question','qs')
-            ->where($qb->expr()->notIn('qs.id', ':idQuestionsInQuiz'))
-            ->setParameter(':idQuestionsInQuiz', $results);
-
-        return $qb->getQuery()->getResult();
-    }*/
 
 }

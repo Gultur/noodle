@@ -1,11 +1,12 @@
 {% extends 'layout.html.twig' %}
 
-{% set page_title = 'Édition utilisateur' %}
+{% set page_title = 'Édition d\'un utilisateur' %}
 {% block content %}
 
 
-    <main>
+    <main class="container">
         <h1>Éditer un utilisateur</h1>
+
 
         {{ form_start(form) }}
 
@@ -14,9 +15,9 @@
             {{ form_row(form.role) }}
 
         <div class="btn-site">
-            <button type="submit" class="btn btn-primary btn-lg">Valider</button>
+            <button type="submit" class="btn btn-primary btn-lg" onclick="return confirm('Confirmer la modification ?')">Valider</button>
         </div>
-        {{ form_end(form) }}
+        {{  form_end(form) }}
 
     </main>
 

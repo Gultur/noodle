@@ -1,10 +1,5 @@
-// le cas closed quiz declenche le par defaut des switchs !!!
-
 $(document).ready(function () {
 
-    /*
-        array with all the buttons id
-     */
     const buttons = ["startQuiz", "nextQuestion", "stopQuestion", "showResults", "addTime", "showResponse", "closeQuiz"];
 
     var idSession = -1;
@@ -12,7 +7,7 @@ $(document).ready(function () {
     const indexSession = $("#quiz").attr('data-session');
 
     /*
-        handle the visibility of the buttons
+     *  Handle the visibility of the buttons
      */
     function toggleButtons(hideButtons, showButtons) {
         $.each(hideButtons, function(index, value) {
@@ -22,10 +17,10 @@ $(document).ready(function () {
             $("#" + value).show()
         });
     }
-    /*
-        enable or disable the buttons
-     */
 
+    /*
+     *   Enable or disable the buttons
+     */
     function togglePropsButtons(disableButtons, enableButtons) {
         $.each(disableButtons, function(index, value) {
             $("#" + value).prop('disabled', true)
@@ -36,8 +31,7 @@ $(document).ready(function () {
     }
 
     /*
-        on initialise check the status of the quiz with the json
-        display in function of the status
+     *  Check the status of the session using the json
      */
     $.getJSON("json/runningQuiz.json", function (data) {
 
@@ -53,7 +47,6 @@ $(document).ready(function () {
                 messageNoSession();
 
             } else {
-
 
                 switch(dataSession.status) {
 
@@ -90,10 +83,10 @@ $(document).ready(function () {
                 }
             }
         } else {messageNoSession();}
-    })
+    });
 
     /*
-        change the status of the quiz
+     *  Change the status of the session
      */
     function changeStatus(value) {
         $.post( idSession, {
@@ -102,8 +95,8 @@ $(document).ready(function () {
     }
 
     /*
-        empty some fields
-     */
+    * Delete content form specifics fields
+    */
     function emptyFields(arrayFields) {
         $.each(arrayFields, function(index, value) {
             $("#" + value).empty()
@@ -111,16 +104,13 @@ $(document).ready(function () {
     }
 
     /*
-        display the question with the type
-        checkbox/radio
-     */
+    * Display the question depending of the type
+    */
     function displayQuestion(data, elem){
 
         elem.innerHTML =
             "<p> <span>Question : </span> " + dataSession.name +  "</p>"
             + "<p> <span>Intitulé : </span> " + dataSession.question +  "</p>";
-
-
 
         switch (dataSession.typeQuestion) {
             case "text":
@@ -174,13 +164,12 @@ $(document).ready(function () {
     }
 
     /*
-        this functions handle the action after click on the buttons
+     * This functions handle the action after click on the buttons
      */
 
     /*
-        handle start action button
+     * Handle start action button
      */
-
     $("#startQuiz").click(function () {
 
         changeStatus("delayQuestion");
@@ -194,7 +183,7 @@ $(document).ready(function () {
 
 
     /*
-        handle next action button
+     * Handle next action button
      */
     $("#nextQuestion").click(function () {
 
@@ -209,7 +198,7 @@ $(document).ready(function () {
     });
 
     /*
-        handle stop action button
+     * Handle stop action button
      */
     $("#stopQuestion").click(function () {
         changeStatus("endedQuestionHide");
@@ -219,17 +208,15 @@ $(document).ready(function () {
     });
 
     /*
-        handle show result action button
+     * Handle show result action button
      */
-
     $("#showResults").click(function () {
 
     });
 
     /*
-        handle addtime action button
+     * Handle addtime action button
      */
-
     $("#addTime").click(function () {
         $.post( idSession, {
             "addTime": "success"
@@ -237,9 +224,8 @@ $(document).ready(function () {
     });
 
     /*
-        handle showResponse action button
+     * Handle showResponse action button
      */
-
     $("#showResponse").click(function () {
 
         $.getJSON("json/runningQuiz.json", function (data) {
@@ -260,9 +246,8 @@ $(document).ready(function () {
     });
 
     /*
-        handle closequiz action button
+     * Handle closequiz action button
      */
-
     $("#closeQuiz").click(function () {
 
         clearInterval(quizInterval);
@@ -271,7 +256,9 @@ $(document).ready(function () {
 
     });
 
-    // handle the end of a quiz or an non existant quiz
+    /*
+    * Handle the end of a quiz or an access to an ended quiz
+    */
     function messageNoSession() {
         clearInterval(quizInterval);
         emptyFields(["time", "response", "quiz"]);
@@ -284,10 +271,8 @@ $(document).ready(function () {
     }
 
     /*
-        Main function , handle the timers, change the status
-
+     * Main function , handle the timers, change the status
      */
-
     function handleQuestion() {
 
         $.getJSON("json/runningQuiz.json", function (data) {
@@ -307,14 +292,15 @@ $(document).ready(function () {
 
                     var totalStudents = dataSession.responded.length + dataSession.notResponded.length;
 
-                    $("#responded").html(dataSession.responded.length + '/' + totalStudents);
-                    $("#notResponded").html(dataSession.notResponded.length + '/' + totalStudents);
+
 
                     var elem;
 
                     switch (dataSession.status) {
 
                         case "delayQuestion":
+                            emptyFields(["totalStudents", "responded", "notResponded"]);
+
 
                             if (dataSession.delay == 0) {
                                 if (dataSession.idsQuestions.length == 0) {
@@ -334,8 +320,6 @@ $(document).ready(function () {
                             elem = document.createElement("form");
                             $(elem).attr("id","questionForm");
 
-
-                            //todo : implemented session and projectionchoice
                             if ("session" == "projeted") {
 
                                 displayQuestion(data, elem);
@@ -348,13 +332,14 @@ $(document).ready(function () {
 
                         case "runningQuestion":
 
-
                             elem = document.createElement("form");
                             $(elem).attr("id", "questionForm");
 
                             displayQuestion(data, elem);
 
                             $("#quiz").html(elem);
+                            $("#responded").html("Nombre d'étudiants ayant répondu : " + dataSession.responded.length + '/' + totalStudents);
+                            $("#notResponded").html("Nombre d'étudiants n'ayant pas répondu : " + dataSession.notResponded.length + '/' + totalStudents);
 
 
                             if (dataSession.time == 0) {
@@ -381,24 +366,32 @@ $(document).ready(function () {
                             var response = document.createElement("p");
 
                             for (let i = 0; i < dataSession.responses.length; i++) {
-                                response.innerHTML += dataSession.responses[i] + " "
+                                if(i != dataSession.responses.length-1) {
+                                    response.innerHTML += dataSession.responses[i] + " - "
+                                } else {
+                                    response.innerHTML += dataSession.responses[i];
+                                }
                             }
+
 
 
                             $("#response").html(response);
                             $("#time").html("Temps écoulé");
+                            $("#responded").html("Nombre d'étudiants ayant répondu : " + dataSession.responded.length + '/' + totalStudents);
+                            $("#notResponded").html("Nombre d'étudiants n'ayant pas répondu : " + dataSession.notResponded.length + '/' + totalStudents);
+
                             break;
 
                         case "endedQuestionHide":
                             $("#time").html("Temps écoulé");
+                            $("#responded").html("Nombre d'étudiants ayant répondu : " + dataSession.responded.length + '/' + totalStudents);
+                            $("#notResponded").html("Nombre d'étudiants n'ayant pas répondu : " + dataSession.notResponded.length + '/' + totalStudents);
+
                             emptyFields(["response"]);
 
                             break;
-
-                        /*case "closedQuiz":
-                            emptyFields(["time", "response", "quiz"]);
-                            break;*/
                         case "closedQuiz":
+                            $("#totalStudents").html("Nombre d'étudiants connectés au quiz : " + totalStudents);
                             break;
                         default:
                             messageNoSession();
@@ -408,8 +401,5 @@ $(document).ready(function () {
         })
     }
 
-    /*
-        we call the main method with an interval
-     */
     const quizInterval = setInterval(handleQuestion, 1000);
 });

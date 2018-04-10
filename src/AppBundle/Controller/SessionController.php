@@ -23,16 +23,18 @@ use Symfony\Component\Security\Core\User\UserInterface;
 class SessionController extends Controller
 {
     /**
+     * Create a session from a quiz and redirect to the interactive quiz
      * @Route("/createsession/{id}", name="createsession")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function createSessionAction (Request $request, UserInterface $user, Quiz $quiz) {
         $session = new Session();
 
         $form = $this->createForm(SessionType::class, $session);
         $form->add("add",SubmitType::class, array(
-            "label" => "Créer"
+            "label" => "Créer",
+            'attr' => array(
+                'class' => 'btn btn-primary btn-lg'
+            )
         ));
 
         $form->handleRequest($request);
@@ -51,6 +53,10 @@ class SessionController extends Controller
                 }
             }
 
+            if(($form->getData()->getDelayQuestion()) < 3){
+                $session->setDelayQuestion(3);
+            }
+
             $session->setAuthor($user);
             $session->setQuiz($quiz);
             $session->setState("Running");
@@ -66,9 +72,8 @@ class SessionController extends Controller
     }
 
     /**
+     * Add a user (student) in a quiz by entering the correct session's key
      * @Route("/sessionadduser", name="sessionadduser")
-     *
-     * @return \Symfony\Component\HttpFoundation\Response
      */
     public function addUserAction (Request $request, UserInterface $user) {
         $em = $this->getDoctrine()->getManager();

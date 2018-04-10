@@ -5,22 +5,22 @@
 
 <main class="container">
 
-    <div>
+    <div class="text-center">
         <h1>Bienvenue sur Noodle !</h1>
         <p class="presentation">
             Vous êtes sur un site de quiz interactif en ligne. Venez créer des quiz pour vos
-            élèves ou encore venez répondre à des quiz préparés par vos professeurs.
+            élèves ou encore venez répondre à des quiz préparés par vos enseignants.
         </p>
     </div>
 
         {% if is_granted("ROLE_TEACHER") or is_granted("ROLE_ADMIN") %}
         <div class="btn-site">
             <a href="{{ path('addquestion') }}" type="button" class="btn btn-primary btn-lg">Créer une question</a>
-            <a href="{{ path('displayquestions') }}" type="button" class="btn btn-primary btn-lg">Afficher les questions</a>
+            <a href="{{ path('displayquestions') }}" type="button" class="btn btn-primary btn-lg">Liste des questions</a>
         </div>
         <div class="btn-site">
             <a href="{{ path('createquiz') }}" type="button" class="btn btn-primary btn-lg">Créer un quiz</a>
-            <a href="{{ path('listquiz') }}" type="button" class="btn btn-primary btn-lg">Liste des Quiz</a>
+            <a href="{{ path('listquiz') }}" type="button" class="btn btn-primary btn-lg">Lancer un quiz</a>
         </div>
 
         {% elseif is_granted("ROLE_STUDENT") %}

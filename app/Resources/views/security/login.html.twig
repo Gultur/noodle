@@ -5,12 +5,9 @@
 
 {% block content %}
 
-    {% if error %}
-        <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
 
-
-<main>
+<main class="container">
+    <h1>Connexion</h1>
 
     <form action="{{ path('login') }}" method="post">
 
@@ -27,6 +24,13 @@
             <button type="submit" class="btn btn-primary btn-lg">Connexion</button>
         </div>
 
+        {% if error %}
+            <div class="alert alert-danger alert-dismissable">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <p>Erreur d'identifiant ou de mot de passe</p>
+
+            </div>
+        {% endif %}
 
     </form>
 

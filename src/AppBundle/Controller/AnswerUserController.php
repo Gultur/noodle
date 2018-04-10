@@ -32,8 +32,7 @@ class AnswerUserController extends Controller
 {
 
     /**
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
+     * For each question of the session, render the student's answers and the corrects answers
      * @Route("/studentresults/{id}", name="studentresults")
      */
 
@@ -67,7 +66,7 @@ class AnswerUserController extends Controller
                 $arrayCorrectAnswers = [];
 
                 foreach ($correctsAnswers as $ca) {
-                    array_push( $arrayCorrectAnswers, strtolower($ca["value"]));
+                    array_push($arrayCorrectAnswers, strtolower($ca["value"]));
                 }
 
                 foreach ($studentAnswers as $sa) {

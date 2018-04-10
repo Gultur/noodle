@@ -1,5 +1,3 @@
-// le cas closed quiz declenche le par defaut des switchs !!!
-
 $(document).ready(function () {
     var idCurrentQuestion = -1;
 
@@ -8,12 +6,18 @@ $(document).ready(function () {
     var dataSession = -1;
     var answersUser = [];
 
+    /*
+    * Delete content form specifics fields
+    */
     function emptyFields(arrayFields) {
         $.each(arrayFields, function(index, value) {
             $("#" + value).empty();
         });
     }
 
+    /*
+    * Display the question depending of the type
+    */
     function displayQuestion(data, elem){
         elem.innerHTML =
             "<p> <span>Question : </span> " + dataSession.name +  "</p>"
@@ -70,8 +74,9 @@ $(document).ready(function () {
         }
     }
 
-
-    // handle the end of a quiz or an non existant quiz
+    /*
+    * Handle the end of a quiz or an access to an ended quiz
+    */
     function messageNoSession() {
         emptyFields(["time", "response", "quiz"]);
         clearInterval(quizInterval);
@@ -79,7 +84,9 @@ $(document).ready(function () {
         $(".redirectLink").show();
     }
 
-    // this function make an ajax request in order to have the current question information
+    /*
+    * Ajax request in order to have the current question's informations
+    */
     function handleQuestion() {
 
         $.getJSON("json/runningQuiz.json", function (data) {
@@ -108,8 +115,6 @@ $(document).ready(function () {
                             break;
 
                         case "runningQuestion":
-
-                            //alert(dataSession.responded[0])
 
                             if(dataSession.responded.indexOf(5) > -1){
                                 $("#quiz").html("<p>En attente de la question suivante</p>");
@@ -156,7 +161,7 @@ $(document).ready(function () {
 
                                             const formdata = {
                                                 "idQuestion": dataSession.idQuestion,
-                                                "responses": answersUser,
+                                                "responses": answersUser
                                             };
 
 
@@ -198,11 +203,7 @@ $(document).ready(function () {
                             $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
                             break;
                         case "closedQuiz":
-                            /*    emptyFields(["time", "response", "quiz"]);
-                                clearInterval(quizInterval);
-                                $("#quiz").html("<p>Le Quiz est terminé</p>");
-                               $("#redirectLink").show();
-   */
+                            $("#quiz").html("<p>En attente du démarrage du quiz par l'enseignant</p>");
                             break;
                         default :
                             messageNoSession();

@@ -1,6 +1,6 @@
 {% extends 'layout.html.twig' %}
 
-{% set page_title = 'Liste des Quiz' %}
+{% set page_title = 'Liste des quiz' %}
 
 
 {% block content %}
@@ -11,12 +11,12 @@
         {% for quiz in listQuiz %}
             <div class="quiz">
                 <h3>{{ quiz.name }}</h3>
-                <p><a href="{{ path('editquiz', {"id": quiz.id}) }}">Modifier la liste des questions du quiz</a></p>
-                <p><a href="{{ path('deletequiz', {"id": quiz.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer le quiz</a></p>
+                <a href="{{ path('editquiz', {"id": quiz.id}) }}" type="button" class="btn btn-primary">Modifier la liste des questions du quiz</a>
+                <!--<p><a href="{# path('deletequiz', {"id": quiz.id}) #}" onclick="return confirm('Confirmer la suppression?')">Supprimer le quiz</a></p> -->
                 {% if quiz.questions is empty %}
                     <p>Il n'y a pas de question dans ce Quiz, ajoutez des questions pour pouvoir l'utiliser </p>
                 {% else %}
-                    <p><a href="{{ path('createsession', {"id": quiz.id}) }}">Lancer le quiz</a></p>
+                    <a href="{{ path('createsession', {"id": quiz.id}) }}" type="button" class="btn btn-primary leave">Lancer le quiz</a>
                 {% endif %}
                 <hr>
             </div>

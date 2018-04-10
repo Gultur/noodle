@@ -17,16 +17,15 @@ class SecurityController extends Controller
 {
 
     /**
+     * Handle the login
      * @Route("/login", name="login")
      */
     public function loginAction(Request $request)
     {
         $authenticationUtils = $this->get('security.authentication_utils');
 
-        // get the login error if there is one
         $error = $authenticationUtils->getLastAuthenticationError();
 
-        // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
         return $this->render('security/login.html.twig', array(
@@ -36,6 +35,7 @@ class SecurityController extends Controller
     }
 
     /**
+     * Render the administration page
      * @Route("/administration", name="administration")
      */
     public function adminAction(Request $request) {
@@ -44,8 +44,8 @@ class SecurityController extends Controller
     }
 
     /**
+     * Handle the logout
      * @Route("/logout", name="logout")
-     * @param Request
      */
     public function logoutAction(Request $request)
     {

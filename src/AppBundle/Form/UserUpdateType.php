@@ -19,23 +19,18 @@ class UserUpdateType extends AbstractType
     {
         $builder
             ->add('username', TextType::class, array('label'=>'Username'))
-            //->add('password', PasswordType::class, array('label'=>'Password'))
             ->add('email', EmailType::class, array('label'=>'Email'))
             ->add('role', ChoiceType::class, array('choices' =>
                 array(
                     'Etudiant' => 'ROLE_STUDENT',
-                    'Enseignant' => 'ROLE_TEACHER'),
+                    'Enseignant' => 'ROLE_TEACHER',
+                    'Administrateur' => 'ROLE_ADMIN'
+                ),
                 'multiple' => false,
                 'expanded' => true,
                 'label' => 'Sélectionnez un rôle',
                 'data' => 'text'))
-
-             /*->add('plainPassword', RepeatedType::class, array (
-                'type' => PasswordType::class,
-                'first_options' => array('label' => 'Mot de passe'),
-                'second_options' => array('label' => 'Validez mot de passe'),
-                'required' => false,))*/
-             ->add('plainPassword', HiddenType::class, array('label'=>'Password', 'data'=>"default value because symfony want it so bad"))
+             ->add('plainPassword', HiddenType::class, array('label'=>'Password', 'data'=>"default value"))
         ;
     }
 

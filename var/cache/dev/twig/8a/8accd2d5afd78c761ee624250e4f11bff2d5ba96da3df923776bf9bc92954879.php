@@ -21,32 +21,32 @@ class __TwigTemplate_16c28484566fc1463e411ffe7f05220994fc8b2780c690949a7cb3bc1cb
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_372b206d70ad4b0784d5642d4e920fd00ce6294554b558335528c1de7f354b55 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_372b206d70ad4b0784d5642d4e920fd00ce6294554b558335528c1de7f354b55->enter($__internal_372b206d70ad4b0784d5642d4e920fd00ce6294554b558335528c1de7f354b55_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/quiz.html.twig"));
+        $__internal_0a4617a09f16942661d5fad02b5dd3bfc4b89637a4c63f4d0065456ddeb3e272 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_0a4617a09f16942661d5fad02b5dd3bfc4b89637a4c63f4d0065456ddeb3e272->enter($__internal_0a4617a09f16942661d5fad02b5dd3bfc4b89637a4c63f4d0065456ddeb3e272_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/quiz.html.twig"));
 
-        $__internal_c9d2e6daaf34ca08fe11b0eb03ff4ceeb131b09fa9759e393fd038bdb70775f4 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_c9d2e6daaf34ca08fe11b0eb03ff4ceeb131b09fa9759e393fd038bdb70775f4->enter($__internal_c9d2e6daaf34ca08fe11b0eb03ff4ceeb131b09fa9759e393fd038bdb70775f4_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/quiz.html.twig"));
+        $__internal_4fa012c13124d0bd632ea0ba09270b31734bed687ff7c8c58a02425db478e729 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_4fa012c13124d0bd632ea0ba09270b31734bed687ff7c8c58a02425db478e729->enter($__internal_4fa012c13124d0bd632ea0ba09270b31734bed687ff7c8c58a02425db478e729_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/quiz.html.twig"));
 
         // line 3
         $context["page_title"] = "Quiz";
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_372b206d70ad4b0784d5642d4e920fd00ce6294554b558335528c1de7f354b55->leave($__internal_372b206d70ad4b0784d5642d4e920fd00ce6294554b558335528c1de7f354b55_prof);
+        $__internal_0a4617a09f16942661d5fad02b5dd3bfc4b89637a4c63f4d0065456ddeb3e272->leave($__internal_0a4617a09f16942661d5fad02b5dd3bfc4b89637a4c63f4d0065456ddeb3e272_prof);
 
         
-        $__internal_c9d2e6daaf34ca08fe11b0eb03ff4ceeb131b09fa9759e393fd038bdb70775f4->leave($__internal_c9d2e6daaf34ca08fe11b0eb03ff4ceeb131b09fa9759e393fd038bdb70775f4_prof);
+        $__internal_4fa012c13124d0bd632ea0ba09270b31734bed687ff7c8c58a02425db478e729->leave($__internal_4fa012c13124d0bd632ea0ba09270b31734bed687ff7c8c58a02425db478e729_prof);
 
     }
 
     // line 4
     public function block_content($context, array $blocks = array())
     {
-        $__internal_00e4afa975f5071c9e2c4cce045377067c83f181f63443189cba9510c3750e1a = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_00e4afa975f5071c9e2c4cce045377067c83f181f63443189cba9510c3750e1a->enter($__internal_00e4afa975f5071c9e2c4cce045377067c83f181f63443189cba9510c3750e1a_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_a153ace72b1522073d882ed5db06b464f1407866196d3513ba177e8477523c00 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_a153ace72b1522073d882ed5db06b464f1407866196d3513ba177e8477523c00->enter($__internal_a153ace72b1522073d882ed5db06b464f1407866196d3513ba177e8477523c00_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
-        $__internal_3b3ed329caf63ee9e144d6aa290f7005f03b21143d7b8fa12b04be919684eb4f = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_3b3ed329caf63ee9e144d6aa290f7005f03b21143d7b8fa12b04be919684eb4f->enter($__internal_3b3ed329caf63ee9e144d6aa290f7005f03b21143d7b8fa12b04be919684eb4f_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_00e7a910da290b4367f704702c0abff91e48a19bb73027a85cd31ddd5797b059 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_00e7a910da290b4367f704702c0abff91e48a19bb73027a85cd31ddd5797b059->enter($__internal_00e7a910da290b4367f704702c0abff91e48a19bb73027a85cd31ddd5797b059_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
         // line 5
         echo "    <main class=\"container\">
@@ -85,13 +85,16 @@ class __TwigTemplate_16c28484566fc1463e411ffe7f05220994fc8b2780c690949a7cb3bc1cb
         echo "\">
 
         </div>
+        <div id=\"graph\">
+
+        </div>
 
         <a href=\"";
-        // line 28
+        // line 31
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("studentresults", array("id" => ($context["idSession"] ?? $this->getContext($context, "idSession")))), "html", null, true);
         echo "\" type=\"button\" class=\"btn btn-primary leave redirectLink\">Visualiser mes résultats</a>
         <a href=\"";
-        // line 29
+        // line 32
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("homepage");
         echo "\" type=\"button\" class=\"btn btn-primary leave redirectLink\">Quitter</a>
 
@@ -106,32 +109,32 @@ class __TwigTemplate_16c28484566fc1463e411ffe7f05220994fc8b2780c690949a7cb3bc1cb
     </main>
 
     ";
-        // line 41
+        // line 44
         if (($this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_TEACHER") || $this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_ADMIN"))) {
-            // line 42
+            // line 45
             echo "        <script src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("js/teacher.js"), "html", null, true);
             echo "\"></script>
     ";
         }
-        // line 44
+        // line 47
         echo "    ";
         if ($this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_STUDENT")) {
-            // line 45
+            // line 48
             echo "        <script src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("js/student.js"), "html", null, true);
             echo "\"></script>
     ";
         }
-        // line 47
+        // line 50
         echo "
 
 ";
         
-        $__internal_3b3ed329caf63ee9e144d6aa290f7005f03b21143d7b8fa12b04be919684eb4f->leave($__internal_3b3ed329caf63ee9e144d6aa290f7005f03b21143d7b8fa12b04be919684eb4f_prof);
+        $__internal_00e7a910da290b4367f704702c0abff91e48a19bb73027a85cd31ddd5797b059->leave($__internal_00e7a910da290b4367f704702c0abff91e48a19bb73027a85cd31ddd5797b059_prof);
 
         
-        $__internal_00e4afa975f5071c9e2c4cce045377067c83f181f63443189cba9510c3750e1a->leave($__internal_00e4afa975f5071c9e2c4cce045377067c83f181f63443189cba9510c3750e1a_prof);
+        $__internal_a153ace72b1522073d882ed5db06b464f1407866196d3513ba177e8477523c00->leave($__internal_a153ace72b1522073d882ed5db06b464f1407866196d3513ba177e8477523c00_prof);
 
     }
 
@@ -147,7 +150,7 @@ class __TwigTemplate_16c28484566fc1463e411ffe7f05220994fc8b2780c690949a7cb3bc1cb
 
     public function getDebugInfo()
     {
-        return array (  127 => 47,  121 => 45,  118 => 44,  112 => 42,  110 => 41,  95 => 29,  91 => 28,  84 => 24,  81 => 23,  76 => 21,  61 => 9,  58 => 8,  56 => 7,  52 => 5,  43 => 4,  33 => 1,  31 => 3,  11 => 1,);
+        return array (  130 => 50,  124 => 48,  121 => 47,  115 => 45,  113 => 44,  98 => 32,  94 => 31,  84 => 24,  81 => 23,  76 => 21,  61 => 9,  58 => 8,  56 => 7,  52 => 5,  43 => 4,  33 => 1,  31 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -184,6 +187,9 @@ class __TwigTemplate_16c28484566fc1463e411ffe7f05220994fc8b2780c690949a7cb3bc1cb
         {% endif %}
 
         <div id=\"quiz\" data-session=\"{{ indexSession }}\">
+
+        </div>
+        <div id=\"graph\">
 
         </div>
 

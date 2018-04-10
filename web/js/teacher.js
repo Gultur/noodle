@@ -57,7 +57,7 @@ $(document).ready(function () {
                     case "runningQuestion":
                         $("#showResponse").html("Envoyer la réponse");
                         toggleButtons([], buttons);
-                        togglePropsButtons(["startQuiz", "showResponse"], ["nextQuestion", "stopQuestion", "showResults", "addTime", "closeQuiz"]);
+                        togglePropsButtons(["startQuiz", "showResponse", "showResults"], ["nextQuestion", "stopQuestion", "addTime", "closeQuiz"]);
                         break;
                     case "endedQuestionShow":
                         $("#showResponse").html("Cacher la réponse");
@@ -191,7 +191,8 @@ $(document).ready(function () {
 
 
         $("#showResponse").html("Envoyer la réponse");
-        emptyFields(["response"]);
+        $("#showResults").html("Voir les resultats");
+        emptyFields(["response", "graph"]);
 
         toggleButtons([], buttons);
         togglePropsButtons(buttons, [])
@@ -204,6 +205,7 @@ $(document).ready(function () {
         changeStatus("endedQuestionHide");
         $(this).prop("disabled", true);
         $("#showResponse").prop("disabled", false);
+        $("#showResults").prop("disabled", false);
         emptyFields(["quiz"])
     });
 
@@ -211,6 +213,29 @@ $(document).ready(function () {
      * Handle show result action button
      */
     $("#showResults").click(function () {
+        $.post( idSession, {
+            "showResults": "success"
+        });
+
+        setTimeout(function(){
+            if($("#showResults").html() == "Cacher les résultats") {
+                $("#showResults").html("Voir les résultats");
+                emptyFields(["graph"]);
+            } else {
+                $("#showResults").html("Cacher les résultats");
+                if (dataSession.answersResults == null || dataSession.answersResults.length == 0) {
+                    $("#graph").html("Il n'y a aucune réponse pour cette question !");
+                }
+                else {
+                    let result = document.createElement("ul");
+                    for (answerResult in dataSession.answersResults) {
+                        result.innerHTML += '<li> ' + answerResult + ' : ' + dataSession.answersResults[answerResult] * 100 / (dataSession.responded.length + dataSession.notResponded.length) + '% </li>';
+                    }
+                    $("#graph").html(result);
+                }
+
+            }
+        }, 1000);
 
     });
 
@@ -299,14 +324,14 @@ $(document).ready(function () {
                     switch (dataSession.status) {
 
                         case "delayQuestion":
-                            emptyFields(["totalStudents", "responded", "notResponded"]);
+                            emptyFields(["totalStudents", "responded", "notResponded", "graph"]);
 
 
                             if (dataSession.delay == 0) {
                                 if (dataSession.idsQuestions.length == 0) {
-                                    togglePropsButtons(["startQuiz", "showResponse", "nextQuestion"], ["stopQuestion", "showResults", "addTime", "closeQuiz"])
+                                    togglePropsButtons(["startQuiz", "showResponse", "nextQuestion", "showResults"], ["stopQuestion", "addTime", "closeQuiz"])
                                 } else {
-                                    togglePropsButtons(["startQuiz", "showResponse"], ["nextQuestion", "stopQuestion", "showResults", "addTime", "closeQuiz"])
+                                    togglePropsButtons(["startQuiz", "showResponse", "showResults"], ["nextQuestion", "stopQuestion", "addTime", "closeQuiz"])
 
                                 }
                                 changeStatus("runningQuestion");
@@ -350,6 +375,7 @@ $(document).ready(function () {
 
                                 emptyFields(["quiz"]);
                                 $("#showResponse").prop('disabled', false);
+                                $("#showResults").prop('disabled', false);
                                 $("#addtime").prop('disabled', true);
                             } else {
 
@@ -386,6 +412,7 @@ $(document).ready(function () {
                             $("#time").html("Temps écoulé");
                             $("#responded").html("Nombre d'étudiants ayant répondu : " + dataSession.responded.length + '/' + totalStudents);
                             $("#notResponded").html("Nombre d'étudiants n'ayant pas répondu : " + dataSession.notResponded.length + '/' + totalStudents);
+
 
                             emptyFields(["response"]);
 

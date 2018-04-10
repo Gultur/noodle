@@ -1,1 +1,1 @@
-[{"idsQuestions":[26,27,28],"status":"closedQuiz","projected":false,"idSession":7,"responded":[],"notResponded":[]}]
+[{"idsQuestions":[28],"status":"endedQuestionHide","projected":false,"idSession":21,"responded":[5],"notResponded":[],"idQuestion":27,"name":"Radio Question","typeQuestion":"multipleChoicesRadio","question":"Lequel est un chasseur de primes","delay":0,"responses":["Finn","Jango Fett","Kylo Ren","Jar Jar Binks","Watoo"],"time":0,"answersResults":{"Jango Fett":"0","Jar Jar Binks":"0","Kylo Ren":"1","Finn":"0","Watoo":"0"}}]

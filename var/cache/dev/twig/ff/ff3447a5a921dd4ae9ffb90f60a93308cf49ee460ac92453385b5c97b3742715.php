@@ -21,38 +21,42 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
 
     protected function doDisplay(array $context, array $blocks = array())
     {
-        $__internal_4450a8e8481cdefe64a41d72068492c9f34062acaa786aed4e9b56d776d53878 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_4450a8e8481cdefe64a41d72068492c9f34062acaa786aed4e9b56d776d53878->enter($__internal_4450a8e8481cdefe64a41d72068492c9f34062acaa786aed4e9b56d776d53878_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/studentResults.html.twig"));
+        $__internal_8834fd510587cdc91d19f9a3735d620879f80245dade5599851dc95dbba862d2 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_8834fd510587cdc91d19f9a3735d620879f80245dade5599851dc95dbba862d2->enter($__internal_8834fd510587cdc91d19f9a3735d620879f80245dade5599851dc95dbba862d2_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/studentResults.html.twig"));
 
-        $__internal_3f95a670ac1d48bb5f242774900e99c14a04c5548703d938d81640c1ad5f194b = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_3f95a670ac1d48bb5f242774900e99c14a04c5548703d938d81640c1ad5f194b->enter($__internal_3f95a670ac1d48bb5f242774900e99c14a04c5548703d938d81640c1ad5f194b_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/studentResults.html.twig"));
+        $__internal_dd3863e32ee0cb8d35233c6f119cb22eaa81e3513b3a9450fb60b7ee3cd14041 = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_dd3863e32ee0cb8d35233c6f119cb22eaa81e3513b3a9450fb60b7ee3cd14041->enter($__internal_dd3863e32ee0cb8d35233c6f119cb22eaa81e3513b3a9450fb60b7ee3cd14041_prof = new Twig_Profiler_Profile($this->getTemplateName(), "template", "default/studentResults.html.twig"));
 
         // line 3
         $context["page_title"] = "Resultats";
         // line 1
         $this->parent->display($context, array_merge($this->blocks, $blocks));
         
-        $__internal_4450a8e8481cdefe64a41d72068492c9f34062acaa786aed4e9b56d776d53878->leave($__internal_4450a8e8481cdefe64a41d72068492c9f34062acaa786aed4e9b56d776d53878_prof);
+        $__internal_8834fd510587cdc91d19f9a3735d620879f80245dade5599851dc95dbba862d2->leave($__internal_8834fd510587cdc91d19f9a3735d620879f80245dade5599851dc95dbba862d2_prof);
 
         
-        $__internal_3f95a670ac1d48bb5f242774900e99c14a04c5548703d938d81640c1ad5f194b->leave($__internal_3f95a670ac1d48bb5f242774900e99c14a04c5548703d938d81640c1ad5f194b_prof);
+        $__internal_dd3863e32ee0cb8d35233c6f119cb22eaa81e3513b3a9450fb60b7ee3cd14041->leave($__internal_dd3863e32ee0cb8d35233c6f119cb22eaa81e3513b3a9450fb60b7ee3cd14041_prof);
 
     }
 
     // line 6
     public function block_content($context, array $blocks = array())
     {
-        $__internal_43ee2d7665db7c65d48a7aff5d815e7e981335d36548ca68f7804378825930b1 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
-        $__internal_43ee2d7665db7c65d48a7aff5d815e7e981335d36548ca68f7804378825930b1->enter($__internal_43ee2d7665db7c65d48a7aff5d815e7e981335d36548ca68f7804378825930b1_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_0b4ba31b0d4e00774b881f11daee47ea445592ba94858045b2e7729d970e5082 = $this->env->getExtension("Symfony\\Bundle\\WebProfilerBundle\\Twig\\WebProfilerExtension");
+        $__internal_0b4ba31b0d4e00774b881f11daee47ea445592ba94858045b2e7729d970e5082->enter($__internal_0b4ba31b0d4e00774b881f11daee47ea445592ba94858045b2e7729d970e5082_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
-        $__internal_4ae421e62b54f7fbe3d3271d1408720dcc3d5a8ac0053865dcd26592257846db = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
-        $__internal_4ae421e62b54f7fbe3d3271d1408720dcc3d5a8ac0053865dcd26592257846db->enter($__internal_4ae421e62b54f7fbe3d3271d1408720dcc3d5a8ac0053865dcd26592257846db_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
+        $__internal_740d1112d3464a5cff8441deb46ea853266c510b9d87784165e9005604b6decc = $this->env->getExtension("Symfony\\Bridge\\Twig\\Extension\\ProfilerExtension");
+        $__internal_740d1112d3464a5cff8441deb46ea853266c510b9d87784165e9005604b6decc->enter($__internal_740d1112d3464a5cff8441deb46ea853266c510b9d87784165e9005604b6decc_prof = new Twig_Profiler_Profile($this->getTemplateName(), "block", "content"));
 
         // line 7
         echo "
     <main>
-        <p class=\"text-center\">";
+        <a href=\"";
         // line 9
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("homepage");
+        echo "\"  type=\"button\" class=\"btn btn-primary\">Retour à l'accueil</a>
+        <p class=\"text-center\">";
+        // line 10
         echo twig_escape_filter($this->env, ($context["studentCorrectAnswers"] ?? $this->getContext($context, "studentCorrectAnswers")), "html", null, true);
         echo " bonne(s) réponse(s) sur ";
         echo twig_escape_filter($this->env, ($context["nbQuestions"] ?? $this->getContext($context, "nbQuestions")), "html", null, true);
@@ -60,25 +64,25 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
 
         <div class=\"text-center\">
             ";
-        // line 12
+        // line 13
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["results"] ?? $this->getContext($context, "results")));
         foreach ($context['_seq'] as $context["_key"] => $context["result"]) {
-            // line 13
+            // line 14
             echo "                <hr>
 
                 <div>
                     <p>";
-            // line 16
+            // line 17
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["result"], "question", array()), "question", array()), "html", null, true);
             echo "</p>
                     <p>Votre ou vos réponse(s) :
                         ";
-            // line 18
+            // line 19
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["result"], "studentAnswers", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["answer"]) {
-                // line 19
+                // line 20
                 echo "                            ";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["answer"], "value", array()), "html", null, true);
                 echo "
@@ -87,17 +91,17 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['answer'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 21
+            // line 22
             echo "                    </p>
 
 
                     <p class=\"correctAnswers\">La ou les bonne(s) réponse(s) :
                         ";
-            // line 25
+            // line 26
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["result"], "correctAnswers", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["correctanswer"]) {
-                // line 26
+                // line 27
                 echo "                            ";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["correctanswer"], "value", array()), "html", null, true);
                 echo "
@@ -106,7 +110,7 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['correctanswer'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 28
+            // line 29
             echo "                    </p>
                 </div>
             ";
@@ -114,7 +118,7 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['result'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 31
+        // line 32
         echo "        </div>
 
 
@@ -122,10 +126,10 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
 
 ";
         
-        $__internal_4ae421e62b54f7fbe3d3271d1408720dcc3d5a8ac0053865dcd26592257846db->leave($__internal_4ae421e62b54f7fbe3d3271d1408720dcc3d5a8ac0053865dcd26592257846db_prof);
+        $__internal_740d1112d3464a5cff8441deb46ea853266c510b9d87784165e9005604b6decc->leave($__internal_740d1112d3464a5cff8441deb46ea853266c510b9d87784165e9005604b6decc_prof);
 
         
-        $__internal_43ee2d7665db7c65d48a7aff5d815e7e981335d36548ca68f7804378825930b1->leave($__internal_43ee2d7665db7c65d48a7aff5d815e7e981335d36548ca68f7804378825930b1_prof);
+        $__internal_0b4ba31b0d4e00774b881f11daee47ea445592ba94858045b2e7729d970e5082->leave($__internal_0b4ba31b0d4e00774b881f11daee47ea445592ba94858045b2e7729d970e5082_prof);
 
     }
 
@@ -141,7 +145,7 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
 
     public function getDebugInfo()
     {
-        return array (  118 => 31,  110 => 28,  101 => 26,  97 => 25,  91 => 21,  82 => 19,  78 => 18,  73 => 16,  68 => 13,  64 => 12,  56 => 9,  52 => 7,  43 => 6,  33 => 1,  31 => 3,  11 => 1,);
+        return array (  122 => 32,  114 => 29,  105 => 27,  101 => 26,  95 => 22,  86 => 20,  82 => 19,  77 => 17,  72 => 14,  68 => 13,  60 => 10,  56 => 9,  52 => 7,  43 => 6,  33 => 1,  31 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */
@@ -162,6 +166,7 @@ class __TwigTemplate_5ed0a00c4e18784960a8dc1c7a2c0cca7e9081d17df452741740638d77f
 {% block content %}
 
     <main>
+        <a href=\"{{ path('homepage') }}\"  type=\"button\" class=\"btn btn-primary\">Retour à l'accueil</a>
         <p class=\"text-center\">{{ studentCorrectAnswers }} bonne(s) réponse(s) sur {{ nbQuestions }} question(s)</p>
 
         <div class=\"text-center\">

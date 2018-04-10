@@ -28,4 +28,30 @@ class AnswerUserRepository extends \Doctrine\ORM\EntityRepository
 
     }
 
+    public function getCountAnswersForSpecificQuestion(Question $question, Session $session, $answer) {
+        $qb = $this->createQueryBuilder('ans');
+        $qb -> select('count(ans.value)')
+            -> where('ans.session = :session')
+            -> setParameter('session', $session)
+            -> andWhere('ans.question = :question')
+            -> setParameter('question', $question)
+            -> andWhere('ans.value = :answer')
+            -> setParameter('answer', $answer);
+
+        return $qb->getQuery()->getSingleScalarResult();
+
+    }
+
+    public function getStudentsAnswersForSpecificQuestion(Question $question, Session $session) {
+        $qb = $this->createQueryBuilder('ans');
+        $qb -> select('ans.value')
+            -> where('ans.session = :session')
+            -> setParameter('session', $session)
+            -> andWhere('ans.question = :question')
+            -> setParameter('question', $question)
+            -> distinct();
+
+        return $qb->getQuery()->getResult();
+    }
+
 }

@@ -127,7 +127,7 @@ class QuizController extends Controller
 
                 $allUserResponses = $request->request->get('responses');
 
-                $question = $em ->getRepository(Question::class)
+                $question = $em->getRepository(Question::class)
                     ->find($request->request->get('idQuestion'));
 
                 $user = $em-> getRepository(User::class)
@@ -179,6 +179,47 @@ class QuizController extends Controller
                 $json[$indexSession]['delay']--;
                 $new_json = json_encode($json);
                 file_put_contents("viewquiz/json/runningQuiz.json", $new_json);
+            }
+            if ($request->request->get('showResults') == "success") {
+                $question = $em->getRepository(Question::class)->find($json[$indexSession]['idQuestion']);
+
+                $arrayOfResponse = [];
+
+                switch($question->getType()) {
+                    case 'text':
+
+                        $answersStudents = $em->getRepository('AppBundle:AnswerUser')->getStudentsAnswersForSpecificQuestion($question, $session);
+
+                        foreach ($answersStudents  as $answer) {
+                            $total = $em->getRepository('AppBundle:AnswerUser')->getCountAnswersForSpecificQuestion($question, $session, $answer);
+                            $arrayOfResponse[$answer['value']] = $total;
+                        }
+                        break;
+
+                    case 'trueOrFalse':
+                        $array = ['Vrai', 'Faux'];
+                        foreach ($array as $answer) {
+                            $total = $em->getRepository('AppBundle:AnswerUser')->getCountAnswersForSpecificQuestion($question, $session, $answer);
+                            $arrayOfResponse[$answer] = $total;
+                        }
+                        break;
+
+                    case 'multipleChoicesRadio':
+                    case 'multipleChoicesCheckBox':
+                        $answers = $question->getAnswers();
+                        foreach ($answers as $answer) {
+                            $total = $em->getRepository('AppBundle:AnswerUser')->getCountAnswersForSpecificQuestion($question, $session, $answer->getValue());
+                            $arrayOfResponse[$answer->getValue()] = $total;
+                        }
+                        break;
+
+
+                }
+
+                $json[$indexSession]['answersResults'] = $arrayOfResponse;
+                $new_json = json_encode($json);
+                file_put_contents("viewquiz/json/runningQuiz.json", $new_json);
+
             }
 
             if ($request->request->get('status')) {

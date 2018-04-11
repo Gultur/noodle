@@ -232,6 +232,34 @@ $(document).ready(function () {
                         result.innerHTML += '<li> ' + answerResult + ' : ' + dataSession.answersResults[answerResult] * 100 / (dataSession.responded.length + dataSession.notResponded.length) + '% </li>';
                     }
                     $("#graph").html(result);
+
+                    google.charts.load('current', {'packages':['corechart']});
+
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    let arrayOfData = [['Réponse', 'Proportion', { role: 'annotation' }]];
+                    for (answerResult in dataSession.answersResults) {
+                        arrayOfData.push([answerResult, dataSession.answersResults[answerResult] * 100 / (dataSession.responded.length + dataSession.notResponded.length), dataSession.answersResults[answerResult]]);
+                    }
+
+
+
+                    function drawChart() {
+
+                        const data = google.visualization.arrayToDataTable(arrayOfData);
+
+                        const options = {
+                            title: 'Répartition des réponses ',
+                            subtitle: dataSession.question,
+
+
+                        };
+                        //var chart = new google.visualization.PieChart(document.getElementById('piechart'));
+                        const chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+
+                        chart.draw(data, options);
+
+                    }
                 }
 
             }

@@ -67,3 +67,7 @@ swiftmailer:
     username: '%mailer_user%'
     password: '%mailer_password%'
     spool: { type: memory }
+
+#CMEN google charts config
+cmen_google_charts:
+    version: "current"

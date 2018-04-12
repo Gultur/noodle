@@ -13,16 +13,17 @@
         <div >
             <div class="panel-group" id="accordion">
                 {% for question in questions %}
-                    {% set question_id = 'collapse'~ question.id %}
+                    {% set collapse_id = 'collapse'~ question.id %}
 
                     <div class="panel panel-default question text-center">
                         <div class="panel-heading">
                             <h4 class="panel-title">
-                                <a data-toggle="collapse" data-parent="#accordion" href="#{{ question_id }}"><span class="glyphicon glyphicon-plus"></span> <em>Intitulé de la question : </em>{{ question.name }}</a>
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse_id }}"><span class="glyphicon glyphicon-plus"></span> <em>Intitulé de la question : </em>{{ question.name }}</a>
                             </h4>
                         </div>
-                        <div id="{{ question_id }}" class="panel-collapse collapse">
+                        <div id="{{ collapse_id }}" class="panel-collapse collapse">
                             <div class="panel-body">
+                                <p><em>Enoncé : </em>{{ question.question }}</p>
                                 <p><em>Type de la question :</em>
                                     {% if question.type == 'text' %}
                                         texte
@@ -35,19 +36,17 @@
                                     {% endif %}
                                 </p>
                                 <p><em>Durée : </em>{{ question.time }} seconde(s)</p>
-                                <p><em>Enoncé : </em>{{ question.question }}</p>
+
                                 <div class="answer">
-                                    <p><em>Réponse(s) : </em></p>
+                                    <p><em>Réponse(s) (une bonne réponse est en vert): </em></p>
 
                                     {% for answer in question.answers %}
 
-                                        <p>{{ answer.value }} :
-                                            {% if answer.correct == 1 %}
-                                                bonne réponse
-                                            {% elseif answer.correct == 0 %}
-                                                mauvaise réponse
-                                            {% endif %}
-                                        </p>
+                                        {% if answer.correct == 1 %}
+                                            <p class="text-success"> {{ answer.value }} </p>
+                                        {% elseif answer.correct == 0 %}
+                                            <p class="text-danger">{{  answer.value }}</p>
+                                        {% endif %}
 
                                     {% endfor %}
                                 </div>
@@ -55,7 +54,8 @@
                                 {% if is_granted("ROLE_ADMIN") %}
                                     <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
                                 {% endif %}
-                                <hr>                            </div>
+                                <hr>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}

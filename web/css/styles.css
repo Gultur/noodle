@@ -404,12 +404,18 @@ span {
 #questionsInQuiz .questionBox{
     background-color: lightblue;
     border-radius: 5px;
+    padding: 5px;
 
 }
 
 #questionsNotInQuiz .questionBox{
     background-color: #e8e8e8;
     border-radius: 5px;
+    padding: 5px;
+}
+
+.questionBox p {
+    line-height: normal;
 }
 
 /* studentresults */

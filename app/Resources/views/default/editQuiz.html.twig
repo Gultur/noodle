@@ -15,26 +15,95 @@
 
         <section>
 
-            <div id="questionsInQuiz" class="col-md-6">
+            <div id="questionsInQuiz" class="panel-group col-md-6">
                 <h2>Questions présentes dans le quiz</h2>
                 {% for question in quiz.questions %}
-                    <div class="questionBox" id={{ question.id }}>
-                        <p>{{ question.question }}</p>
-                        <button class="btn btn-primary">Changer de zone</button>
-                        <hr>
+                    <div class="panel panel-default questionBox" id="{{ question.id }}">
+                        {% set collapse_id = 'collapse'~ question.id %}
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse_id }}"><span class="glyphicon glyphicon-plus"></span> <em>Question : </em>{{ question.name }}</a>
+                            </h4>
+                        </div>
+                        <div id="{{ collapse_id }}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p><em>Enoncé : </em>{{ question.question }}</p>
+                                <p><em>Type de la question :</em>
+                                    {% if question.type == 'text' %}
+                                        texte
+                                    {% elseif question.type == 'trueOrFalse' %}
+                                        vrai ou faux
+                                    {% elseif question.type == 'multipleChoicesRadio' %}
+                                        choix multiple, une seule réponse correcte
+                                    {% elseif question.type == 'multipleChoicesCheckBox' %}
+                                        choix multiple, au moins une bonne réponse
+                                    {% endif %}
+                                </p>
+                                <p><em>Durée : </em>{{ question.time }} seconde(s)</p>
+                                <div class="answer">
+                                    <p><em>Réponse(s) (une bonne réponse est en vert): </em></p>
+
+                                    {% for answer in question.answers %}
+
+                                        {% if answer.correct == 1 %}
+                                            <p class="text-success"> {{ answer.value }} </p>
+                                        {% elseif answer.correct == 0 %}
+                                            <p class="text-danger">{{  answer.value }}</p>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </div>
+                          </div>
+                        </div>
+                        <button class="btn btn-primary">Retirer du quiz</button>
                     </div>
+
                 {% endfor %}
 
             </div>
 
 
-            <div id="questionsNotInQuiz" class="col-md-6">
+            <div id="questionsNotInQuiz" class="panel-group col-md-6">
                 <h2>Questions disponibles</h2>
                 {% for question in questions %}
-                    <div class="questionBox" id={{ question.id }}>
-                        <p>{{ question.question }}</p>
-                        <button class="btn btn-primary">Changer de zone</button>
-                        <hr>
+                    <div class="panel panel-default questionBox" id="{{ question.id }}">
+                        {% set collapse_id = 'collapse'~ question.id %}
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse_id }}"><span class="glyphicon glyphicon-plus"></span> <em>Question : </em>{{ question.name }}</a>
+                            </h4>
+                        </div>
+                        <div id="{{ collapse_id }}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p><em>Enoncé : </em>{{ question.question }}</p>
+                                <p><em>Type de la question :</em>
+                                    {% if question.type == 'text' %}
+                                        texte
+                                    {% elseif question.type == 'trueOrFalse' %}
+                                        vrai ou faux
+                                    {% elseif question.type == 'multipleChoicesRadio' %}
+                                        choix multiple, une seule réponse correcte
+                                    {% elseif question.type == 'multipleChoicesCheckBox' %}
+                                        choix multiple, au moins une bonne réponse
+                                    {% endif %}
+                                </p>
+                                <p><em>Durée : </em>{{ question.time }} seconde(s)</p>
+                                <div class="answer">
+                                    <p><em>Réponse(s) (une bonne réponse est en vert): </em></p>
+
+                                    {% for answer in question.answers %}
+
+                                        {% if answer.correct == 1 %}
+                                            <p class="text-success"> {{ answer.value }} </p>
+                                        {% elseif answer.correct == 0 %}
+                                            <p class="text-danger">{{  answer.value }}</p>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </div>
+                        <button class="btn btn-primary">Ajouter au quiz</button>
                     </div>
                 {% endfor %}
 
@@ -46,6 +115,7 @@
 
 
     <script src="{{ asset('js/editQuiz.js') }}"></script>
+
 
 
 {% endblock %}

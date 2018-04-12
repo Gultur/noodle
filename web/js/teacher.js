@@ -211,6 +211,7 @@ $(document).ready(function () {
 
     /*
      * Handle show result action button
+     * use the google chart library
      */
     $("#showResults").click(function () {
         $.post( idSession, {
@@ -227,11 +228,11 @@ $(document).ready(function () {
                     $("#graph").html("Il n'y a aucune réponse pour cette question !");
                 }
                 else {
-                    let result = document.createElement("ul");
+                    /*let result = document.createElement("ul");
                     for (answerResult in dataSession.answersResults) {
                         result.innerHTML += '<li> ' + answerResult + ' : ' + dataSession.answersResults[answerResult] * 100 / (dataSession.responded.length + dataSession.notResponded.length) + '% </li>';
                     }
-                    $("#graph").html(result);
+                    $("#graph").html(result);*/
 
                     google.charts.load('current', {'packages':['corechart']});
 
@@ -254,8 +255,7 @@ $(document).ready(function () {
 
 
                         };
-                        //var chart = new google.visualization.PieChart(document.getElementById('piechart'));
-                        const chart = new google.visualization.ColumnChart(document.getElementById('piechart'));
+                        const chart = new google.visualization.ColumnChart(document.getElementById('graph'));
 
                         chart.draw(data, options);
 

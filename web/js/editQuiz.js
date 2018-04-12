@@ -3,10 +3,10 @@ $(document).ready(function () {
     const questionsNotInQuiz = $('#rightDiv');
     const idQuiz = $('h1').attr('data-quiz');
 
-    $('#leftDiv button').each(function () {
+    $('#questionsInQuiz button').each(function () {
         $(this).html('Retirer du quiz');
     });
-    $('#rightDiv button').each(function () {
+    $('#questionsNotInQuiz button').each(function () {
         $(this).html('Ajouter au quiz');
     });
 
@@ -19,7 +19,7 @@ $(document).ready(function () {
         let elementParent = $(elementToMove).parent();
 
 
-        if ($(elementParent).attr('id') == 'leftDiv') {
+        if ($(elementParent).attr('id') == 'questionsInQuiz') {
             $(elementToMove).appendTo(questionsNotInQuiz);
             $(event.target).html('Ajouter au quiz');
             $.post( idQuiz, {

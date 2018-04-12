@@ -11,10 +11,11 @@
         <a href="{{ path('createsession', {"id" : quiz.id})  }}" type="button" class="btn btn-primary leave">Lancer le quiz</a>
 
         <h1 class="text-center" data-quiz="{{ quiz.id }}">{{ quiz.name }}</h1>
+        <p class=text-center">Les changements sont pris en compte et appliqués immédiatement sans validation necessaire</p>
 
         <section>
 
-            <div id="leftDiv" class="col-md-6">
+            <div id="questionsInQuiz" class="col-md-6">
                 <h2>Questions présentes dans le quiz</h2>
                 {% for question in quiz.questions %}
                     <div class="questionBox" id={{ question.id }}>
@@ -27,7 +28,7 @@
             </div>
 
 
-            <div id="rightDiv" class="col-md-6">
+            <div id="questionsNotInQuiz" class="col-md-6">
                 <h2>Questions disponibles</h2>
                 {% for question in questions %}
                     <div class="questionBox" id={{ question.id }}>

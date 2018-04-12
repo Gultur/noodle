@@ -395,19 +395,21 @@ span {
 }
 
 /* editquiz */
-#leftDiv, #rightDiv{
+#questionsInQuiz, #questionsNotInQuiz{
     border:none;
     padding: 5px;
     background-color: white;
 }
 
-#leftDiv .questionBox{
+#questionsInQuiz .questionBox{
     background-color: lightblue;
+    border-radius: 5px;
 
 }
 
-#rightDiv .questionBox{
-    background-color: #e8e8e8 ;
+#questionsNotInQuiz .questionBox{
+    background-color: #e8e8e8;
+    border-radius: 5px;
 }
 
 /* studentresults */

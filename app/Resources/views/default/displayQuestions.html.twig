@@ -6,50 +6,84 @@
     <main class="container">
         {% if (is_granted("ROLE_TEACHER") == true or is_granted("ROLE_ADMIN") == true ) %}
 
-            <h1>Liste des questions</h1>
+        <h1>Liste des questions</h1>
 
 
 
-            {% for question in questions %}
-                <div class="question text-center">
-                    <p>Intitulé : {{ question.name }}</p>
-                    <p>Question de type :
-                        {% if question.type == 'text' %}
-                            texte
-                        {% elseif question.type == 'trueOrFalse' %}
-                            vrai ou faux
-                        {% elseif question.type == 'multipleChoicesRadio' %}
-                            choix multiple, une seule réponse correcte
-                        {% elseif question.type == 'multipleChoicesCheckBox' %}
-                            choix multiple, au moins une bonne réponse
-                        {% endif %}
-                    </p>
-                    <p>Durée : {{ question.time }} seconde(s)</p>
-                    <p>{{ question.question }}</p>
-                    <div class="answer">
-                    {% for answer in question.answers %}
+        <div >
+            <div class="panel-group" id="accordion">
+                {% for question in questions %}
+                    {% set question_id = 'collapse'~ question.id %}
 
-                            <p>{{ answer.value }} :
-                            {% if answer.correct == 1 %}
-                                bonne réponse
-                            {% elseif answer.correct == 0 %}
-                                mauvaise réponse
-                            {% endif %}
-                            </p>
+                    <div class="panel panel-default question text-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{ question_id }}"><span class="glyphicon glyphicon-plus"></span> <em>Intitulé de la question : </em>{{ question.name }}</a>
+                            </h4>
+                        </div>
+                        <div id="{{ question_id }}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p><em>Type de la question :</em>
+                                    {% if question.type == 'text' %}
+                                        texte
+                                    {% elseif question.type == 'trueOrFalse' %}
+                                        vrai ou faux
+                                    {% elseif question.type == 'multipleChoicesRadio' %}
+                                        choix multiple, une seule réponse correcte
+                                    {% elseif question.type == 'multipleChoicesCheckBox' %}
+                                        choix multiple, au moins une bonne réponse
+                                    {% endif %}
+                                </p>
+                                <p><em>Durée : </em>{{ question.time }} seconde(s)</p>
+                                <p><em>Enoncé : </em>{{ question.question }}</p>
+                                <div class="answer">
+                                    <p><em>Réponse(s) : </em></p>
 
-                    {% endfor %}
+                                    {% for answer in question.answers %}
+
+                                        <p>{{ answer.value }} :
+                                            {% if answer.correct == 1 %}
+                                                bonne réponse
+                                            {% elseif answer.correct == 0 %}
+                                                mauvaise réponse
+                                            {% endif %}
+                                        </p>
+
+                                    {% endfor %}
+                                </div>
+
+                                {% if is_granted("ROLE_ADMIN") %}
+                                    <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
+                                {% endif %}
+                                <hr>                            </div>
+                        </div>
                     </div>
+                {% endfor %}
+            </div>
+        </div>
 
-                    {% if is_granted("ROLE_ADMIN") %}
-                        <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
-                    {% endif %}
-                    <hr>
-                </div>
 
-            {% endfor %}
+
+            </div>
 
         {% endif %}
 
+
+        <script>
+            $(document).ready(function(){
+                // Add minus icon for collapse element which is open by default
+                $(".collapse.in").each(function(){
+                    $(this).siblings(".panel-heading").find(".glyphicon").addClass("glyphicon-minus").removeClass("glyphicon-plus");
+                });
+
+                // Toggle plus minus icon on show hide of collapse element
+                $(".collapse").on('show.bs.collapse', function(){
+                    $(this).parent().find(".glyphicon").removeClass("glyphicon-plus").addClass("glyphicon-minus");
+                }).on('hide.bs.collapse', function(){
+                    $(this).parent().find(".glyphicon").removeClass("glyphicon-minus").addClass("glyphicon-plus");
+                });
+            });
+        </script>
     </main>
 
 {% endblock %}

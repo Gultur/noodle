@@ -9,6 +9,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 use AppBundle\Repository\AnswerRepository;
@@ -40,11 +41,12 @@ class QuestionType extends AbstractType
                     'data' => 'text'
                 )
             )
-            ->add('question', TextType::class, array(
+            ->add('question', TextareaType::class, array(
                 'label' => 'Enoncé'
             ))
             ->add('time', IntegerType::class, array(
-                'label' => 'Durée (un minimum de 5 secondes sera appliqué)'
+                'label' => 'Durée (un minimum de 5 secondes sera appliqué)',
+                'data' => 5
             ))
 
             ->add('answers', CollectionType::class, array(

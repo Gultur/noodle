@@ -17,7 +17,6 @@
       <parameter key="DoctrineBundle">Doctrine\Bundle\DoctrineBundle\DoctrineBundle</parameter>
       <parameter key="SensioFrameworkExtraBundle">Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle</parameter>
       <parameter key="AppBundle">AppBundle\AppBundle</parameter>
-      <parameter key="CMENGoogleChartsBundle">CMEN\GoogleChartsBundle\CMENGoogleChartsBundle</parameter>
       <parameter key="DebugBundle">Symfony\Bundle\DebugBundle\DebugBundle</parameter>
       <parameter key="WebProfilerBundle">Symfony\Bundle\WebProfilerBundle\WebProfilerBundle</parameter>
       <parameter key="SensioDistributionBundle">Sensio\Bundle\DistributionBundle\SensioDistributionBundle</parameter>
@@ -64,11 +63,6 @@
         <parameter key="parent">null</parameter>
         <parameter key="path">/home/gultur/noodleclean/Noodle/src/AppBundle</parameter>
         <parameter key="namespace">AppBundle</parameter>
-      </parameter>
-      <parameter key="CMENGoogleChartsBundle" type="collection">
-        <parameter key="parent">null</parameter>
-        <parameter key="path">/home/gultur/noodleclean/Noodle/vendor/cmen/google-charts-bundle</parameter>
-        <parameter key="namespace">CMEN\GoogleChartsBundle</parameter>
       </parameter>
       <parameter key="DebugBundle" type="collection">
         <parameter key="parent">null</parameter>
@@ -337,8 +331,6 @@
     <parameter key="doctrine.orm.auto_generate_proxy_classes">true</parameter>
     <parameter key="doctrine.orm.proxy_dir">/home/gultur/noodleclean/Noodle/var/cache/dev/doctrine/orm/Proxies</parameter>
     <parameter key="doctrine.orm.proxy_namespace">Proxies</parameter>
-    <parameter key="cmen_google_charts.version">current</parameter>
-    <parameter key="cmen_google_charts.language"></parameter>
     <parameter key="web_profiler.debug_toolbar.position">bottom</parameter>
     <parameter key="web_profiler.debug_toolbar.intercept_redirects">false</parameter>
     <parameter key="web_profiler.debug_toolbar.mode">2</parameter>
@@ -514,12 +506,6 @@
   <services>
     <service id="service_container" class="Symfony\Component\DependencyInjection\ContainerInterface" public="true" synthetic="true"/>
     <service id="AppBundle\AppBundle" class="AppBundle\AppBundle" public="false" autowire="true" autoconfigure="true"/>
-    <service id="AppBundle\Chart\Chart" class="AppBundle\Chart\Chart" public="false" autowire="true" autoconfigure="true">
-      <argument type="service" id="AppBundle\Chart\ChartData"/>
-    </service>
-    <service id="AppBundle\Chart\ChartData" class="AppBundle\Chart\ChartData" public="false" autowire="true" autoconfigure="true">
-      <argument type="service" id="doctrine.orm.default_entity_manager"/>
-    </service>
     <service id="AppBundle\Controller\AnswerUserController" class="AppBundle\Controller\AnswerUserController" public="true" autowire="true" autoconfigure="true">
       <tag name="controller.service_arguments"/>
     </service>
@@ -560,12 +546,6 @@
       <tag name="form.type"/>
     </service>
     <service id="AppBundle\QuestionResults" class="AppBundle\QuestionResults" public="false" autowire="true" autoconfigure="true"/>
-    <service id="app.chart.data" class="AppBundle\Chart\ChartData" public="false" autowire="true" autoconfigure="true">
-      <argument type="service" id="doctrine.orm.default_entity_manager"/>
-    </service>
-    <service id="app.chart" class="AppBundle\Chart\Chart" public="false" autowire="true" autoconfigure="true">
-      <argument type="service" id="app.chart.data"/>
-    </service>
     <service id="controller_name_converter" class="Symfony\Bundle\FrameworkBundle\Controller\ControllerNameParser" public="false">
       <tag name="monolog.logger" channel="request"/>
       <argument type="service" id="kernel"/>
@@ -1648,14 +1628,6 @@
       </call>
       <call method="addListener">
         <argument>kernel.request</argument>
-        <argument type="collection">
-          <argument type="service" id="debug.debug_handlers_listener"/>
-          <argument>configure</argument>
-        </argument>
-        <argument>2048</argument>
-      </call>
-      <call method="addListener">
-        <argument>console.command</argument>
         <argument type="collection">
           <argument type="service" id="debug.debug_handlers_listener"/>
           <argument>configure</argument>
@@ -2893,9 +2865,6 @@
         <argument type="service" id="doctrine.twig.doctrine_extension"/>
       </call>
       <call method="addExtension">
-        <argument type="service" id="CMEN\GoogleChartsBundle\Twig\GoogleChartsExtension"/>
-      </call>
-      <call method="addExtension">
         <argument type="service" id="twig.extension.dump"/>
       </call>
       <call method="addExtension">
@@ -3745,25 +3714,6 @@
     </service>
     <service id="framework_extra_bundle.argument_name_convertor" class="Sensio\Bundle\FrameworkExtraBundle\Request\ArgumentNameConverter" public="false">
       <argument type="service" id="argument_metadata_factory"/>
-    </service>
-    <service id="CMEN\GoogleChartsBundle\Output\Javascript\DateOutput" class="CMEN\GoogleChartsBundle\Output\Javascript\DateOutput" public="false"/>
-    <service id="CMEN\GoogleChartsBundle\Output\Javascript\OptionsOutput" class="CMEN\GoogleChartsBundle\Output\Javascript\OptionsOutput" public="false">
-      <argument type="service" id="CMEN\GoogleChartsBundle\Output\Javascript\DateOutput"/>
-    </service>
-    <service id="CMEN\GoogleChartsBundle\Output\Javascript\DataOutput" class="CMEN\GoogleChartsBundle\Output\Javascript\DataOutput" public="false">
-      <argument type="service" id="CMEN\GoogleChartsBundle\Output\Javascript\DateOutput"/>
-    </service>
-    <service id="CMEN\GoogleChartsBundle\Output\Javascript\EventsOutput" class="CMEN\GoogleChartsBundle\Output\Javascript\EventsOutput" public="false"/>
-    <service id="CMEN\GoogleChartsBundle\Output\Javascript\ChartOutput" class="CMEN\GoogleChartsBundle\Output\Javascript\ChartOutput" public="false">
-      <argument>current</argument>
-      <argument></argument>
-      <argument type="service" id="CMEN\GoogleChartsBundle\Output\Javascript\OptionsOutput"/>
-      <argument type="service" id="CMEN\GoogleChartsBundle\Output\Javascript\DataOutput"/>
-      <argument type="service" id="CMEN\GoogleChartsBundle\Output\Javascript\EventsOutput"/>
-    </service>
-    <service id="CMEN\GoogleChartsBundle\Twig\GoogleChartsExtension" class="CMEN\GoogleChartsBundle\Twig\GoogleChartsExtension" public="false">
-      <tag name="twig.extension"/>
-      <argument type="service" id="CMEN\GoogleChartsBundle\Output\Javascript\ChartOutput"/>
     </service>
     <service id="twig.extension.dump" class="Symfony\Bridge\Twig\Extension\DumpExtension" public="false">
       <tag name="twig.extension"/>

@@ -34,11 +34,3 @@ services:
     #     arguments:
     #         $someArgument: 'some_value'
 
-    # services for google charts
-    app.chart.data:
-        class: AppBundle\Chart\ChartData
-        arguments: ['@doctrine.orm.entity_manager']
-
-    app.chart:
-        class: AppBundle\Chart\Chart
-        arguments: ['@app.chart.data']

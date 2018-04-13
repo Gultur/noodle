@@ -189,8 +189,36 @@ $(document).ready(function () {
                                 emptyFields(["quiz"]);
 
                             }
-                            var response = document.createElement("p");
-                            response.innerHTML = dataSession.responses + " ";
+
+                            let response = document.createElement("div");
+
+                            let responseHeader = document.createElement("p");
+
+                            responseHeader.innerHTML = "<p> Pour la question : <strong>" + dataSession.question + "</strong></p>";
+
+                            if(dataSession.responses.length > 1) {
+                                responseHeader.innerHTML += "<p> Les bonnes réponses  étaient : </p>";
+                            }
+                            else {
+                                responseHeader.innerHTML += "<p> La bonne réponse était : </p>";
+
+                            }
+
+                            response.appendChild(responseHeader);
+
+                            let responseBody = document.createElement("ul");
+
+                            for (let i = 0; i < dataSession.responses.length; i++) {
+                                if(i != dataSession.responses.length-1) {
+                                    responseBody.innerHTML += "<li class='text-success'>" + dataSession.responses[i] + " </li> "
+                                } else {
+                                    responseBody.innerHTML += "<li class='text-success'>" + dataSession.responses[i] + " </li> "
+                                }
+                            }
+
+                            response.appendChild(responseBody);
+
+
                             $("#response").html(response);
                             $("#time").html("<p>Temps écoulé, en attente de la nouvelle question</p>");
                             break;

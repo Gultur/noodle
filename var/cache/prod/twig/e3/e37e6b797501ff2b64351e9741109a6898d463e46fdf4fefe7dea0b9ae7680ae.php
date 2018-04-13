@@ -43,8 +43,9 @@ class __TwigTemplate_f5094db228caf14ff2c454eb6c29b622463004f63dc32cdef12bf521ca3
             echo twig_escape_filter($this->env, ($context["sessionKey"] ?? null), "html", null, true);
             echo "</span></p>
 
-            <p>Nombre d'étudiants ayant répondu : <span id=\"responded\"></span></p>
-            <p>Nombre d'étudiants n'ayant pas répondu : <span id=\"notResponded\"></span></p>
+            <p id=\"totalStudents\"></p>
+            <p id=\"responded\"></p>
+            <p id=\"notResponded\"></p>
 
             <button id=\"startQuiz\" class=\"btn btn-primary\">Démarrer le quiz</button>
             <button id=\"nextQuestion\" class=\"btn btn-primary\">Question suivante</button>
@@ -53,26 +54,28 @@ class __TwigTemplate_f5094db228caf14ff2c454eb6c29b622463004f63dc32cdef12bf521ca3
             <button id=\"showResponse\" class=\"btn btn-primary\">Envoyer la réponse</button>
             <button id=\"addTime\" class=\"btn btn-primary\">Ajouter 10 secondes</button>
             <a id=\"closeQuiz\" href=\"";
-            // line 20
+            // line 21
             echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("homepage");
             echo "\" type=\"button\" class=\"btn btn-primary\">Clore le quiz</a>
         ";
         }
-        // line 22
+        // line 23
         echo "
         <div id=\"quiz\" data-session=\"";
-        // line 23
+        // line 24
         echo twig_escape_filter($this->env, ($context["indexSession"] ?? null), "html", null, true);
         echo "\">
 
         </div>
 
+
+
         <a href=\"";
-        // line 27
+        // line 30
         echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("studentresults", array("id" => ($context["idSession"] ?? null))), "html", null, true);
         echo "\" type=\"button\" class=\"btn btn-primary leave redirectLink\">Visualiser mes résultats</a>
         <a href=\"";
-        // line 28
+        // line 31
         echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("homepage");
         echo "\" type=\"button\" class=\"btn btn-primary leave redirectLink\">Quitter</a>
 
@@ -84,27 +87,37 @@ class __TwigTemplate_f5094db228caf14ff2c454eb6c29b622463004f63dc32cdef12bf521ca3
         <div id=\"time\">
 
         </div>
+
+        <div id=\"graph\" style=\"width: 900px; height: 500px;\">
+
+        </div>
+
     </main>
 
     ";
-        // line 40
+        // line 48
         if (($this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_TEACHER") || $this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_ADMIN"))) {
-            // line 41
+            // line 49
             echo "        <script src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("js/teacher.js"), "html", null, true);
             echo "\"></script>
+
+        <script type=\"text/javascript\" src=\"https://www.gstatic.com/charts/loader.js\"></script>
+
+
+
     ";
         }
-        // line 43
+        // line 56
         echo "    ";
         if ($this->env->getExtension('Symfony\Bridge\Twig\Extension\SecurityExtension')->isGranted("ROLE_STUDENT")) {
-            // line 44
+            // line 57
             echo "        <script src=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\AssetExtension')->getAssetUrl("js/student.js"), "html", null, true);
             echo "\"></script>
     ";
         }
-        // line 46
+        // line 59
         echo "
 
 ";
@@ -122,7 +135,7 @@ class __TwigTemplate_f5094db228caf14ff2c454eb6c29b622463004f63dc32cdef12bf521ca3
 
     public function getDebugInfo()
     {
-        return array (  108 => 46,  102 => 44,  99 => 43,  93 => 41,  91 => 40,  76 => 28,  72 => 27,  65 => 23,  62 => 22,  57 => 20,  43 => 9,  40 => 8,  38 => 7,  34 => 5,  31 => 4,  27 => 1,  25 => 3,  11 => 1,);
+        return array (  121 => 59,  115 => 57,  112 => 56,  101 => 49,  99 => 48,  79 => 31,  75 => 30,  66 => 24,  63 => 23,  58 => 21,  43 => 9,  40 => 8,  38 => 7,  34 => 5,  31 => 4,  27 => 1,  25 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

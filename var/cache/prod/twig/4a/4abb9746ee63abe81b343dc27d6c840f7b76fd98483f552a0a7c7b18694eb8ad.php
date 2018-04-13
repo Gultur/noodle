@@ -64,7 +64,7 @@ class __TwigTemplate_bb22b921eeac74d5479e47ca537955cf31da5719ddfdfeb597bac753407
             <a href=\"";
             // line 23
             echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("listquiz");
-            echo "\" type=\"button\" class=\"btn btn-primary btn-lg\">Liste des Quiz</a>
+            echo "\" type=\"button\" class=\"btn btn-primary btn-lg\">Lancer un quiz</a>
         </div>
 
         ";

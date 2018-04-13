@@ -48,6 +48,8 @@ class __TwigTemplate_5bd9027bd22dacd6e0ed7225308d5add78c282c8f42f2dee1f67c3bdc40
             echo twig_escape_filter($this->env, $this->getAttribute($context["user"], "username", array()), "html", null, true);
             echo " - ";
             echo twig_escape_filter($this->env, $this->getAttribute($context["user"], "email", array()), "html", null, true);
+            echo " - ";
+            echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["user"], "role", array()), 0, array(), "array"), "html", null, true);
             echo " <a href=\"";
             echo twig_escape_filter($this->env, $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("edituser", array("id" => $this->getAttribute($context["user"], "id", array()))), "html", null, true);
             echo "\" type=\"button\" class=\"btn btn-primary\">Modifier</a></p>
@@ -77,7 +79,7 @@ class __TwigTemplate_5bd9027bd22dacd6e0ed7225308d5add78c282c8f42f2dee1f67c3bdc40
 
     public function getDebugInfo()
     {
-        return array (  60 => 13,  45 => 11,  41 => 10,  34 => 5,  31 => 4,  27 => 1,  25 => 3,  11 => 1,);
+        return array (  62 => 13,  45 => 11,  41 => 10,  34 => 5,  31 => 4,  27 => 1,  25 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

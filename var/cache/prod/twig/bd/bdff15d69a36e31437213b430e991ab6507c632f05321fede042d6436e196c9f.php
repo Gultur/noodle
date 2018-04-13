@@ -33,8 +33,12 @@ class __TwigTemplate_de6e87cd9d10b519f5a44449a853d9aabbce2e0bb42313158fbd806cd90
         // line 7
         echo "
     <main>
-        <p class=\"text-center\">";
+        <a href=\"";
         // line 9
+        echo $this->env->getExtension('Symfony\Bridge\Twig\Extension\RoutingExtension')->getPath("homepage");
+        echo "\"  type=\"button\" class=\"btn btn-primary\">Retour à l'accueil</a>
+        <p class=\"text-center\">";
+        // line 10
         echo twig_escape_filter($this->env, ($context["studentCorrectAnswers"] ?? null), "html", null, true);
         echo " bonne(s) réponse(s) sur ";
         echo twig_escape_filter($this->env, ($context["nbQuestions"] ?? null), "html", null, true);
@@ -42,25 +46,25 @@ class __TwigTemplate_de6e87cd9d10b519f5a44449a853d9aabbce2e0bb42313158fbd806cd90
 
         <div class=\"text-center\">
             ";
-        // line 12
+        // line 13
         $context['_parent'] = $context;
         $context['_seq'] = twig_ensure_traversable(($context["results"] ?? null));
         foreach ($context['_seq'] as $context["_key"] => $context["result"]) {
-            // line 13
+            // line 14
             echo "                <hr>
 
                 <div>
                     <p>";
-            // line 16
+            // line 17
             echo twig_escape_filter($this->env, $this->getAttribute($this->getAttribute($context["result"], "question", array()), "question", array()), "html", null, true);
             echo "</p>
                     <p>Votre ou vos réponse(s) :
                         ";
-            // line 18
+            // line 19
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["result"], "studentAnswers", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["answer"]) {
-                // line 19
+                // line 20
                 echo "                            ";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["answer"], "value", array()), "html", null, true);
                 echo "
@@ -69,17 +73,17 @@ class __TwigTemplate_de6e87cd9d10b519f5a44449a853d9aabbce2e0bb42313158fbd806cd90
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['answer'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 21
+            // line 22
             echo "                    </p>
 
 
                     <p class=\"correctAnswers\">La ou les bonne(s) réponse(s) :
                         ";
-            // line 25
+            // line 26
             $context['_parent'] = $context;
             $context['_seq'] = twig_ensure_traversable($this->getAttribute($context["result"], "correctAnswers", array()));
             foreach ($context['_seq'] as $context["_key"] => $context["correctanswer"]) {
-                // line 26
+                // line 27
                 echo "                            ";
                 echo twig_escape_filter($this->env, $this->getAttribute($context["correctanswer"], "value", array()), "html", null, true);
                 echo "
@@ -88,7 +92,7 @@ class __TwigTemplate_de6e87cd9d10b519f5a44449a853d9aabbce2e0bb42313158fbd806cd90
             $_parent = $context['_parent'];
             unset($context['_seq'], $context['_iterated'], $context['_key'], $context['correctanswer'], $context['_parent'], $context['loop']);
             $context = array_intersect_key($context, $_parent) + $_parent;
-            // line 28
+            // line 29
             echo "                    </p>
                 </div>
             ";
@@ -96,7 +100,7 @@ class __TwigTemplate_de6e87cd9d10b519f5a44449a853d9aabbce2e0bb42313158fbd806cd90
         $_parent = $context['_parent'];
         unset($context['_seq'], $context['_iterated'], $context['_key'], $context['result'], $context['_parent'], $context['loop']);
         $context = array_intersect_key($context, $_parent) + $_parent;
-        // line 31
+        // line 32
         echo "        </div>
 
 
@@ -117,7 +121,7 @@ class __TwigTemplate_de6e87cd9d10b519f5a44449a853d9aabbce2e0bb42313158fbd806cd90
 
     public function getDebugInfo()
     {
-        return array (  100 => 31,  92 => 28,  83 => 26,  79 => 25,  73 => 21,  64 => 19,  60 => 18,  55 => 16,  50 => 13,  46 => 12,  38 => 9,  34 => 7,  31 => 6,  27 => 1,  25 => 3,  11 => 1,);
+        return array (  104 => 32,  96 => 29,  87 => 27,  83 => 26,  77 => 22,  68 => 20,  64 => 19,  59 => 17,  54 => 14,  50 => 13,  42 => 10,  38 => 9,  34 => 7,  31 => 6,  27 => 1,  25 => 3,  11 => 1,);
     }
 
     /** @deprecated since 1.27 (to be removed in 2.0). Use getSourceContext() instead */

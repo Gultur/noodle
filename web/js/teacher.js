@@ -206,6 +206,7 @@ $(document).ready(function () {
         $(this).prop("disabled", true);
         $("#showResponse").prop("disabled", false);
         $("#showResults").prop("disabled", false);
+        $("#addTime").prop("disabled", true);
         emptyFields(["quiz"])
     });
 
@@ -255,7 +256,7 @@ $(document).ready(function () {
 
 
                         };
-                        const chart = new google.visualization.ColumnChart(document.getElementById('graph'));
+                        const chart = new google.visualization.BarChart(document.getElementById('graph'));
 
                         chart.draw(data, options);
 
@@ -263,7 +264,7 @@ $(document).ready(function () {
                 }
 
             }
-        }, 1000);
+        }, 1500);
 
     });
 
@@ -417,15 +418,33 @@ $(document).ready(function () {
                             break;
 
                         case "endedQuestionShow":
-                            var response = document.createElement("p");
+                            let response = document.createElement("div");
+
+                            let responseHeader = document.createElement("p");
+
+                            responseHeader.innerHTML = "<p> Pour la question : <strong>" + dataSession.question + "</strong></p>";
+
+                            if(dataSession.responses.length > 1) {
+                                responseHeader.innerHTML += "<p> Les bonnes réponses  étaient : </p>";
+                            }
+                            else {
+                                responseHeader.innerHTML += "<p> La bonne réponse était : </p>";
+
+                            }
+
+                            response.appendChild(responseHeader);
+
+                            let responseBody = document.createElement("ul");
 
                             for (let i = 0; i < dataSession.responses.length; i++) {
                                 if(i != dataSession.responses.length-1) {
-                                    response.innerHTML += dataSession.responses[i] + " - "
+                                    responseBody.innerHTML += "<li class='text-success'>" + dataSession.responses[i] + " </li> "
                                 } else {
-                                    response.innerHTML += dataSession.responses[i];
+                                    responseBody.innerHTML += "<li class='text-success'>" + dataSession.responses[i] + " </li> "
                                 }
                             }
+
+                            response.appendChild(responseBody);
 
 
 

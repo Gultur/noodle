@@ -12,7 +12,53 @@
 
         <div >
             <div class="panel-group" id="accordion">
-                {% for question in questions %}
+                {% for question in questionsBelonging %}
+                    {% set collapse_id = 'collapse'~ question.id %}
+
+                    <div class="panel panel-default question text-center">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#{{ collapse_id }}"><span class="glyphicon glyphicon-plus"></span> <em>Intitulé de la question : </em>{{ question.name }}</a>
+                            </h4>
+                            <p class="text-secondary">Vous êtes propriétaire de cette question</p>
+                        </div>
+                        <div id="{{ collapse_id }}" class="panel-collapse collapse">
+                            <div class="panel-body">
+                                <p><em>Enoncé : </em>{{ question.question }}</p>
+                                <p><em>Type de la question :</em>
+                                    {% if question.type == 'text' %}
+                                        texte
+                                    {% elseif question.type == 'trueOrFalse' %}
+                                        vrai ou faux
+                                    {% elseif question.type == 'multipleChoicesRadio' %}
+                                        choix multiple, une seule réponse correcte
+                                    {% elseif question.type == 'multipleChoicesCheckBox' %}
+                                        choix multiple, au moins une bonne réponse
+                                    {% endif %}
+                                </p>
+                                <p><em>Durée : </em>{{ question.time }} seconde(s)</p>
+
+                                <div class="answer">
+                                    <p><em>Réponse(s) (une bonne réponse est en vert): </em></p>
+
+                                    {% for answer in question.answers %}
+
+                                        {% if answer.correct == 1 %}
+                                            <p class="text-success"> {{ answer.value }} </p>
+                                        {% elseif answer.correct == 0 %}
+                                            <p class="text-danger">{{  answer.value }}</p>
+                                        {% endif %}
+
+                                    {% endfor %}
+                                </div>
+
+                                    <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Cette suppression entrainera l\'effacement de réponses enregistrées en base de données. Voulez vous vraiment supprimer?')">Supprimer</a>
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                {% for question in questionsNotBelonging %}
                     {% set collapse_id = 'collapse'~ question.id %}
 
                     <div class="panel panel-default question text-center">
@@ -52,7 +98,7 @@
                                 </div>
 
                                 {% if is_granted("ROLE_ADMIN") %}
-                                    <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Confirmer la suppression?')">Supprimer</a>
+                                    <a class="btn btn-primary" href="{{ path("deletequestion", {"id": question.id}) }}" onclick="return confirm('Cette suppression entrainera l\'effacement de réponses enregistrées en base de données. Voulez vous vraiment supprimer?')">Supprimer</a>
                                 {% endif %}
                                 <hr>
                             </div>

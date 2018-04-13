@@ -398,14 +398,16 @@ $(document).ready(function () {
 
                             if (dataSession.time == 0) {
 
-                                $.post(idSession, {
-                                    "status": "endedQuestionHide"
-                                });
+
 
                                 emptyFields(["quiz"]);
                                 $("#showResponse").prop('disabled', false);
                                 $("#showResults").prop('disabled', false);
-                                $("#addtime").prop('disabled', true);
+                                $("#addTime").prop('disabled', true);
+                                $("#stopQuestion").prop('disabled', true);
+                                $.post(idSession, {
+                                    "status": "endedQuestionHide"
+                                });
                             } else {
 
                                 $.post(idSession, {
@@ -459,9 +461,10 @@ $(document).ready(function () {
                             $("#time").html("Temps écoulé");
                             $("#responded").html("Nombre d'étudiants ayant répondu : " + dataSession.responded.length + '/' + totalStudents);
                             $("#notResponded").html("Nombre d'étudiants n'ayant pas répondu : " + dataSession.notResponded.length + '/' + totalStudents);
-
+                            $("#addTime").prop('disabled', true);
 
                             emptyFields(["response"]);
+
 
                             break;
                         case "closedQuiz":

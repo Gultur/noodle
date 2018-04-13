@@ -58,6 +58,20 @@ class Question
     private $answers;
 
     /**
+     * @var User
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="author", referencedColumnName="id")
+     */
+    private $author;
+
+    /**
+     *
+     *
+     * @ORM\ManyToMany(targetEntity="Quiz", mappedBy="questions")
+     */
+    private $quizes;
+
+    /**
      * Get id
      *
      * @return int
@@ -191,6 +205,39 @@ class Question
         $this->answers->removeElement($answer);
 
     }
+
+    /**
+     * Set author
+     *
+     * @param User $author
+     *
+     * @return Session
+     */
+    public function setAuthor($author)
+    {
+        $this->author = $author;
+
+        return $this;
+    }
+
+    /**
+     * Get author
+     *
+     * @return User
+     */
+    public function getAuthor()
+    {
+        return $this->author;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getQuizes()
+    {
+        return $this->quizes;
+    }
+
 
 
 }

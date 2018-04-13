@@ -37,4 +37,30 @@ class QuestionRepository extends \Doctrine\ORM\EntityRepository
         return $results;
     }
 
+
+
+    function getQuestionsBelongingToCreator($user){
+
+        $qb = $this->createQueryBuilder('que');
+        $qb -> select('que')
+            ->where('que.author = :user')
+            -> setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getResult();
+
+    }
+
+    function getQuestionsNotBelongingToCreator($user){
+
+        $qb = $this->createQueryBuilder('que');
+        $qb -> select('que')
+            ->where('que.author != :user OR que.author IS NULL')
+            -> setParameter('user', $user)
+        ;
+
+        return $qb->getQuery()->getResult();
+
+    }
+
 }
